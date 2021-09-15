@@ -22,7 +22,7 @@ open class Criterion(
 	override val hasConcept: List<InformationConcept>? = emptyList(),
 	override val hasRequirement: List<Requirement>? = emptyList(),
 	override val hasEvidenceTypeList: List<EvidenceTypeList>? = emptyList(),
-) : Requirement
+): Requirement
 
 open class InformationRequirement(
 	override val description: String?,
@@ -32,9 +32,9 @@ open class InformationRequirement(
 	override val hasConcept: List<InformationConcept>? = emptyList(),
 	override val hasRequirement: List<Requirement>? = emptyList(),
 	override val hasEvidenceTypeList: List<EvidenceTypeList>? = emptyList(),
-) : Requirement
+): Requirement
 
-open class Contraint(
+open class Constraint(
 	override val description: String?,
 	override val identifier: String?,
 	override val name: String?,
@@ -42,9 +42,25 @@ open class Contraint(
 	override val hasConcept: List<InformationConcept>? = emptyList(),
 	override val hasRequirement: List<Requirement>? = emptyList(),
 	override val hasEvidenceTypeList: List<EvidenceTypeList>? = emptyList(),
-) : Requirement
+): Requirement
 
-interface RequirementBuilder<T : Requirement> {
+/**
+ * Custom requirement which is considered validated when at least K of its N sub-requirements are met
+ * where K is defined by the property [minRequirementsToMeet] and N is the size of the list [hasRequirement]
+ * TODO more meaningful name
+ */
+open class PartialRequirement(
+	override val description: String?,
+	override val identifier: String?,
+	override val name: String?,
+	override val type: Code?,
+	val minRequirementsToMeet: Int,
+	override val hasConcept: List<InformationConcept>? = emptyList(),
+	override val hasRequirement: List<Requirement>? = emptyList(),
+	override val hasEvidenceTypeList: List<EvidenceTypeList>? = emptyList(),
+): Requirement
+
+interface RequirementBuilder<T: Requirement> {
 	var description: String?
 	var identifier: String?
 	var name: String?
@@ -56,14 +72,14 @@ interface RequirementBuilder<T : Requirement> {
 
 	fun criterion(init: CriterionBuilder.() -> Unit)
 	fun informationRequirement(init: InformationRequirementBuilder.() -> Unit)
-	fun contraint(init: ContraintBuilder.() -> Unit)
+	fun constraint(init: ConstraintBuilder.() -> Unit)
 
 	operator fun Requirement.unaryPlus()
 
 	fun build(): Requirement
 }
 
-class CriterionBuilder : RequirementBuilder<Criterion>, AbstractRequirementBuilder<Criterion>() {
+class CriterionBuilder: AbstractRequirementBuilder<Criterion>() {
 	var bias: Double? = null
 	var weight: Double? = null
 	var weightingConsiderationDescription: String? = null
@@ -86,7 +102,7 @@ class CriterionBuilder : RequirementBuilder<Criterion>, AbstractRequirementBuild
 	)
 }
 
-class InformationRequirementBuilder : RequirementBuilder<InformationRequirement>,
+class InformationRequirementBuilder: RequirementBuilder<InformationRequirement>,
 	AbstractRequirementBuilder<InformationRequirement>() {
 	override fun build() = InformationRequirement(
 		description = description,
@@ -100,8 +116,8 @@ class InformationRequirementBuilder : RequirementBuilder<InformationRequirement>
 	)
 }
 
-class ContraintBuilder : RequirementBuilder<Contraint>, AbstractRequirementBuilder<Contraint>() {
-	override fun build() = Contraint(
+class ConstraintBuilder: RequirementBuilder<Constraint>, AbstractRequirementBuilder<Constraint>() {
+	override fun build() = Constraint(
 		description = description,
 		identifier = identifier,
 		name = name,
@@ -112,7 +128,7 @@ class ContraintBuilder : RequirementBuilder<Contraint>, AbstractRequirementBuild
 	)
 }
 
-abstract class AbstractRequirementBuilder<T : Requirement> : RequirementBuilder<T> {
+abstract class AbstractRequirementBuilder<T: Requirement>: RequirementBuilder<T> {
 	override var description: String? = null
 	override var identifier: String? = null
 	override var name: String? = null
@@ -129,8 +145,8 @@ abstract class AbstractRequirementBuilder<T : Requirement> : RequirementBuilder<
 		+InformationRequirementBuilder().apply(init).build()
 	}
 
-	override fun contraint(init: ContraintBuilder.() -> Unit) {
-		+ContraintBuilder().apply(init).build()
+	override fun constraint(init: ConstraintBuilder.() -> Unit) {
+		+ConstraintBuilder().apply(init).build()
 	}
 
 	override operator fun Requirement.unaryPlus() {
@@ -144,5 +160,5 @@ fun criterion(init: CriterionBuilder.() -> Unit): Criterion =
 fun informationRequirement(init: InformationRequirementBuilder.() -> Unit): InformationRequirement =
 	InformationRequirementBuilder().apply(init).build()
 
-fun contraint(init: ContraintBuilder.() -> Unit): Contraint =
-	ContraintBuilder().apply(init).build()
+fun constraint(init: ConstraintBuilder.() -> Unit): Constraint =
+	ConstraintBuilder().apply(init).build()
