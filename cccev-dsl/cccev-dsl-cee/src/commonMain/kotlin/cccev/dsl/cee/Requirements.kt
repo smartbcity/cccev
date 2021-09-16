@@ -88,3 +88,13 @@ object AucunPrecedentDossierPourMemeOperationEtConditions: InformationRequiremen
         )
     )
 )
+
+class MontantCertificatsCumac(
+    vararg requirements: Requirement
+): Criterion(
+    name = "Montant de certificats en kWh cumac",
+    description = "Montant en kWh/W en fonction du nombre de types dispositif de gestion de l'éclairage",
+    type = FicheCode.MontantCertificatsCumac,
+    identifier = "montantCertificatsCumac",
+    hasRequirement = requirements.asList()
+)

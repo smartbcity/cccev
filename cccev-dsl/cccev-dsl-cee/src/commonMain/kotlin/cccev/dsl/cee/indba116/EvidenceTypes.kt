@@ -11,13 +11,15 @@ object CertificatProfessionnel: EvidenceTypeList(
     name = "Certificat Professionnel",
     description = "CertificatProfessionnel",
     specifiesEvidenceType = listOf(
-        EvidenceType(
-            identifier = "CERFA-2321122",
-            evidenceTypeClassification = CerfaCode,
-            validityPeriodConstraint = PeriodOfTime(
-                duration = "10 ans"
-            )
-        )
+        CertificatCerfa
+    )
+)
+
+object CertificatCerfa: EvidenceType(
+    identifier = "CERFA-2321122",
+    evidenceTypeClassification = CerfaCode,
+    validityPeriodConstraint = PeriodOfTime(
+        duration = "10 ans"
     )
 )
 
@@ -29,11 +31,13 @@ object EtudeDimensionnementEclairagePrealable: EvidenceTypeList(
     """.trimIndent(),
     description = "Étude de dimensionnement de l'éclairage préalable à la mise en place des luminaires",
     specifiesEvidenceType = listOf(
-        EvidenceType(
-            identifier = "etudePrealabe",
-            evidenceTypeClassification = Etude
-        )
+        EtudeDimensionnementEclairagePrealableDocument
     )
+)
+
+object EtudeDimensionnementEclairagePrealableDocument: EvidenceType(
+    identifier = "etudeDimensionnementEclairagePrealableDoc",
+    evidenceTypeClassification = Etude
 )
 
 object Annexe1AvecDetailsEquipement: EvidenceTypeList(
@@ -48,11 +52,13 @@ object Annexe1AvecDetailsEquipement: EvidenceTypeList(
     """.trimIndent(),
     description = "Annexe 1 avec détails des caractéristiques des équipements installés",
     specifiesEvidenceType = listOf(
-        EvidenceType(
-            identifier = "annexe1Detaillee",
-            evidenceTypeClassification = FicheCode.Annexe1
-        )
+        Annexe1AvecDetailsEquipementDocument
     )
+)
+
+object Annexe1AvecDetailsEquipementDocument: EvidenceType(
+    identifier = "annexe1DetailleeDoc",
+    evidenceTypeClassification = FicheCode.Annexe1
 )
 
 object Annexe1AvecReferencesEquipement: EvidenceTypeList(
@@ -72,13 +78,17 @@ object Annexe1AvecReferencesEquipement: EvidenceTypeList(
     """.trimIndent(),
     description = "Annexe 1 avec marques et références des équipements installés, complétée par les fiches constructeur",
     specifiesEvidenceType = listOf(
-        EvidenceType(
-            identifier = "annexe1References",
-            evidenceTypeClassification = FicheCode.Annexe1
-        ),
-        EvidenceType(
-            identifier = "ficheConstructeur",
-            evidenceTypeClassification = FicheConstructeur
-        )
+        Annexe1AvecReferencesEquipementDocument,
+        Annexe1FicheConstructeur
     )
+)
+
+object Annexe1AvecReferencesEquipementDocument: EvidenceType(
+    identifier = "annexe1ReferencesDoc",
+    evidenceTypeClassification = FicheCode.Annexe1
+)
+
+object Annexe1FicheConstructeur: EvidenceType(
+    identifier = "annexe1References",
+    evidenceTypeClassification = FicheCode.Annexe1
 )

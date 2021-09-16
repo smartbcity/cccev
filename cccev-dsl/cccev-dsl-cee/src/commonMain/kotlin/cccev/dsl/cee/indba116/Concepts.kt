@@ -2,9 +2,12 @@ package cccev.dsl.cee.indba116
 
 import ccev.dsl.core.Duration
 import ccev.dsl.core.InformationConcept
+import ccev.dsl.core.Watt
 import ccev.dsl.core.XSDDate
 import ccev.dsl.core.XSDInt
 import ccev.dsl.core.XSDString
+import ccev.dsl.core.kWhCumac
+import ccev.dsl.core.kWhCumacPerW
 
 object SecteurActivite: InformationConcept(
     identifier = "secteurActivite",
@@ -77,5 +80,37 @@ object NombreTypesDispositifGestionEclairage: InformationConcept(
     type = XSDInt,
     name = "Nombre Types Dispositif Gestion Eclairage",
     description = "Nombre de types de dispositifs de gestion de l'éclairage",
+    expressionOfExpectedValue = null
+)
+
+object DureeVieConventionnelleLuminaire: InformationConcept(
+    identifier = "dureeVieConventionnelleLuminaire",
+    type = Duration,
+    name = "Durée de vie conventionnelle Luminaire",
+    description = "Durée de vie conventionnelle de luminaires en fonction du dispositif de gestion d'éclairage",
+    expressionOfExpectedValue = "{0: 13, 1: 14, 2: 16}.get(\${${NombreTypesDispositifGestionEclairage.identifier}})"
+)
+
+object CumacParWatt: InformationConcept(
+    identifier = "cumacParWatt",
+    type = kWhCumacPerW,
+    name = "Montant en kWh par Watt",
+    description = "Montant en kWh/W en fonction du nombre de types dispositif de gestion de l'éclairage",
+    expressionOfExpectedValue = "{0: 25, 1: 30, 2: 34}.get(\${${NombreTypesDispositifGestionEclairage.identifier}})"
+)
+
+object Puissance: InformationConcept(
+    identifier = "puissance",
+    type = Watt,
+    name = "Puissance",
+    description = "Puissance en Watt",
+    expressionOfExpectedValue = null
+)
+
+object Cumac: InformationConcept(
+    identifier = "kWhCumac",
+    type = kWhCumac,
+    name = "kWh Cumac",
+    description = "kWh Cumac",
     expressionOfExpectedValue = null
 )

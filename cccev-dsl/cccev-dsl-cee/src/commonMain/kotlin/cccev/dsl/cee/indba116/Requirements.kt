@@ -4,7 +4,6 @@ import cccev.dsl.cee.FicheCode
 import ccev.dsl.core.Constraint
 import ccev.dsl.core.Criterion
 import ccev.dsl.core.InformationRequirement
-import ccev.dsl.core.PartialRequirement
 
 object EstBatimentIndustriel: Constraint(
     description = "${SecteurActivite.identifier} == Industriel",
@@ -122,96 +121,25 @@ object EtudeDimensionnementEclairagePrealableInfo: InformationRequirement(
     )
 )
 
-object DureeVieConventionnelleConditionnelle: PartialRequirement(
-    description = "Durée de vie conventionnelle en fonction du dispositif de gestion de l'éclairage",
-    identifier = "dureeVieConventionnelleConditionnelle",
-    name = """
-        - 13 ans sans dispositif de gestion de l’éclairage ;
-        - 14 ans avec un dispositif de gestion de l’éclairage (détection de présence ou variation de lumière) ;
-        - 16 ans avec deux dispositifs de gestion de l’éclairage (détection de présence et variation de lumière). 
-    """.trimIndent(),
-    type = FicheCode.ConditionsDelivranceCertificats,
-    hasRequirement = listOf(
-        DureeVieConventionnelleSansDispositifGestionEclairage,
-        DureeVieConventionnelleAvec1DispositifGestionEclairage,
-        DureeVieConventionnelleAvec2DispositifsGestionEclairage
-    ),
-    minRequirementsToMeet = 1
-)
-
-object DureeVieConventionnelleSansDispositifGestionEclairage: Constraint(
-    description = "13 ans si aucun dispositif de gestion d'éclairage",
-    identifier = "dureeVieConventionnelleSansDispositifGestionEclairage",
-    name = "13 ans sans dispositif de gestion de l’éclairage",
-    type = FicheCode.ConditionsDelivranceCertificats,
-    hasRequirement = listOf(
-        AucunDispositifGestionEclairage,
-        DatePrecedentsTravaux(yearsCount = 13)
-    ),
-    hasConcept = listOf(
-        DateTravaux
-    )
-)
-
-object DureeVieConventionnelleAvec1DispositifGestionEclairage: Constraint(
-    description = "14 ans avec un dispositif de gestion de l’éclairage (détection de présence ou variation de lumière)",
-    identifier = "dureeVieConventionnelleAvec1DispositifGestionEclairage",
-    name = "14 ans avec 1 dispositif de gestion de l’éclairage",
-    type = FicheCode.ConditionsDelivranceCertificats,
-    hasRequirement = listOf(
-        UnDispositifGestionEclairage,
-        DatePrecedentsTravaux(yearsCount = 14)
-    ),
-    hasConcept = listOf(
-        DateTravaux
-    )
-)
-
-object DureeVieConventionnelleAvec2DispositifsGestionEclairage: Constraint(
-    description = "16 ans avec deux dispositifs de gestion de l’éclairage (détection de présence et variation de lumière)",
-    identifier = "dureeVieConventionnelleAvec2DispositifsGestionEclairage",
-    name = "16 ans avec 2 dispositifs de gestion de l’éclairage",
-    type = FicheCode.ConditionsDelivranceCertificats,
-    hasRequirement = listOf(
-        DeuxDispositifsGestionEclairage,
-        DatePrecedentsTravaux(yearsCount = 16)
-    ),
-    hasConcept = listOf(
-        DateTravaux
-    )
-)
-
-open class NombreTypesDispositifGestionEclairageConstraint(count: Int, name: String): Constraint(
-    description = "${NombreTypesDispositifGestionEclairage.identifier} == $count ",
-    identifier = "${count}TypesDispositifGestionEclairage",
-    name = name,
+object DatePrecedentsTravaux: Constraint(
+    description = "now - ${DateTravaux.identifier} >= ${DureeVieConventionnelleLuminaire.identifier} ans",
+    identifier = "datePrecedantTravaux",
+    name = "Date des précédents travaux",
     type = FicheCode.DureeVieConventionnelle,
     hasConcept = listOf(
-        NombreTypesDispositifGestionEclairage
+        DureeVieConventionnelleLuminaire,
+        DateTravaux
     )
 )
 
-object AucunDispositifGestionEclairage: NombreTypesDispositifGestionEclairageConstraint(
-    count = 0,
-    name = "Aucun dispositif de gestion d'éclairage"
-)
-
-object UnDispositifGestionEclairage: NombreTypesDispositifGestionEclairageConstraint(
-    count = 1,
-    name = "Détection de présence OU système de détection tenant compte des apports de lumière du jour"
-)
-
-object DeuxDispositifsGestionEclairage: NombreTypesDispositifGestionEclairageConstraint(
-    count = 2,
-    name = "Détection de présence ET système de détection tenant compte des apports de lumière du jour "
-)
-
-open class DatePrecedentsTravaux(yearsCount: Int): Constraint(
-    description = "now - ${DateTravaux.identifier} >= $yearsCount ans",
-    identifier = "${yearsCount}AnsDepuisPrecedentsTravaux",
-    name = "$yearsCount ans depuis les précédents travaux",
-    type = FicheCode.DureeVieConventionnelle,
+object CalculCertificatsCumac: Constraint(
+    description = "${CumacParWatt.identifier} * ${Puissance.identifier} = ${Cumac.identifier}",
+    identifier = "calculCertificatsCumac",
+    name = "Montant de certificats en kWh cumac",
+    type = FicheCode.MontantCertificatsCumac,
     hasConcept = listOf(
-        DateTravaux
+        CumacParWatt,
+        Cumac,
+        Puissance
     )
 )

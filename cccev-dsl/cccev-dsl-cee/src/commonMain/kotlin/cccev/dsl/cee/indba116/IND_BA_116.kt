@@ -4,6 +4,7 @@ import cccev.dsl.cee.ConditionsDelivranceCertificats
 import cccev.dsl.cee.Denomination
 import cccev.dsl.cee.DureeVieConventionnelle
 import cccev.dsl.cee.FicheCee
+import cccev.dsl.cee.MontantCertificatsCumac
 import cccev.dsl.cee.SecteurApplication
 import ccev.dsl.core.criterion
 
@@ -26,7 +27,10 @@ val IND_BA_116 = criterion {
 		EtudeDimensionnementEclairagePrealableInfo
 	)
 	+DureeVieConventionnelle(
-
+		DatePrecedentsTravaux
+	)
+	+MontantCertificatsCumac(
+		CalculCertificatsCumac
 	)
 	hasEvidenceTypeList = listOf(
 		Annexe1AvecDetailsEquipement,

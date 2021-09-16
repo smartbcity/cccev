@@ -16,6 +16,7 @@ object FicheCode {
 	object Denomination: Code
 	object ConditionsDelivranceCertificats: Code
 	object DureeVieConventionnelle: Code
+	object MontantCertificatsCumac: Code
 	object Annexe1: Code
 }
 
