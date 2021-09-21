@@ -11,3 +11,6 @@ include(
 	"cccev-dsl:cccev-dsl-core",
 	"cccev-dsl:cccev-dsl-cee"
 )
+include(
+	"proto"
+)

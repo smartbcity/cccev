@@ -1,13 +1,10 @@
 package cccev.dsl.cee.indba116
 
+import cccev.dsl.cee.kWhCumac
 import ccev.dsl.core.Duration
 import ccev.dsl.core.InformationConcept
-import ccev.dsl.core.Watt
-import ccev.dsl.core.XSDDate
 import ccev.dsl.core.XSDInt
 import ccev.dsl.core.XSDString
-import ccev.dsl.core.kWhCumac
-import ccev.dsl.core.kWhCumacPerW
 
 object SecteurActivite: InformationConcept(
     identifier = "secteurActivite",
@@ -66,14 +63,6 @@ open class Norme(identifier: String = "norme"): InformationConcept(
 )
 
 object TauxDistorsionHarmoniqueNormeCalcul: Norme("tauxDistorsionHarmoniqueNormeCalcul")
-
-object DateTravaux: InformationConcept(
-    identifier = "dateTravaux",
-    type = XSDDate,
-    name = "Date Travaux",
-    description = "Date de travaux",
-    expressionOfExpectedValue = null
-)
 
 object NombreTypesDispositifGestionEclairage: InformationConcept(
     identifier = "nombreTypesDispositifGestionEclairage",

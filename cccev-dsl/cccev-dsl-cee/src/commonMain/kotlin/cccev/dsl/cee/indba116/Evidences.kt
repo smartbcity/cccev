@@ -1,5 +1,6 @@
 package cccev.dsl.cee.indba116
 
+import cccev.dsl.cee.CertificatCerfa
 import ccev.dsl.core.Evidence
 import ccev.dsl.core.SupportedValue
 

@@ -18,10 +18,11 @@ class SecteurApplication(
 )
 
 class Denomination(
-    vararg requirements: Requirement,
+    description: String,
+    vararg requirements: Requirement
 ): Criterion(
     name = "Dénomination",
-    description = "La dénomination de la fiche.",
+    description = description,
     type = FicheCode.SecteurActivite,
     identifier = "denomination",
     hasRequirement = requirements.asList()
@@ -97,4 +98,14 @@ class MontantCertificatsCumac(
     type = FicheCode.MontantCertificatsCumac,
     identifier = "montantCertificatsCumac",
     hasRequirement = requirements.asList()
+)
+
+object EstProfessionnelInformationRequirement: InformationRequirement(
+    description = "La mise en place est réalisée par un professionnel.",
+    identifier = "estProfessionnel",
+    name = "CertificatProfessionel",
+    type = FicheCode.ConditionsDelivranceCertificats,
+    hasEvidenceTypeList = listOf(
+        CertificatProfessionnel
+    )
 )

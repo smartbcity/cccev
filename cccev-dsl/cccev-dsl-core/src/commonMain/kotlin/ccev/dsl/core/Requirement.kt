@@ -21,7 +21,7 @@ open class Criterion(
 	val weightingType: Code? = null,
 	override val hasConcept: List<InformationConcept>? = emptyList(),
 	override val hasRequirement: List<Requirement>? = emptyList(),
-	override val hasEvidenceTypeList: List<EvidenceTypeList>? = emptyList(),
+	override val hasEvidenceTypeList: List<EvidenceTypeList>? = emptyList()
 ): Requirement
 
 open class InformationRequirement(
@@ -31,7 +31,7 @@ open class InformationRequirement(
 	override val type: Code?,
 	override val hasConcept: List<InformationConcept>? = emptyList(),
 	override val hasRequirement: List<Requirement>? = emptyList(),
-	override val hasEvidenceTypeList: List<EvidenceTypeList>? = emptyList(),
+	override val hasEvidenceTypeList: List<EvidenceTypeList>? = emptyList()
 ): Requirement
 
 open class Constraint(
@@ -41,7 +41,7 @@ open class Constraint(
 	override val type: Code?,
 	override val hasConcept: List<InformationConcept>? = emptyList(),
 	override val hasRequirement: List<Requirement>? = emptyList(),
-	override val hasEvidenceTypeList: List<EvidenceTypeList>? = emptyList(),
+	override val hasEvidenceTypeList: List<EvidenceTypeList>? = emptyList()
 ): Requirement
 
 /**
@@ -57,7 +57,7 @@ open class PartialRequirement(
 	val minRequirementsToMeet: Int,
 	override val hasConcept: List<InformationConcept>? = emptyList(),
 	override val hasRequirement: List<Requirement>? = emptyList(),
-	override val hasEvidenceTypeList: List<EvidenceTypeList>? = emptyList(),
+	override val hasEvidenceTypeList: List<EvidenceTypeList>? = emptyList()
 ): Requirement
 
 interface RequirementBuilder<T: Requirement> {

@@ -1,5 +1,7 @@
 package cccev.dsl.cee.indba116
 
+import cccev.dsl.cee.DatePrecedentsTravaux
+import cccev.dsl.cee.DateTravaux
 import cccev.dsl.cee.FicheCode
 import ccev.dsl.core.Constraint
 import ccev.dsl.core.Criterion
@@ -25,16 +27,6 @@ object DenominationTypeUsageNonMouvementOuIntrusion: Constraint(
     type = FicheCode.Denomination,
     hasConcept = listOf(
         UsageLuminaire
-    )
-)
-
-object EstProfessionnelInformationRequirement: InformationRequirement(
-    description = "La mise en place est réalisée par un professionnel.",
-    identifier = "estProfessionnel",
-    name = "CertificatProfessionel",
-    type = FicheCode.ConditionsDelivranceCertificats,
-    hasEvidenceTypeList = listOf(
-        CertificatProfessionnel
     )
 )
 
@@ -121,9 +113,9 @@ object EtudeDimensionnementEclairagePrealableInfo: InformationRequirement(
     )
 )
 
-object DatePrecedentsTravaux: Constraint(
-    description = "now - ${DateTravaux.identifier} >= ${DureeVieConventionnelleLuminaire.identifier} ans",
-    identifier = "datePrecedantTravaux",
+object DatePrecedentsTravauxContrainte: Constraint(
+    description = "${DateTravaux.identifier} - ${DatePrecedentsTravaux.identifier} >= ${DureeVieConventionnelleLuminaire.identifier} ans",
+    identifier = "datePrecedentsTravaux",
     name = "Date des précédents travaux",
     type = FicheCode.DureeVieConventionnelle,
     hasConcept = listOf(

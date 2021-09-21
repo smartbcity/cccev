@@ -1,9 +1,9 @@
 package cccev.dsl.cee.indba116.archives
 
+import cccev.dsl.cee.DateTravaux
 import cccev.dsl.cee.DeclarationHonneur
 import cccev.dsl.cee.DossierCee
 import cccev.dsl.cee.FicheCode
-import cccev.dsl.cee.indba116.DateTravaux
 import cccev.dsl.cee.indba116.NombreTypesDispositifGestionEclairage
 import ccev.dsl.core.Constraint
 import ccev.dsl.core.EvidenceType

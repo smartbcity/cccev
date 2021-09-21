@@ -6,4 +6,5 @@ object LumenPerW: Code
 object Ratio: Code
 object Variation: Code
 object Etude: Code
-object FicheConstructeur: Code
+object kWhCumacPerW: Code
+object Watt: Code

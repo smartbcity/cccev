@@ -3,6 +3,7 @@ package cccev.dsl.cee.indba116
 import cccev.dsl.cee.ConditionsDelivranceCertificats
 import cccev.dsl.cee.Denomination
 import cccev.dsl.cee.DureeVieConventionnelle
+import cccev.dsl.cee.EstProfessionnelInformationRequirement
 import cccev.dsl.cee.FicheCee
 import cccev.dsl.cee.MontantCertificatsCumac
 import cccev.dsl.cee.SecteurApplication
@@ -16,6 +17,7 @@ val IND_BA_116 = criterion {
 		EstBatimentIndustriel
 	)
 	+Denomination(
+		"Mise en place d'un luminaire à modules LED avec ou sans dispositif de gestion d'éclairage",
 		DenominationTypeUsageNonMouvementOuIntrusion
 	)
 	+ConditionsDelivranceCertificats(
@@ -27,7 +29,7 @@ val IND_BA_116 = criterion {
 		EtudeDimensionnementEclairagePrealableInfo
 	)
 	+DureeVieConventionnelle(
-		DatePrecedentsTravaux
+		DatePrecedentsTravauxContrainte
 	)
 	+MontantCertificatsCumac(
 		CalculCertificatsCumac
