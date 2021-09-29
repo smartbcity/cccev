@@ -1,31 +1,25 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import reportWebVitals from "reportWebVitals";
-import { AppProvider, KeycloakProvider } from "@smartb/g2-providers";
+import { AppProvider } from "@smartb/g2-providers";
 import { languages } from "i18n";
 import { history, store } from "store";
 import { ThemeContextProvider } from "@smartb/g2-themes";
-import { Typography } from "@mui/material";
-import { theme } from "Themes";
+import { LoadingComponent } from "components";
+import { muiTheme, theme } from "Themes";
 import App from "App";
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeContextProvider theme={theme}>
-      <KeycloakProvider
-        config={{ clientId: "", realm: "", url: "" }}
-        initOptions={{ onLoad: "login-required" }}
-        loadingComponent={<Typography>Loading...</Typography>}
-      >
+    <ThemeContextProvider theme={theme} customMuiTheme={muiTheme}>
         <AppProvider
           languages={languages}
           reduxStore={store}
           history={history}
-          loadingComponent={<Typography>Loading...</Typography>}
+          loadingComponent={<LoadingComponent/>}
         >
           <App />
         </AppProvider>
-      </KeycloakProvider>
     </ThemeContextProvider>
   </React.StrictMode>,
   document.getElementById("root")
