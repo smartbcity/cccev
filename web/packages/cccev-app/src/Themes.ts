@@ -1,4 +1,5 @@
 import { Theme as AruiTheme } from "@smartb/g2-themes";
+import { ThemeOptions } from "@mui/material";
 import { StyleProps } from "@smartb/g2-layout";
 
 export const appLayoutStyleProps: StyleProps = {
@@ -12,10 +13,10 @@ type DeepPartial<T> = {
 };
 
 export const theme: DeepPartial<AruiTheme> = {
-  name: "X2",
+  name: "cccev-app",
   colors: {
-    primary: "some color",
-    secondary: "some color",
+    primary: "#B1DAFB",
+    secondary: "#052947",
   },
   shadows: [
     "0 0px 0px 0 rgba(0,0,0,0)",
@@ -32,4 +33,26 @@ export const theme: DeepPartial<AruiTheme> = {
     "0px 31.5px 63px 0px rgba(0,0,0,0.25)",
     "0px 33.75px 67.5px 0px rgba(0,0,0,0.27)",
   ],
+};
+
+export const muiTheme: ThemeOptions = {
+  typography: {
+    subtitle2: {
+      fontFamily: "roboto",
+      fontWeight: 700
+    },
+    subtitle1: {
+      fontFamily: "roboto",
+      fontWeight: 700
+    },
+    body1: {
+      fontFamily: "roboto",
+    },
+    body2: {
+      fontFamily: "roboto",
+    },
+    caption: {
+      fontFamily: "roboto",
+    }
+  }
 };
