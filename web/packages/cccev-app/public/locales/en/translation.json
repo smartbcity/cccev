@@ -1,3 +1,11 @@
 {
-  
+    "createdOn": "Ceated on {{creationDate}}",
+    "representative": "REpresentative: {{name}}",
+    "beneficiary": "Beneficiary: {{name}}",
+    "trustability": "Trustability",
+    "percentCompleted": "{{percent}}% completed",
+    "certificateFillerPage": {
+        "improveTrustability": "If you want to improve this trustability index",
+        "fillTheFields": "fill the fileds below and add evidence to prove their relability"
+    }
 }

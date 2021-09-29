@@ -16,7 +16,7 @@
     "react": "^17.0.1",
     "@mui/material": "^5.0.1",
     "@mui/icons-material": "^5.0.1",
-    "@smartb/g2": "^1.0.0-alpha.1"
+    "@smartb/g2": "^1.0.0-alpha.2"
   },
   "dependencies": {
     "utils": "^1.0.0"

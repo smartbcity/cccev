@@ -1,13 +1,27 @@
-import { Box, Typography } from '@mui/material'
+import { Box, styled, Typography } from '@mui/material'
 import { TrustabilityCard } from './TrustabilityCard'
+import { useTranslation } from "react-i18next"
+
+const CertificateInformationsBox = styled(Box)({
+    display: "flex",
+    width: "30%",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    '@media (max-width:1400px)': {
+        width: '35%',
+        justifyContent: "flex-start",
+    }
+})
 
 export const Header = () => {
+    const {t} = useTranslation()
     return (
         <Box
             sx={{
                 display: "flex",
                 position: "relative",
                 height: "100%",
+                boxSizing:"border-box",
                 padding: "10px 15px",
                 justifyContent: "space-between"
             }}
@@ -33,16 +47,9 @@ export const Header = () => {
                     #4452
                 </Typography>
             </Box>
-            <Box
-                sx={{
-                    display: "flex",
-                    width: "30%",
-                    flexDirection: "column",
-                    justifyContent: "space-between"
-                }}
-            >
+            <CertificateInformationsBox>
                 <Typography textAlign="end">
-                    Created on 06/10/2021
+                    {t("createdOn", {creationDate: "06/10/2021"})}
                 </Typography>
                 <Box
                     sx={{
@@ -52,13 +59,13 @@ export const Header = () => {
                     }}
                 >
                     <Typography>
-                        Representative Layton
+                        {t("representative", {name: "Layton"})}
                     </Typography>
                     <Typography>
-                        Beneficiary Mr Bourgeon Thomas
+                        {t("beneficiary", {name: "Mr Bourgeon Thomas"})}
                     </Typography>
                 </Box>
-            </Box>
+            </CertificateInformationsBox>
             <TrustabilityCard />
         </Box>
     )

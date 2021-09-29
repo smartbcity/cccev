@@ -1,16 +1,17 @@
 import { Box } from '@mui/material'
 import { EvidenceBar } from './components/EvidenceBar'
-import { Header } from './components/Header'
+import { Header } from './components/Header/Header'
+import { Main } from './components/Main/Main'
 
 export const CertificateFiller = () => {
     return (
         <>
             <Box
                 sx={{
-                    display: "inline-flex",
+                    display: "block",
                     width: "calc(100vw - 500px)",
                     justifyContent: "center",
-                    height: "150px"
+                    minWidth: "650px"
                 }}
             >
                 <Box 
@@ -18,6 +19,7 @@ export const CertificateFiller = () => {
                         position: "absolute",
                         top: "170px",
                         width: "calc(100vw - 500px)",
+                        minWidth: "650px",
                         background: "#8294A3",
                         height: "2px"
                     }}
@@ -26,11 +28,12 @@ export const CertificateFiller = () => {
                     sx={{
                         maxWidth: "1500px",
                         width: "100%",
-                        height: "100%"
+                        height: "170px"
                     }}
                 >
                     <Header />
                 </Box>
+                <Main />
             </Box>
             <EvidenceBar />
         </>
