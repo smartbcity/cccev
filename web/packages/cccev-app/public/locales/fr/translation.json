@@ -1,3 +1,11 @@
 {
- 
+    "createdOn": "Crée le {{creationDate}}",
+    "representative": "Mandataire: {{name}}",
+    "beneficiary": "Bénéficiaire: {{name}}",
+    "trustability": "Fiabilité",
+    "percentCompleted": "{{percent}}% complété",
+    "certificateFillerPage": {
+        "improveTrustability": "Si vous voulez améliorer votre indice de confiance",
+        "fillTheFields": "Remplissez les champs ci-dessous pour prouver leurs fiabilités"
+    }
 }
