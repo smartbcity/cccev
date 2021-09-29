@@ -1,0 +1,24 @@
+{
+  "name": "components",
+  "version": "1.0.0",
+  "description": "Plateform components",
+  "author": "SmartB",
+  "license": "",
+  "repository": "SmartB/components",
+  "main": "src/index.ts",
+  "source": "src/index.ts",
+  "types": "src/index.ts",
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {},
+  "peerDependencies": {
+    "react": "^17.0.1",
+    "@mui/material": "^5.0.1",
+    "@mui/icons-material": "^5.0.1",
+    "@smartb/g2": "^1.0.0-alpha.1"
+  },
+  "dependencies": {
+    "utils": "^1.0.0"
+  }
+}
