@@ -4,6 +4,9 @@
     "beneficiary": "Beneficiary: {{name}}",
     "trustability": "Trustability",
     "percentCompleted": "{{percent}}% completed",
+    "category": "Category",
+    "evidence": "Evidence",
+    "searchATerm": "Search a term",
     "certificateFillerPage": {
         "improveTrustability": "If you want to improve this trustability index",
         "fillTheFields": "fill the fileds below and add evidence to prove their relability"

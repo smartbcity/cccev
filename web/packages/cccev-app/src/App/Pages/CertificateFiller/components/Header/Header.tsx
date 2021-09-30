@@ -1,4 +1,4 @@
-import { Box, styled, Typography } from '@mui/material'
+import { Box, styled, Typography, Stack} from '@mui/material'
 import { TrustabilityCard } from './TrustabilityCard'
 import { useTranslation } from "react-i18next"
 
@@ -26,12 +26,11 @@ export const Header = () => {
                 justifyContent: "space-between"
             }}
         >
-            <Box
+            <Stack
                 sx={{
-                    display: "flex",
                     width: "60%",
-                    flexDirection: "column",
                 }}
+                direction="column"
             >
                 <Typography
                     variant="h4"
@@ -46,17 +45,14 @@ export const Header = () => {
                 >
                     #4452
                 </Typography>
-            </Box>
+            </Stack>
             <CertificateInformationsBox>
                 <Typography textAlign="end">
                     {t("createdOn", {creationDate: "06/10/2021"})}
                 </Typography>
-                <Box
-                    sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "space-around"
-                    }}
+                <Stack
+                    direction="column"
+                    justifyContent="space-around"
                 >
                     <Typography>
                         {t("representative", {name: "Layton"})}
@@ -64,7 +60,7 @@ export const Header = () => {
                     <Typography>
                         {t("beneficiary", {name: "Mr Bourgeon Thomas"})}
                     </Typography>
-                </Box>
+                </Stack>
             </CertificateInformationsBox>
             <TrustabilityCard />
         </Box>
