@@ -30,7 +30,6 @@ export const Header = () => {
                 sx={{
                     width: "60%",
                 }}
-                direction="column"
             >
                 <Typography
                     variant="h4"
@@ -51,7 +50,6 @@ export const Header = () => {
                     {t("createdOn", {creationDate: "06/10/2021"})}
                 </Typography>
                 <Stack
-                    direction="column"
                     justifyContent="space-around"
                 >
                     <Typography>

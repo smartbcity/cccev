@@ -26,7 +26,6 @@ export const TrustabilityCard = () => {
                     width: "200px",
                     marginRight: "15px",
                 }}
-                direction="column"
             >
                 <ProgressIndicator value={30} label={t("percentCompleted", {percent: 30})} style={{ display: "block" }} />
                 <Typography sx={{marginTop: "10px"}} variant="subtitle1">
@@ -38,7 +37,6 @@ export const TrustabilityCard = () => {
                 sx={{
                     marginLeft: "20px",
                 }}
-                direction="column"
                 justifyContent="space-between"
             >
                 <Typography sx={{fontSize: "15px"}} >
@@ -49,6 +47,7 @@ export const TrustabilityCard = () => {
                         paddingLeft: "10px"
                     }}
                     justifyContent="space-between"
+                    direction="row"
                 >
                     <Typography
                         variant="body2"

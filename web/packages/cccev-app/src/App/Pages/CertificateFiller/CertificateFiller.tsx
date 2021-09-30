@@ -10,7 +10,9 @@ export const CertificateFiller = () => {
                 sx={{
                     display: "block",
                     width: "calc(100vw - 500px)",
-                    justifyContent: "center",
+                    height: "100vh",
+                    position: 'relative',
+                    overflow: "auto",
                     minWidth: "650px"
                 }}
             >
@@ -18,7 +20,7 @@ export const CertificateFiller = () => {
                     sx={{
                         position: "absolute",
                         top: "170px",
-                        width: "calc(100vw - 500px)",
+                        width: "100%",
                         minWidth: "650px",
                         background: "#8294A3",
                         height: "2px"
@@ -27,6 +29,7 @@ export const CertificateFiller = () => {
                 <Box
                     sx={{
                         maxWidth: "1500px",
+                        margin: "auto",
                         width: "100%",
                         height: "170px"
                     }}
