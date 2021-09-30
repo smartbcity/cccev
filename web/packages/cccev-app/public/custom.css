@@ -4,3 +4,23 @@ body {
   margin: 0;
   padding: 0;
 }
+
+*::-webkit-scrollbar {
+  width: 0.6em;
+  height: 0.6em;
+}
+
+*::-webkit-scrollbar {
+  background-color: #8294A34D;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #8294A3;
+  border-radius: 2px;
+}
+
+.PdfDisplayer-infiniteScroll::-webkit-scrollbar {
+  background-color: transparent;
+}
+
+ 
