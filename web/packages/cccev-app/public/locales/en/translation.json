@@ -1,14 +1,16 @@
 {
     "createdOn": "Ceated on {{creationDate}}",
-    "representative": "REpresentative: {{name}}",
+    "representative": "Representative: {{name}}",
     "beneficiary": "Beneficiary: {{name}}",
     "trustability": "Trustability",
     "percentCompleted": "{{percent}}% completed",
     "category": "Category",
     "evidence": "Evidence",
     "searchATerm": "Search a term",
+    "evidenceList": "Evidence list",
     "certificateFillerPage": {
         "improveTrustability": "If you want to improve this trustability index",
-        "fillTheFields": "fill the fileds below and add evidence to prove their relability"
+        "fillTheFields": "fill the fileds below and add evidence to prove their relability",
+        "evidenceListInfo": "The evidence list that contains and prove the value of the certificat"
     }
 }
