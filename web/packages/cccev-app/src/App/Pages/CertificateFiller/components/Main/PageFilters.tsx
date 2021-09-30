@@ -1,14 +1,16 @@
 import { Box } from '@mui/material'
 import { Filters, FiltersField, useFilters } from "@smartb/g2-forms"
 import { useMemo } from 'react'
+import { useTranslation } from "react-i18next"
 
 export const PageFilters = () => {
+    const {t} = useTranslation()
 
     const fields = useMemo((): FiltersField[] => [
         {
             key: "ccevApp-filters-field-category",
             name: "category",
-            label: "Category",
+            label: t("category"),
             type: "select",
             selectProps: {
                 options: [{ key: "choice1", label: 'Choice1' }, { key: "choice2", label: 'Choice2' }],
@@ -17,7 +19,7 @@ export const PageFilters = () => {
         }, {
             key: "ccevApp-filters-field-evidence",
             name: "evidence",
-            label: "Evidence",
+            label: t("evidence"),
             type: "select",
             selectProps: {
                 options: [{ key: "choice1", label: 'Choice1' }, { key: "choice2", label: 'Choice2' }],
@@ -26,13 +28,13 @@ export const PageFilters = () => {
         }, {
             key: "ccevApp-filters-field-search",
             name: "search",
-            label: "Search a term",
+            label: t("searchATerm"),
             type: "textfield",
             textFieldProps:{
-                style:{width: "150px"}
+                style:{width: "180px"}
             }
         }
-    ], [])
+    ], [t])
 
     const formState = useFilters({
         fields: fields,
