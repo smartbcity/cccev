@@ -32,7 +32,7 @@ export const TrustabilityCard = () => {
                     {t("trustability")}
                 </Typography>
             </Stack>
-            <Divider sx={{background: "#8294A399", margin:0}} orientation="vertical" variant="middle" flexItem />
+            <Divider sx={{borderColor: "#8294A3"}} orientation="vertical" flexItem />
             <Stack
                 sx={{
                     marginLeft: "20px",

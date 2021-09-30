@@ -1,6 +1,6 @@
 import { useI18n } from "@smartb/g2-providers"
 
-interface Languages {
+export interface Languages {
   fr: string
   en: string
 }

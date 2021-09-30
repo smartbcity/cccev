@@ -2,6 +2,7 @@ import { Box } from "@mui/material"
 import { PageFilters } from "./PageFilters"
 import { CertificatFillerAccrodion, Category } from "components"
 import { useMemo } from "react"
+import { LanguageSelector } from "./LanguageSelector"
 
 
 export const Main = () => {
@@ -32,6 +33,7 @@ export const Main = () => {
         <Box sx={{padding: "10px 20px", paddingTop: "70px", maxWidth: "1500px", margin: "auto"}}>
             <PageFilters />
             <CertificatFillerAccrodion categories={categories} />
+            <LanguageSelector />
         </Box>
     )
 }

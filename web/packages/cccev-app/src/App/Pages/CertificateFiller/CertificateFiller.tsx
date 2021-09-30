@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import { EvidenceBar } from './components/EvidenceBar'
+import { EvidenceBar } from './components/EvidenceBar/EvidenceBar'
 import { Header } from './components/Header/Header'
 import { Main } from './components/Main/Main'
 

@@ -7,8 +7,10 @@
     "category": "Catégorie",
     "evidence": "Justificatif",
     "searchATerm": "Rechercher un terme",
+    "evidenceList": "Liste des justificatifs",
     "certificateFillerPage": {
         "improveTrustability": "Si vous voulez améliorer votre indice de confiance",
-        "fillTheFields": "Remplissez les champs ci-dessous pour prouver leurs fiabilités"
+        "fillTheFields": "Remplissez les champs ci-dessous pour prouver leurs fiabilités",
+        "evidenceListInfo": "La liste des justificatifs qui contiennent et prouvent les valeurs du certificat"
     }
 }

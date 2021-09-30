@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import { Filters, FiltersField, useFilters } from "@smartb/g2-forms"
-import { useMemo } from 'react'
+import {  useMemo } from 'react'
 import { useTranslation } from "react-i18next"
 
 export const PageFilters = () => {
