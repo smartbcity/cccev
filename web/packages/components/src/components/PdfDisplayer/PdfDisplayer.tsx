@@ -9,6 +9,7 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 const StyledInfiniteScroll = styled(InfiniteScroll)({
     marginTop: "-20px",
     paddingTop: "20px",
+    boxSizing: "border-box",
     "& .pdfPage": {
         padding: "20px 0"
     }
