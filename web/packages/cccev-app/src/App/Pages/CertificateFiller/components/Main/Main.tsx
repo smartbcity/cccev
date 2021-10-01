@@ -3,9 +3,15 @@ import { PageFilters } from "./PageFilters"
 import { CertificatFillerAccrodion, Category } from "components"
 import { useMemo } from "react"
 import { LanguageSelector } from "./LanguageSelector"
+import { FiltersState } from "store/filters/filters.reducer"
 
+interface MainProps {
+    filters: FiltersState
+    changeFilters: (filters: FiltersState) => void
+}
 
-export const Main = () => {
+export const Main = (props: MainProps) => {
+    const { filters, changeFilters } = props
 
     const categories = useMemo((): Category[] => [
         {
@@ -31,7 +37,7 @@ export const Main = () => {
 
     return (
         <Box sx={{padding: "10px 20px", paddingTop: "70px", maxWidth: "1500px", margin: "auto"}}>
-            <PageFilters />
+            <PageFilters filters={filters} changeFilters={changeFilters} />
             <CertificatFillerAccrodion categories={categories} />
             <LanguageSelector />
         </Box>

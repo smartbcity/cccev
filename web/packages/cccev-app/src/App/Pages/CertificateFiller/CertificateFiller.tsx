@@ -1,9 +1,17 @@
 import { Box } from '@mui/material'
+import { FiltersState } from 'store/filters/filters.reducer'
 import { EvidenceBar } from './components/EvidenceBar/EvidenceBar'
 import { Header } from './components/Header/Header'
 import { Main } from './components/Main/Main'
 
-export const CertificateFiller = () => {
+interface CertificateFillerProps {
+    filters: FiltersState
+    changeFilters: (filters: FiltersState) => void
+    changeEvidence: (evidence?: string) => void
+}
+
+export const CertificateFiller = (props: CertificateFillerProps) => {
+    const { filters, changeFilters, changeEvidence } = props
     return (
         <>
             <Box
@@ -16,7 +24,7 @@ export const CertificateFiller = () => {
                     minWidth: "650px"
                 }}
             >
-                <Box 
+                <Box
                     sx={{
                         position: "absolute",
                         top: "170px",
@@ -36,9 +44,9 @@ export const CertificateFiller = () => {
                 >
                     <Header />
                 </Box>
-                <Main />
+                <Main filters={filters} changeFilters={changeFilters} />
             </Box>
-            <EvidenceBar />
+            <EvidenceBar currentEvidence={filters.evidence} changeEvidence={changeEvidence} />
         </>
     )
 }
