@@ -1,6 +1,8 @@
 import { ArrowBackRounded } from '@mui/icons-material'
 import { Box, IconButton, styled } from '@mui/material'
 import { PdfDisplayer } from 'components'
+import { useCallback } from 'react'
+import { EvidenceList } from './EvidenceList'
 
 const EvidenceBarContainer = styled(Box)({
     position: "fixed",
@@ -24,10 +26,29 @@ const EvidenceBarContainer = styled(Box)({
     }
 })
 
-export const EvidenceBar = () => {
+interface EvidenceBarProps {
+    currentEvidence?: string
+    changeEvidence: (evidence?: string) => void
+}
+
+export const EvidenceBar = (props: EvidenceBarProps) => {
+    const {currentEvidence, changeEvidence} = props
+
+    const removeCurrentEvidence = useCallback(
+        () => changeEvidence(),
+        [changeEvidence],
+    )
+    
+    if (!currentEvidence) {
+        return (
+            <EvidenceBarContainer>
+                <EvidenceList />
+            </EvidenceBarContainer>
+        )
+    }
     return (
         <EvidenceBarContainer>
-            <IconButton size="small" className="evidenceBar-backButton" >
+            <IconButton size="small" className="evidenceBar-backButton" onClick={removeCurrentEvidence} >
                 <ArrowBackRounded className="evidenceBar-backArrow" />
             </IconButton>
             <PdfDisplayer />

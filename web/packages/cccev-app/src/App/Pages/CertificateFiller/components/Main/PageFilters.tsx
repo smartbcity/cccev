@@ -1,9 +1,17 @@
 import { Box } from '@mui/material'
 import { Filters, FiltersField, useFilters } from "@smartb/g2-forms"
-import {  useMemo } from 'react'
+import {  useEffect, useMemo } from 'react'
 import { useTranslation } from "react-i18next"
+import { FiltersState } from 'store/filters/filters.reducer'
 
-export const PageFilters = () => {
+interface PageFiltersProps {
+    filters: FiltersState
+    changeFilters: (filters: FiltersState) => void
+}
+
+
+export const PageFilters = (props: PageFiltersProps) => {
+    const { filters, changeFilters } = props
     const {t} = useTranslation()
 
     const fields = useMemo((): FiltersField[] => [
@@ -12,6 +20,7 @@ export const PageFilters = () => {
             name: "category",
             label: t("category"),
             type: "select",
+            defaultValue: filters.category,
             selectProps: {
                 options: [{ key: "choice1", label: 'Choice1' }, { key: "choice2", label: 'Choice2' }],
                 multiple: true
@@ -21,15 +30,16 @@ export const PageFilters = () => {
             name: "evidence",
             label: t("evidence"),
             type: "select",
+            defaultValue: filters.evidence,
             selectProps: {
-                options: [{ key: "choice1", label: 'Choice1' }, { key: "choice2", label: 'Choice2' }],
-                multiple: true
+                options: [{ key: "evidenceExample", label: 'evidence example' }]
             }
         }, {
             key: "ccevApp-filters-field-search",
             name: "search",
             label: t("searchATerm"),
             type: "textfield",
+            defaultValue: filters.search,
             textFieldProps:{
                 style:{width: "180px"}
             }
@@ -38,8 +48,14 @@ export const PageFilters = () => {
 
     const formState = useFilters({
         fields: fields,
-        onSubmit: (values) => { console.log(values) }
+        onSubmit: (values: FiltersState) => { changeFilters(values) }
     })
+
+    useEffect(() => {
+        if (formState.values.evidence !== filters.evidence) {
+            formState.setFieldValue("evidence", filters.evidence)
+        }
+    }, [filters.evidence])
 
     return (
         <Box
