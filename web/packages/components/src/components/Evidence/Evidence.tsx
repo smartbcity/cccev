@@ -2,7 +2,9 @@ import { ErrorOutline, Upload } from '@mui/icons-material'
 import { Paper, Stack, styled, Typography } from '@mui/material'
 import { Tooltip } from '@smartb/g2-notifications'
 import { useTheme } from '@smartb/g2-themes'
+import { useCallback } from 'react'
 import { DeleteIcon, PdfIcon, ViewFileIcon } from '../../icons'
+import { useTranslation } from "react-i18next"
 
 const EvidencePaper = styled(Paper)(({ theme }) => ({
     padding: "5px 10px",
@@ -10,7 +12,8 @@ const EvidencePaper = styled(Paper)(({ theme }) => ({
     borderRadius: "5px",
     boxSizing: "border-box",
     cursor: "pointer",
-    margin: "0 5px",
+    marginLeft: "10px",
+    zIndex: 1,
     "& .evidence-iconActions": {
         color: "#353945",
         fill: "#353945",
@@ -25,7 +28,8 @@ const EvidencePaper = styled(Paper)(({ theme }) => ({
         background: "#E6E9EF"
     },
     "& .evidence-pdficon": {
-        width: "21px"
+        width: "21px",
+        flexShrink: 0
     },
     "&.evidence-needed .evidence-label": {
         color: "#676879"
@@ -52,12 +56,20 @@ interface EvidenceProps {
 }
 
 export const Evidence = (props: EvidenceProps) => {
-    const { variant, label } = props
+    const { variant, label, onDelete, onUpload, onView } = props
     const theme = useTheme()
+    const {t} = useTranslation()
+    const onDeleteMemoized = useCallback(
+        (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
+            event.stopPropagation()
+            onDelete && onDelete()
+        },
+        [onDelete],
+    )
     if (variant === "needed") {
         return (
-            <Tooltip helperText="You haven’t added this evidence yet. Click on it to add it">
-                <EvidencePaper className="evidence-needed">
+            <Tooltip helperText={t("certificateFillerPage.evidenceNotAddedHelper")}>
+                <EvidencePaper className="evidence-needed" onClick={onUpload}>
                     <Stack
                         direction="row"
                         alignItems="center"
@@ -68,14 +80,14 @@ export const Evidence = (props: EvidenceProps) => {
                             {label}
                         </Typography>
                         <ErrorOutline sx={{ color: theme.colors.error }} className="evidence-errorIcon" />
-                        <Upload className="evidence-iconActions" />
+                        <Upload sx={{color: "#353945"}} />
                     </Stack>
                 </EvidencePaper>
             </Tooltip>
         )
     }
     return (
-        <EvidencePaper>
+        <EvidencePaper onClick={onView}>
             <Stack
                 direction="row"
                 alignItems="center"
@@ -85,11 +97,11 @@ export const Evidence = (props: EvidenceProps) => {
                 <Typography className="evidence-label" variant="body2">
                     {label}
                 </Typography>
-                <Tooltip helperText="View this evidence">
+                <Tooltip helperText={t("certificateFillerPage.viewEvidenceHelper")}>
                     <ViewFileIcon style={{stroke: "none"}} className="evidence-iconActions evidence-viewFileIcon" />
                 </Tooltip>
-                <Tooltip helperText="Delete this evidence">
-                    <DeleteIcon style={{fill: "none"}} className="evidence-iconActions evidence-deleteIcon" />
+                <Tooltip helperText={t("certificateFillerPage.deleteEvidenceHelper")}>
+                    <DeleteIcon style={{fill: "none"}} onClick={onDeleteMemoized} className="evidence-iconActions evidence-deleteIcon" />
                 </Tooltip>
             </Stack>
         </EvidencePaper>
