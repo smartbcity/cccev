@@ -42,7 +42,7 @@ export const EvidenceBar = (props: EvidenceBarProps) => {
     if (!currentEvidence) {
         return (
             <EvidenceBarContainer>
-                <EvidenceList />
+                <EvidenceList changeEvidence={changeEvidence} />
             </EvidenceBarContainer>
         )
     }

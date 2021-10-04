@@ -8,9 +8,15 @@
     "evidence": "Justificatif",
     "searchATerm": "Rechercher un terme",
     "evidenceList": "Liste des justificatifs",
+    "addAnEvidence": "Ajouter un justificatif",
+    "canDropFile": "Vous pouvez déposer des fichiers ici",
+    "or": "Ou",
     "certificateFillerPage": {
         "improveTrustability": "Si vous voulez améliorer votre indice de confiance",
         "fillTheFields": "Remplissez les champs ci-dessous pour prouver leurs fiabilités",
-        "evidenceListInfo": "La liste des justificatifs qui contiennent et prouvent les valeurs du certificat"
+        "evidenceListInfo": "La liste des justificatifs qui contiennent et prouvent les valeurs du certificat",
+        "evidenceNotAddedHelper": "Vous n'avez pas encore fourni ce justificatif. Cliquez dessus pour l'ajouter.",
+        "viewEvidenceHelper": "Voir ce justificatif",
+        "deleteEvidenceHelper": "Supprimer"
     }
 }

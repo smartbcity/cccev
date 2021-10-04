@@ -1,18 +1,57 @@
 import { Divider, Stack, Typography } from '@mui/material'
+import { Button } from '@smartb/g2-components'
 import { DropFileIcon } from './DropFileIcon'
 import { Title } from './Title'
-import { Evidence } from 'components'
+import { Evidence, EvidenceTypeList, EvidenceType } from 'components'
+import { useMemo } from 'react'
+import { useTranslation } from "react-i18next"
 
-export const EvidenceList = () => {
+interface EvidenceListProps {
+    changeEvidence: (evidence?: string) => void
+}
+
+export const EvidenceList = (props: EvidenceListProps) => {
+    const {changeEvidence} = props
+
+    const {t} = useTranslation()
+
+    const evidences = useMemo(():EvidenceTypeList[] => [
+        {
+            id: "EvidenceTypeList-1",
+            name: "Justificatifs des critères techniques",
+            specifiesEvidenceType: [{
+                id: "evidence-1",
+                isAdded: false,
+                label: "Document du détail de l’équipement ajouté"
+            }]
+        },
+        {
+            id: "EvidenceTypeList-2",
+            name: "Justificatifs des critères techniques",
+            specifiesEvidenceType: [{
+                id: "evidence-2",
+                isAdded: false,
+                label: "Fiche technique des luminaires venant du constructeur"
+            },{
+                id: "evidence-3",
+                isAdded: true,
+                label: "Référence équipement.pdf"
+            }]
+        }
+    ], [])
+
     return (
         <>
             <Stack
                 sx={{ position: "relative", padding: "0px 10px" }}
-                spacing={1}
+                alignItems="center"
+                spacing={3}
             >
                 <Title />
-                    <Divider sx={{ borderColor: "#8294A3", borderBottomWidth: "2px" }} flexItem />
-                <Evidence variant="needed" label="Etude préalable du dimensionnement de l’éclairage.pdf" />
+                    <Divider sx={{ borderColor: "#8294A3", borderBottomWidth: "2px" }} style={{marginTop: "5px"}} flexItem />
+                    <EvidenceType onView={() => changeEvidence("evidenceExample")} evidences={evidences} />
+                <Evidence onView={() => changeEvidence("evidenceExample")} label="Etude préalable du dimensionnement de l’éclairage.pdf" />
+                <Button style={{width: "180px"}}>{t("addAnEvidence")}</Button>
             </Stack>
             <Stack
                 direction="row"
@@ -27,7 +66,7 @@ export const EvidenceList = () => {
             >
                 <DropFileIcon style={{ width: "80px" }} />
                 <Typography variant="body2" color="#787878">
-                    You can drop file here
+                    {t("canDropFile")}
                     </Typography>
             </Stack>
         </>
