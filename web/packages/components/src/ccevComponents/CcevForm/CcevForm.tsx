@@ -8,14 +8,18 @@ import { useTranslation } from "react-i18next"
 
 const FormStyled = styled(Form)({
     "& .EvidenceIcon": {
-        width: 30,
-        height: 30
+        width: 27,
+        height: 27
     },
     "& .AruiForm-field": {
         margin: 0
     },
     "& .AruiTextfield-Textfield": {
         width: "300px"
+    },
+    "& .MuiInputLabel-root": {
+        whiteSpace: "normal",
+        maxWidth: "600px"
     }
 })
 
@@ -40,7 +44,7 @@ export const CcevForm = (props: CcevFormProps) => {
             iconPosition: "end"
         },
         customDisplay: (input) => (
-            <Stack direction="row" alignItems="center" spacing={0} justifyContent="space-between">
+            <Stack key={`${field.key}-stackContainer`} direction="row" alignItems="center" spacing={0} justifyContent="space-between">
                 {input}
                 <Stack sx={{marginLeft: "5px"}} direction="row" alignItems="center" spacing={2}>
                     {field.hasEvidence ?

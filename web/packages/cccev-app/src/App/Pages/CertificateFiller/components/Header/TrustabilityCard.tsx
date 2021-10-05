@@ -11,10 +11,7 @@ const TrustabilityPaper = styled(Paper)({
     width: "500px",
     height: "100px",
     left: "10%",
-    top: "110px",
-    '@media (min-width:2000px)': {
-        left: "calc(50% - 250px)"
-    }
+    top: "110px"
 })
 
 export const TrustabilityCard = () => {
