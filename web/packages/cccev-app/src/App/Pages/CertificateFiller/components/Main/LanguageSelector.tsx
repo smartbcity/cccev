@@ -6,6 +6,7 @@ const BoxStyled = styled(Box)({
     display: "flex",
     alignItems: "center",
     padding: "10px",
+    paddingBottom: "0px",
     "& .LanguageSelector-label": {
         marginRight: "5px"
     },
