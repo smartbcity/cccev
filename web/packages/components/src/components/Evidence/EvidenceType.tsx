@@ -1,5 +1,5 @@
 import { Box, Divider, Stack, Typography } from "@mui/material"
-import { useMemo } from "react"
+import { Fragment, useMemo } from "react"
 import { Evidence } from "./Evidence"
 import { useTranslation } from "react-i18next"
 
@@ -29,7 +29,7 @@ export const EvidenceType = (props: EvidenceTypeProps) => {
     const {t} = useTranslation()
 
     const evidencesDisplay = useMemo(() => evidences.map((evidenceTypeList, firstIndex) => (
-        <>
+        <Fragment key={evidenceTypeList.id}>
             {evidenceTypeList.specifiesEvidenceType.map((evidence, secondIndex) => {
                 let divider: JSX.Element = <Divider sx={{ borderBottom: "2px solid black", width: "20px" }} />
                 if (firstIndex === 0 && secondIndex === 0) {
@@ -87,7 +87,7 @@ export const EvidenceType = (props: EvidenceTypeProps) => {
                     </Typography>
                 </Box>
             )}
-        </>
+        </Fragment>
     )), [evidences, onDelete, onUpload, onView])
 
     return (
