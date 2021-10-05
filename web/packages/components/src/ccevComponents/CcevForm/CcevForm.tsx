@@ -1,0 +1,67 @@
+import { NetworkCell } from '@mui/icons-material'
+import { Divider, Stack, styled, Typography } from '@mui/material'
+import { Form, FormField, FormProps } from '@smartb/g2-forms'
+import { Tooltip } from '@smartb/g2-notifications'
+import { useMemo } from 'react'
+import { EvidenceBounded, EvidenceNotBounded } from '../../icons'
+import { useTranslation } from "react-i18next"
+
+const FormStyled = styled(Form)({
+    "& .EvidenceIcon": {
+        width: 30,
+        height: 30
+    },
+    "& .AruiForm-field": {
+        margin: 0
+    },
+    "& .AruiTextfield-Textfield": {
+        width: "300px"
+    }
+})
+
+export type CcevFormField = Omit<FormField, "customDisplay"> & {
+    hasEvidence: boolean
+    fieldUnit?: string
+}
+
+interface CcevFormProps extends Omit<FormProps, "fields"> {
+    fields: CcevFormField[]
+}
+
+export const CcevForm = (props: CcevFormProps) => {
+    const { fields, ...other } = props
+    const {t} = useTranslation()
+
+    const fieldsMapping = useMemo((): FormField[] => fields.map((field): FormField => ({
+        ...field,
+        textFieldProps: {
+            ...field.textFieldProps,
+            inputIcon: field.fieldUnit,
+            iconPosition: "end"
+        },
+        customDisplay: (input) => (
+            <Stack direction="row" alignItems="center" spacing={0} justifyContent="space-between">
+                {input}
+                <Stack sx={{marginLeft: "5px"}} direction="row" alignItems="center" spacing={2}>
+                    {field.hasEvidence ?
+                        <Tooltip helperText={t("certificateFillerPage.evidenceIsBounded")}>
+                            <EvidenceBounded className="EvidenceIcon" />
+                        </Tooltip>
+                        :
+                        <Tooltip helperText={t("certificateFillerPage.noEvidenceIsBounded")}>
+                            <EvidenceNotBounded className="EvidenceIcon" />
+                        </Tooltip>
+                    }
+                    <Typography variant="body2">
+                        {t("trustability")}:
+                    </Typography>
+                    <NetworkCell />
+                </Stack>
+            </Stack>
+        )
+    })), [fields, t])
+
+    return (
+        <FormStyled fields={fieldsMapping} fieldsStackProps={{ divider: <Divider flexItem />, spacing: 3 }} {...other} />
+    )
+}

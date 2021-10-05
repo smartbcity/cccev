@@ -53,6 +53,10 @@ export const muiTheme: ThemeOptions = {
     },
     caption: {
       fontFamily: "roboto",
+    },
+    button: {
+      fontFamily: "roboto",
+      fontWeight: 500
     }
   }
 };

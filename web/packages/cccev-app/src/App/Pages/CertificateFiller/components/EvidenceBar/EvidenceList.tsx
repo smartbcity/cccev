@@ -49,8 +49,8 @@ export const EvidenceList = (props: EvidenceListProps) => {
             >
                 <Title />
                     <Divider sx={{ borderColor: "#8294A3", borderBottomWidth: "2px" }} style={{marginTop: "5px"}} flexItem />
-                    <EvidenceType onView={() => changeEvidence("evidenceExample")} evidences={evidences} />
-                <Evidence onView={() => changeEvidence("evidenceExample")} label="Etude préalable du dimensionnement de l’éclairage.pdf" />
+                    <EvidenceType onView={() => changeEvidence("evidence example")} evidences={evidences} />
+                <Evidence onView={() => changeEvidence("evidence example")} label="Etude préalable du dimensionnement de l’éclairage.pdf" />
                 <Button style={{width: "180px"}}>{t("addAnEvidence")}</Button>
             </Stack>
             <Stack
