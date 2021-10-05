@@ -6,8 +6,8 @@ import cccev.dsl.cee.DossierCee
 import cccev.dsl.cee.FicheCode
 import cccev.dsl.cee.indba116.NombreTypesDispositifGestionEclairage
 import ccev.dsl.core.Constraint
-import ccev.dsl.core.EvidenceType
-import ccev.dsl.core.EvidenceTypeList
+import ccev.dsl.core.EvidenceTypeBase
+import ccev.dsl.core.EvidenceTypeListBase
 import ccev.dsl.core.InformationRequirement
 import ccev.dsl.core.PartialRequirement
 import ccev.dsl.core.Requirement
@@ -38,14 +38,15 @@ object DureeVieConventionnelleV2 {
             AucunPrecedentDossierPourMemeOperationEtConditions
         ),
         hasEvidenceTypeList = listOf(
-            EvidenceTypeList(
+            EvidenceTypeListBase(
                 description = "Précédent dossier CEE pour la même opération et dans les mêmes conditions",
                 identifier = "precedentDossierCee",
                 name = "Précédent dossier CEE",
                 specifiesEvidenceType = listOf(
-                    EvidenceType(
-                        evidenceTypeClassification = DossierCee,
-                        identifier = "dossierCee"
+                    EvidenceTypeBase(
+                        identifier = "dossierCee",
+                        name = "Précédent dossier CEE",
+                        evidenceTypeClassification = DossierCee
                     )
                 )
             )
@@ -58,14 +59,15 @@ object DureeVieConventionnelleV2 {
         name = "Aucun précédent dossier pour meme operation et conditions",
         type = FicheCode.DureeVieConventionnelle,
         hasEvidenceTypeList = listOf(
-            EvidenceTypeList(
+            EvidenceTypeListBase(
                 description = "Déclare sur l'honneur ne jamais avoir bénéficié de crédits CEE avec la même fiche et dans les mêmes conditions",
-                identifier = "declarationHonneurDureeVieConditionnelle",
-                name = "Declaration honneur durée vie conditionnelle",
+                identifier = "declarationHonneurDureeVieConventionnelle",
+                name = "Declaration honneur durée vie conventionnelle",
                 specifiesEvidenceType = listOf(
-                    EvidenceType(
-                        evidenceTypeClassification = DeclarationHonneur,
-                        identifier = "declarationHonneurDureeVieConditionnelle"
+                    EvidenceTypeBase(
+                        identifier = "declarationHonneurDureeVieConventionnelle",
+                        name = "Declaration honneur durée vie conventionnelle",
+                        evidenceTypeClassification = DeclarationHonneur
                     )
                 )
             )

@@ -1,9 +1,19 @@
 package ccev.dsl.core
 
-open class InformationConcept(
-	val identifier: String,
-	val type: Code,
-	val name: String,
-	val description: String,
+expect interface InformationConcept {
+	val identifier: String
+	val name: String
+	val unit: CUnitDTO
+	val type: Code
+	val description: String
 	val expressionOfExpectedValue: String?
-)
+}
+
+open class InformationConceptBase(
+	override val identifier: String,
+	override val name: String,
+	override val unit: CUnit,
+	override val type: Code,
+	override val description: String,
+	override val expressionOfExpectedValue: String?
+): InformationConcept

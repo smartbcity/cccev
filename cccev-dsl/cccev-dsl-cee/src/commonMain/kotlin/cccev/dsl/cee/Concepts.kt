@@ -1,28 +1,31 @@
 package cccev.dsl.cee
 
-import ccev.dsl.core.InformationConcept
+import ccev.dsl.core.InformationConceptBase
 import ccev.dsl.core.XSDDate
 
-object DateTravaux: InformationConcept(
+object DateTravaux: InformationConceptBase(
     identifier = "dateTravaux",
-    type = XSDDate,
     name = "Date Travaux",
+    unit = XSDDate,
+    type = FicheCode.ConditionsDelivranceCertificats,
     description = "Date de travaux",
     expressionOfExpectedValue = null
 )
 
-object DatePrecedentsTravaux: InformationConcept(
+object DatePrecedentsTravaux: InformationConceptBase(
     identifier = "datePrecedentsTravaux",
-    type = XSDDate,
     name = "Date Précédents Travaux",
+    unit = XSDDate,
+    type = FicheCode.ConditionsDelivranceCertificats,
     description = "Date des précédents travaux",
     expressionOfExpectedValue = null
 )
 
-object DateDevis: InformationConcept(
+object DateDevis: InformationConceptBase(
     identifier = "dateDevis",
-    type = XSDDate,
     name = "Date Devis",
+    unit = XSDDate,
+    type = FicheCode.ConditionsDelivranceCertificats,
     description = "Date de devis",
     expressionOfExpectedValue = null
 )
