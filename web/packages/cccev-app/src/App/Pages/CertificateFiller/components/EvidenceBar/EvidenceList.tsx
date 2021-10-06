@@ -3,42 +3,34 @@ import { Button } from '@smartb/g2-components'
 import { DropFileIcon } from './DropFileIcon'
 import { Title } from './Title'
 import { Evidence, EvidenceTypeList, EvidenceType } from 'components'
-import { useMemo } from 'react'
+import { useCallback } from 'react'
 import { useTranslation } from "react-i18next"
 
 interface EvidenceListProps {
     changeEvidence: (evidence?: string) => void
+    addEvidenceType: (evidenceTypeId?: string | undefined) => void
+    evidences: EvidenceTypeList[]
 }
 
 export const EvidenceList = (props: EvidenceListProps) => {
-    const {changeEvidence} = props
+    const {changeEvidence, addEvidenceType, evidences} = props
 
     const {t} = useTranslation()
 
-    const evidences = useMemo(():EvidenceTypeList[] => [
-        {
-            id: "EvidenceTypeList-1",
-            name: "Justificatifs des critères techniques",
-            specifiesEvidenceType: [{
-                id: "evidence-1",
-                isAdded: false,
-                label: "Document du détail de l’équipement ajouté"
-            }]
+
+    const onAddEvidence = useCallback(
+        () => {
+            addEvidenceType()
         },
-        {
-            id: "EvidenceTypeList-2",
-            name: "Justificatifs des critères techniques",
-            specifiesEvidenceType: [{
-                id: "evidence-2",
-                isAdded: false,
-                label: "Fiche technique des luminaires venant du constructeur"
-            },{
-                id: "evidence-3",
-                isAdded: true,
-                label: "Référence équipement.pdf"
-            }]
-        }
-    ], [])
+        [addEvidenceType],
+    )
+
+    const onUploadEvidence = useCallback(
+        (evidenceTypeId: string) => {
+            addEvidenceType(evidenceTypeId)
+        },
+        [addEvidenceType],
+    )
 
     return (
         <>
@@ -49,9 +41,9 @@ export const EvidenceList = (props: EvidenceListProps) => {
             >
                 <Title />
                     <Divider sx={{ borderColor: "#8294A3", borderBottomWidth: "2px" }} style={{marginTop: "5px"}} flexItem />
-                    <EvidenceType onView={() => changeEvidence("evidence example")} evidences={evidences} />
-                <Evidence onView={() => changeEvidence("evidence example")} label="Etude préalable du dimensionnement de l’éclairage.pdf" />
-                <Button style={{width: "180px"}}>{t("addAnEvidence")}</Button>
+                    <EvidenceType onView={() => changeEvidence("evidenceExample")} onUpload={onUploadEvidence} evidences={evidences} />
+                <Evidence onView={() => changeEvidence("evidenceExample")} label="Etude préalable du dimensionnement de l’éclairage.pdf" />
+                <Button onClick={onAddEvidence} style={{width: "180px", zIndex: 1}}>{t("addAnEvidence")}</Button>
             </Stack>
             <Stack
                 direction="row"

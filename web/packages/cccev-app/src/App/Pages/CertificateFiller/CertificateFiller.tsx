@@ -8,10 +8,13 @@ interface CertificateFillerProps {
     filters: FiltersState
     changeFilters: (filters: FiltersState) => void
     changeEvidence: (evidence?: string) => void
+    evidenceTypeAdded?: string
+    setEvidenceTypeAdded: (evidenceTypeId?: string | undefined) => void
+    addEvidenceType: (evidenceTypeId?: string | undefined) => void
 }
 
 export const CertificateFiller = (props: CertificateFillerProps) => {
-    const { filters, changeFilters, changeEvidence } = props
+    const { filters, changeFilters, changeEvidence, addEvidenceType, setEvidenceTypeAdded, evidenceTypeAdded } = props
     return (
         <>
             <Box
@@ -46,7 +49,7 @@ export const CertificateFiller = (props: CertificateFillerProps) => {
                 </Box>
                 <Main filters={filters} changeFilters={changeFilters} />
             </Box>
-            <EvidenceBar currentEvidence={filters.evidence} changeEvidence={changeEvidence} />
+            <EvidenceBar addEvidenceType={addEvidenceType} setEvidenceTypeAdded={setEvidenceTypeAdded} evidenceTypeAdded={evidenceTypeAdded}  currentEvidence={filters.evidence} changeEvidence={changeEvidence} />
         </>
     )
 }

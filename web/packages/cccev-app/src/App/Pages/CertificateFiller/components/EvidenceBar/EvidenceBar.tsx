@@ -1,8 +1,34 @@
 import { ArrowBackRounded } from '@mui/icons-material'
 import { Box, IconButton, styled } from '@mui/material'
-import { PdfDisplayer } from 'components'
+import { EvidenceTypeList, PdfDisplayer } from 'components'
 import { useCallback } from 'react'
+import { Dropzone } from './Dropzone'
 import { EvidenceList } from './EvidenceList'
+
+const evidences: EvidenceTypeList[] = [
+    {
+        id: "EvidenceTypeList-1",
+        name: "Justificatifs des critères techniques",
+        specifiesEvidenceType: [{
+            id: "evidence-1",
+            isAdded: false,
+            label: "Document du détail de l’équipement ajouté"
+        }]
+    },
+    {
+        id: "EvidenceTypeList-2",
+        name: "Justificatifs des critères techniques",
+        specifiesEvidenceType: [{
+            id: "evidence-2",
+            isAdded: false,
+            label: "Fiche technique des luminaires venant du constructeur"
+        }, {
+            id: "evidence-3",
+            isAdded: true,
+            label: "Référence équipement.pdf"
+        }]
+    }
+]
 
 const EvidenceBarContainer = styled(Box)({
     position: "fixed",
@@ -20,29 +46,33 @@ const EvidenceBarContainer = styled(Box)({
     "& .evidenceBar-backButton": {
         position: "absolute",
         top: "10px",
-        left:"10px",
+        left: "10px",
         color: "black",
-        zIndex:1
+        zIndex: 1
     }
 })
 
 interface EvidenceBarProps {
     currentEvidence?: string
     changeEvidence: (evidence?: string) => void
+    evidenceTypeAdded?: string
+    setEvidenceTypeAdded: (evidenceTypeId?: string | undefined) => void
+    addEvidenceType: (evidenceTypeId?: string | undefined) => void
 }
 
 export const EvidenceBar = (props: EvidenceBarProps) => {
-    const {currentEvidence, changeEvidence} = props
+    const { currentEvidence, changeEvidence, addEvidenceType, setEvidenceTypeAdded, evidenceTypeAdded } = props
 
     const removeCurrentEvidence = useCallback(
         () => changeEvidence(),
         [changeEvidence],
     )
-    
+
     if (!currentEvidence) {
         return (
             <EvidenceBarContainer>
-                <EvidenceList changeEvidence={changeEvidence} />
+                <EvidenceList evidences={evidences} addEvidenceType={addEvidenceType} changeEvidence={changeEvidence} />
+                <Dropzone evidences={evidences} setEvidenceTypeAdded={setEvidenceTypeAdded} evidenceTypeAdded={evidenceTypeAdded} />
             </EvidenceBarContainer>
         )
     }

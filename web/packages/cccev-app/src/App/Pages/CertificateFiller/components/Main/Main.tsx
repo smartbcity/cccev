@@ -34,6 +34,7 @@ const fictivInformationConcepts: InformationConcept[] = [{
     unit: {
         type: "boolean"
     },
+    value: false,
     hasEvidence: true
 },
 {
@@ -46,6 +47,7 @@ const fictivInformationConcepts: InformationConcept[] = [{
     unit: {
         type: "boolean"
     },
+    value: false,
     hasEvidence: true
 },
 {
