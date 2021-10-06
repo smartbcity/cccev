@@ -450,6 +450,36 @@
   function atomic_6(initial, trace) {
     return new AtomicLong(initial);
   }
+  function CoreLocationLocation() {
+  }
+  CoreLocationLocation.$metadata$ = {
+    simpleName: 'CoreLocationLocation',
+    kind: 'class',
+    interfaces: []
+  };
+  function PeriodOfTime_init_$Init$(duration, endTime, startTime, $mask0, $marker, $this) {
+    if (!(($mask0 & 1) === 0))
+      duration = null;
+    if (!(($mask0 & 2) === 0))
+      endTime = null;
+    if (!(($mask0 & 4) === 0))
+      startTime = null;
+    PeriodOfTime.call($this, duration, endTime, startTime);
+    return $this;
+  }
+  function PeriodOfTime_init_$Create$(duration, endTime, startTime, $mask0, $marker) {
+    return PeriodOfTime_init_$Init$(duration, endTime, startTime, $mask0, $marker, Object.create(PeriodOfTime.prototype));
+  }
+  function PeriodOfTime(duration, endTime, startTime) {
+    var duration_0 = duration === void 1 ? null : duration;
+    var endTime_0 = endTime === void 1 ? null : endTime;
+    var startTime_0 = startTime === void 1 ? null : startTime;
+  }
+  PeriodOfTime.$metadata$ = {
+    simpleName: 'PeriodOfTime',
+    kind: 'class',
+    interfaces: []
+  };
   function Error_0(type, description, date, payload, severity) {
     this._type = type;
     this._description = description;
@@ -658,6 +688,8 @@
   $kotlinx$atomicfu.atomic$boolean$ = atomic_1;
   $kotlinx$atomicfu.atomic$int$ = atomic_3;
   $kotlinx$atomicfu.atomic$long$ = atomic_5;
+  $ccev$dsl$core.CoreLocationLocation = CoreLocationLocation;
+  $ccev$dsl$core.PeriodOfTime = PeriodOfTime;
   $f2$dsl$cqrs$error.Error = Error_0;
   $f2$dsl$cqrs$error.ErrorSeverity = ErrorSeverity_0;
   $f2$dsl$cqrs$error.ErrorSeverityWarning = ErrorSeverityWarning_0;

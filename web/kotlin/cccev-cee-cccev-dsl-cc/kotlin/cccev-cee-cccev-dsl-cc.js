@@ -2691,11 +2691,34 @@
   function atomic_6(initial, trace) {
     return new AtomicLong(initial);
   }
-  function Code() {
+  function CoreLocationLocation() {
   }
-  Code.$metadata$ = {
-    simpleName: 'Code',
-    kind: 'interface',
+  CoreLocationLocation.$metadata$ = {
+    simpleName: 'CoreLocationLocation',
+    kind: 'class',
+    interfaces: []
+  };
+  function PeriodOfTime_init_$Init$(duration, endTime, startTime, $mask0, $marker, $this) {
+    if (!(($mask0 & 1) === 0))
+      duration = null;
+    if (!(($mask0 & 2) === 0))
+      endTime = null;
+    if (!(($mask0 & 4) === 0))
+      startTime = null;
+    PeriodOfTime.call($this, duration, endTime, startTime);
+    return $this;
+  }
+  function PeriodOfTime_init_$Create$(duration, endTime, startTime, $mask0, $marker) {
+    return PeriodOfTime_init_$Init$(duration, endTime, startTime, $mask0, $marker, Object.create(PeriodOfTime.prototype));
+  }
+  function PeriodOfTime(duration, endTime, startTime) {
+    var duration_0 = duration === void 1 ? null : duration;
+    var endTime_0 = endTime === void 1 ? null : endTime;
+    var startTime_0 = startTime === void 1 ? null : startTime;
+  }
+  PeriodOfTime.$metadata$ = {
+    simpleName: 'PeriodOfTime',
+    kind: 'class',
     interfaces: []
   };
   function EvidenceTypeListBase(description, identifier, name, specifiesEvidenceType) {
@@ -3098,7 +3121,7 @@
   Scope.$metadata$ = {
     simpleName: 'Scope',
     kind: 'object',
-    interfaces: [Code]
+    interfaces: []
   };
   var Scope_instance;
   function Scope_getInstance() {
@@ -3112,7 +3135,7 @@
   CC.$metadata$ = {
     simpleName: 'CC',
     kind: 'object',
-    interfaces: [Code]
+    interfaces: []
   };
   var CC_instance;
   function CC_getInstance() {
@@ -3126,7 +3149,7 @@
   BilanCarbone.$metadata$ = {
     simpleName: 'BilanCarbone',
     kind: 'object',
-    interfaces: [Code]
+    interfaces: []
   };
   var BilanCarbone_instance;
   function BilanCarbone_getInstance() {
@@ -3277,6 +3300,8 @@
   $kotlinx$atomicfu.atomic$boolean$ = atomic_1;
   $kotlinx$atomicfu.atomic$int$ = atomic_3;
   $kotlinx$atomicfu.atomic$long$ = atomic_5;
+  $ccev$dsl$core.CoreLocationLocation = CoreLocationLocation;
+  $ccev$dsl$core.PeriodOfTime = PeriodOfTime;
   return _;
 }));
 

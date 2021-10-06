@@ -1,5 +1,19 @@
 type Nullable<T> = T | null | undefined
 export namespace ccev.dsl.core {
+    interface Code {
+    }
+}
+export namespace ccev.dsl.core {
+    interface EvidenceDTO {
+        readonly isConformantTo: kotlin.collections.List<string>;
+        readonly supportsValue: kotlin.collections.List<string>;
+        readonly supportsConcept: kotlin.collections.List<string>;
+        readonly supportsRequirement: kotlin.collections.List<string>;
+        readonly validityPeriod: Nullable<ccev.dsl.core.PeriodOfTime>;
+        readonly file: Nullable<string>;
+    }
+}
+export namespace ccev.dsl.core {
     interface EvidenceTypeList {
         readonly description: string;
         readonly identifier: string;
@@ -25,7 +39,15 @@ export namespace ccev.dsl.core {
     }
 }
 export namespace ccev.dsl.core {
-    interface UnitDTO {
+    interface SupportedValueDTO {
+        readonly identifier: string;
+        readonly value: Nullable<string>;
+        readonly query: Nullable<string>;
+        readonly providesValueFor: string;
+    }
+}
+export namespace ccev.dsl.core {
+    interface CUnitDTO {
         readonly identifier: string;
         readonly name: string;
         readonly description: string;
@@ -38,5 +60,13 @@ export namespace kotlinx.atomicfu {
     function atomic$boolean$(initial: boolean, trace: kotlinx.atomicfu.TraceBase): kotlinx.atomicfu.AtomicBoolean;
     function atomic$int$(initial: number, trace: kotlinx.atomicfu.TraceBase): kotlinx.atomicfu.AtomicInt;
     function atomic$long$(initial: kotlin.Long, trace: kotlinx.atomicfu.TraceBase): kotlinx.atomicfu.AtomicLong;
+}
+export namespace ccev.dsl.core {
+    class CoreLocationLocation {
+        constructor();
+    }
+    class PeriodOfTime {
+        constructor(duration: Nullable<string>, endTime: Nullable<number>, startTime: Nullable<number>);
+    }
 }
 export as namespace cccev_cee_cccev_dsl_cee;

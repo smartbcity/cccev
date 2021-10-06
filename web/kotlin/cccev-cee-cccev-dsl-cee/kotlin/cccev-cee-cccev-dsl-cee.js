@@ -4417,11 +4417,11 @@
   function atomic_6(initial, trace) {
     return new AtomicLong(initial);
   }
-  function Code() {
+  function CoreLocationLocation() {
   }
-  Code.$metadata$ = {
-    simpleName: 'Code',
-    kind: 'interface',
+  CoreLocationLocation.$metadata$ = {
+    simpleName: 'CoreLocationLocation',
+    kind: 'class',
     interfaces: []
   };
   function PeriodOfTime_init_$Init$(duration, endTime, startTime, $mask0, $marker, $this) {
@@ -4438,6 +4438,9 @@
     return PeriodOfTime_init_$Init$(duration, endTime, startTime, $mask0, $marker, Object.create(PeriodOfTime.prototype));
   }
   function PeriodOfTime(duration, endTime, startTime) {
+    var duration_0 = duration === void 1 ? null : duration;
+    var endTime_0 = endTime === void 1 ? null : endTime;
+    var startTime_0 = startTime === void 1 ? null : startTime;
   }
   PeriodOfTime.$metadata$ = {
     simpleName: 'PeriodOfTime',
@@ -5009,7 +5012,7 @@
   SecteurActivite.$metadata$ = {
     simpleName: 'SecteurActivite',
     kind: 'object',
-    interfaces: [Code]
+    interfaces: []
   };
   var SecteurActivite_instance;
   function SecteurActivite_getInstance() {
@@ -5023,7 +5026,7 @@
   Denomination.$metadata$ = {
     simpleName: 'Denomination',
     kind: 'object',
-    interfaces: [Code]
+    interfaces: []
   };
   var Denomination_instance;
   function Denomination_getInstance() {
@@ -5037,7 +5040,7 @@
   ConditionsDelivranceCertificats.$metadata$ = {
     simpleName: 'ConditionsDelivranceCertificats',
     kind: 'object',
-    interfaces: [Code]
+    interfaces: []
   };
   var ConditionsDelivranceCertificats_instance;
   function ConditionsDelivranceCertificats_getInstance() {
@@ -5051,7 +5054,7 @@
   DureeVieConventionnelle.$metadata$ = {
     simpleName: 'DureeVieConventionnelle',
     kind: 'object',
-    interfaces: [Code]
+    interfaces: []
   };
   var DureeVieConventionnelle_instance;
   function DureeVieConventionnelle_getInstance() {
@@ -5065,7 +5068,7 @@
   MontantCertificatsCumac.$metadata$ = {
     simpleName: 'MontantCertificatsCumac',
     kind: 'object',
-    interfaces: [Code]
+    interfaces: []
   };
   var MontantCertificatsCumac_instance;
   function MontantCertificatsCumac_getInstance() {
@@ -5079,7 +5082,7 @@
   Annexe1.$metadata$ = {
     simpleName: 'Annexe1',
     kind: 'object',
-    interfaces: [Code]
+    interfaces: []
   };
   var Annexe1_instance;
   function Annexe1_getInstance() {
@@ -5093,7 +5096,7 @@
   FicheCee.$metadata$ = {
     simpleName: 'FicheCee',
     kind: 'object',
-    interfaces: [Code]
+    interfaces: []
   };
   var FicheCee_instance;
   function FicheCee_getInstance() {
@@ -5107,7 +5110,7 @@
   DossierCee.$metadata$ = {
     simpleName: 'DossierCee',
     kind: 'object',
-    interfaces: [Code]
+    interfaces: []
   };
   var DossierCee_instance;
   function DossierCee_getInstance() {
@@ -5121,7 +5124,7 @@
   DeclarationHonneur.$metadata$ = {
     simpleName: 'DeclarationHonneur',
     kind: 'object',
-    interfaces: [Code]
+    interfaces: []
   };
   var DeclarationHonneur_instance;
   function DeclarationHonneur_getInstance() {
@@ -5135,7 +5138,7 @@
   CerfaCode.$metadata$ = {
     simpleName: 'CerfaCode',
     kind: 'object',
-    interfaces: [Code]
+    interfaces: []
   };
   var CerfaCode_instance;
   function CerfaCode_getInstance() {
@@ -5626,7 +5629,7 @@
   Etude.$metadata$ = {
     simpleName: 'Etude',
     kind: 'object',
-    interfaces: [Code]
+    interfaces: []
   };
   var Etude_instance;
   function Etude_getInstance() {
@@ -6262,6 +6265,8 @@
   $kotlinx$atomicfu.atomic$boolean$ = atomic_1;
   $kotlinx$atomicfu.atomic$int$ = atomic_3;
   $kotlinx$atomicfu.atomic$long$ = atomic_5;
+  $ccev$dsl$core.CoreLocationLocation = CoreLocationLocation;
+  $ccev$dsl$core.PeriodOfTime = PeriodOfTime;
   return _;
 }));
 
