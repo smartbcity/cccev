@@ -1,5 +1,7 @@
 package ccev.dsl.core
 
+import kotlin.js.JsExport
+
 typealias EvidenceTypeListId = String
 typealias EvidenceTypeId = String
 
@@ -33,8 +35,10 @@ open class EvidenceTypeBase(
 	override val issuingPlace: CoreLocationLocation? = null
 ): EvidenceType
 
+@JsExport
 open class CoreLocationLocation
 
+@JsExport
 open class PeriodOfTime(
 	duration: String? = null,
 	endTime: Int? = null,

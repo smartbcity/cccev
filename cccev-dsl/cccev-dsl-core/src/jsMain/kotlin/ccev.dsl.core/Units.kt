@@ -2,7 +2,7 @@
 package ccev.dsl.core
 
 @JsExport
-@JsName("UnitDTO")
+@JsName("CUnitDTO")
 actual external interface CUnitDTO {
     actual val identifier: String
     actual val name: String

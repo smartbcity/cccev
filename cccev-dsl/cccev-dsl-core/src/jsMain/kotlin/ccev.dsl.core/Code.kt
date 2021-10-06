@@ -1,4 +1,6 @@
 @file:Suppress("MatchingDeclarationName")
 package ccev.dsl.core
 
-expect interface Code
+@JsExport
+@JsName("Code")
+actual external interface Code
