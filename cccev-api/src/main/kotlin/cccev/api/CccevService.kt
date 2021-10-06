@@ -1,8 +1,8 @@
 package cccev.api
 
 import cccev.dsl.dto.query.GetEvidenceTypeListsQueryFunction
-import cccev.f2.GetInformationConceptsQueryFunction
-import cccev.f2.GetRequirementQueryFunction
+import cccev.dsl.dto.query.GetInformationConceptsQueryFunction
+import cccev.dsl.dto.query.GetRequirementQueryFunction
 import org.springframework.context.annotation.Bean
 import org.springframework.stereotype.Service
 

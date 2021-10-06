@@ -27,9 +27,11 @@ object DureeVieConventionnelleV2 {
         description = """
             Le montant de certificats d'économies d'énergie, à attribuer suite à la réalisation d'une opération standardisée d'économies 
             d'énergie, figure au point 5 des fiches. Ce montant dépend de la durée de vie conventionnelle du produit en question mentionnée
-            quant à elle au point 4. Ainsi, le produit est supposé être détenu par le bénéficiaire durant toute sa durée de vie conventionnelle 
+            quant à elle au point 4. 
+            Ainsi, le produit est supposé être détenu par le bénéficiaire durant toute sa durée de vie conventionnelle. 
             Par conséquent, les CEE ne peuvent être délivrés à un même bénéficiaire qui renouvelle une opération d'économies d'énergie 
-            ayant déjà fait l'objet d'une délivrance de CEE dans les mêmes conditions, durant la durée de vie conventionnelle de l'opération.
+            ayant déjà fait l'objet d'une délivrance de CEE dans les mêmes conditions, 
+            durant la durée de vie conventionnelle de l'opération.
         """.trimIndent(),
         type = FicheCode.DureeVieConventionnelle,
         identifier = "dureeVieConventionnelle",
@@ -60,7 +62,8 @@ object DureeVieConventionnelleV2 {
         type = FicheCode.DureeVieConventionnelle,
         hasEvidenceTypeList = listOf(
             EvidenceTypeListBase(
-                description = "Déclare sur l'honneur ne jamais avoir bénéficié de crédits CEE avec la même fiche et dans les mêmes conditions",
+                description = "Déclare sur l'honneur ne jamais avoir bénéficié de crédits CEE " +
+                        "avec la même fiche et dans les mêmes conditions",
                 identifier = "declarationHonneurDureeVieConventionnelle",
                 name = "Declaration honneur durée vie conventionnelle",
                 specifiesEvidenceType = listOf(

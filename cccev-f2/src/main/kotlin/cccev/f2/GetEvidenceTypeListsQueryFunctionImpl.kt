@@ -3,6 +3,9 @@ package cccev.f2
 import cccev.dsl.dto.model.EvidenceTypeListDTOBase
 import cccev.dsl.dto.query.GetEvidenceTypeListsQueryFunction
 import cccev.dsl.dto.query.GetEvidenceTypeListsQueryResult
+import cccev.dsl.dto.query.GetRequirementQuery
+import cccev.dsl.dto.query.GetRequirementQueryFunction
+import cccev.f2.exception.NotFoundException
 import cccev.f2.model.toDTO
 import ccev.dsl.core.EvidenceTypeListBase
 import ccev.dsl.core.Requirement
@@ -19,7 +22,7 @@ class GetEvidenceTypeListsQueryFunctionImpl(
     fun getEvidenceTypeListsQueryFunction(): GetEvidenceTypeListsQueryFunction = f2Function { query ->
         val getRequirementQuery = GetRequirementQuery(query.requirement)
         val requirement = getRequirementQueryFunction.invoke(getRequirementQuery).requirement
-            ?: throw Exception("Requirement not found")
+            ?: throw NotFoundException("Requirement not found")
         GetEvidenceTypeListsQueryResult(requirement.evidenceTypeLists())
     }
 

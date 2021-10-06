@@ -16,6 +16,7 @@ open class CUnit(
     override val type: CUnitType
 ): CUnitDTO
 
+@Suppress("EnumNaming")
 enum class CUnitType {
     boolean, date, number, string
 }

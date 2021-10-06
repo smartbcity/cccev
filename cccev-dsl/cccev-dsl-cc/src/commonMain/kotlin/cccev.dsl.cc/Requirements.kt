@@ -1,3 +1,4 @@
+@file:Suppress("MatchingDeclarationName")
 package cccev.dsl.cc
 
 import ccev.dsl.core.InformationRequirement

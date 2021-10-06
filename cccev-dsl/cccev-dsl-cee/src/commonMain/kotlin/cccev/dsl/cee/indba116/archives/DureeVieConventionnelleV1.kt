@@ -58,7 +58,8 @@ object DureeVieConventionnelleV1 {
         type = FicheCode.DureeVieConventionnelle,
         hasEvidenceTypeList = listOf(
             EvidenceTypeListBase(
-                description = "Déclare sur l'honneur ne jamais avoir bénéficié de crédits CEE avec la même fiche et dans les mêmes conditions",
+                description = "Déclare sur l'honneur ne jamais avoir bénéficié de crédits CEE" +
+                        " avec la même fiche et dans les mêmes conditions",
                 identifier = "declarationHonneurDureeVieConventionnelle",
                 name = "Declaration honneur durée vie conventionnelle",
                 specifiesEvidenceType = listOf(
@@ -165,5 +166,4 @@ object DureeVieConventionnelleV1 {
             DateTravaux
         )
     )
-
 }
