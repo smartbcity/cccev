@@ -1,4 +1,4 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-cccev.f2.GetEvidenceTypeListsQueryFunctionImpl, \
-cccev.f2.GetInformationConceptsQueryFunctionImpl, \
-cccev.f2.GetRequirementQueryFunctionImpl
+cccev.f2.query.GetEvidenceTypeListsQueryFunctionImpl, \
+cccev.f2.query.GetInformationConceptsQueryFunctionImpl, \
+cccev.f2.query.GetRequirementQueryFunctionImpl

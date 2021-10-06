@@ -1,7 +1,9 @@
 package ccev.dsl.core
 
+typealias InformationConceptId = String
+
 expect interface InformationConcept {
-	val identifier: String
+	val identifier: InformationConceptId
 	val name: String
 	val unit: CUnitDTO
 	val type: Code
@@ -10,7 +12,7 @@ expect interface InformationConcept {
 }
 
 open class InformationConceptBase(
-	override val identifier: String,
+	override val identifier: InformationConceptId,
 	override val name: String,
 	override val unit: CUnit,
 	override val type: Code,

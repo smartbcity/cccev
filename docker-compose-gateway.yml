@@ -1,0 +1,16 @@
+version: "3.7"
+
+services:
+  cccev-api:
+    image: smartbcity/cccev-gateway:experimental
+    container_name: cccev-api
+    ports:
+      - 8083:8083
+    networks:
+      - nginx-proxy
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://${MONGODB_USER}:${MONGODB_PASS}@mongo-db/cccev
+
+networks:
+  bclannet-it:
+    name: nginx-proxy

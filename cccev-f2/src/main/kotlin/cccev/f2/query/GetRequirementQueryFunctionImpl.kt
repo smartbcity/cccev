@@ -1,4 +1,4 @@
-package cccev.f2
+package cccev.f2.query
 
 import cccev.dsl.cc.CarbonCopy
 import cccev.dsl.cee.baten101.BAT_EN_101

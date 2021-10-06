@@ -2,8 +2,8 @@ package features
 
 import cccev.dsl.dto.model.EvidenceTypeListDTO
 import cccev.dsl.dto.query.GetEvidenceTypeListsQuery
-import cccev.f2.GetEvidenceTypeListsQueryFunctionImpl
-import cccev.f2.GetRequirementQueryFunctionImpl
+import cccev.f2.query.GetEvidenceTypeListsQueryFunctionImpl
+import cccev.f2.query.GetRequirementQueryFunctionImpl
 import f2.dsl.fnc.invoke
 import features.data.ExpectedRequirement
 import features.data.expectedRequirements

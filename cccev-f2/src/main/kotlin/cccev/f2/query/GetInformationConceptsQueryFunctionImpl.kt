@@ -1,4 +1,4 @@
-package cccev.f2
+package cccev.f2.query
 
 import cccev.dsl.dto.model.InformationConceptDTO
 import cccev.dsl.dto.model.InformationConceptDTOBase

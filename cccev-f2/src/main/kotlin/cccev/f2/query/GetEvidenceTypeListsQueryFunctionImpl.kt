@@ -1,4 +1,4 @@
-package cccev.f2
+package cccev.f2.query
 
 import cccev.dsl.dto.model.EvidenceTypeListDTOBase
 import cccev.dsl.dto.query.GetEvidenceTypeListsQueryFunction

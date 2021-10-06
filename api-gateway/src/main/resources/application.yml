@@ -6,3 +6,7 @@ spring:
     function:
       web:
         path: /api
+  data:
+    mongodb:
+      uri: mongodb://admin:admin@localhost/admin
+      auto-index-creation: true

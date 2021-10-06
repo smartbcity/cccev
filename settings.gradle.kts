@@ -16,6 +16,7 @@ include(
 include(
 	"api-gateway",
 	"cccev-api",
+	"cccev-data",
 	"cccev-f2",
 	"cccev-test"
 )
