@@ -5449,7 +5449,7 @@
   function ResistanceThermiqueMinimale() {
     ResistanceThermiqueMinimale_instance = this;
     var tmp = '' + ResistanceThermique_getInstance()._get_identifier__0_k$() + ' >= 6';
-    var tmp_0 = trimIndent("\n        La r\xE9sistance thermique R de l'isolation install\xE9e est sup\xE9rieure ou \xE9gale \xE0 6 m\xB2.K/W en plancher de comble perdu ou en rampant de toiture.\n        La r\xE9sistance thermique est \xE9valu\xE9e selon la norme NF EN 12664, la norme NF EN 12667 ou la norme NF EN 12939 \n        pour les isolants non r\xE9fl\xE9chissants et selon la norme NF EN 16012+A1 pour les isolants r\xE9fl\xE9chissants.\n    ");
+    var tmp_0 = trimIndent("\n        La r\xE9sistance thermique R de l'isolation install\xE9e est sup\xE9rieure ou \xE9gale \xE0 6 m\xB2.K/W \n        en plancher de comble perdu ou en rampant de toiture.\n        La r\xE9sistance thermique est \xE9valu\xE9e selon la norme NF EN 12664, la norme NF EN 12667 ou la norme NF EN 12939 \n        pour les isolants non r\xE9fl\xE9chissants et selon la norme NF EN 16012+A1 pour les isolants r\xE9fl\xE9chissants.\n    ");
     var tmp_1 = ConditionsDelivranceCertificats_getInstance();
     var tmp_2 = listOf_0(ResistanceThermique_getInstance());
     Constraint_init_$Init$(tmp, 'resistanceThermiqueMinimale', tmp_0, tmp_1, tmp_2, null, null, 96, null, this);
@@ -5485,7 +5485,7 @@
   }
   function DateTravauxRegles() {
     DateTravauxRegles_instance = this;
-    var tmp = trimIndent("\n        Un d\xE9lai minimal de sept jours francs est respect\xE9 entre la date d'acceptation du devis et la date de d\xE9but des travaux (pose de l'isolant).\n        Une op\xE9ration ne peut \xEAtre engag\xE9e moins de douze mois suivant \n        l'engagement d'une op\xE9ration portant sur un m\xEAme b\xE2timent et un m\xEAme b\xE9n\xE9ficiaire.\n    ");
+    var tmp = trimIndent("\n        Un d\xE9lai minimal de sept jours francs est respect\xE9 entre la date d'acceptation du devis \n        et la date de d\xE9but des travaux (pose de l'isolant).\n        Une op\xE9ration ne peut \xEAtre engag\xE9e moins de douze mois suivant \n        l'engagement d'une op\xE9ration portant sur un m\xEAme b\xE2timent et un m\xEAme b\xE9n\xE9ficiaire.\n    ");
     var tmp_0 = ConditionsDelivranceCertificats_getInstance();
     var tmp_1 = listOf([DateDevisContrainte_getInstance(), DatePrecedentsTravauxMemeBatimentContrainte_getInstance()]);
     Criterion_init_$Init$('Contraintes sur la date des travaux', 'dateTravauxRegles', tmp, tmp_0, null, null, null, null, null, tmp_1, null, 1520, null, this);
@@ -5504,7 +5504,7 @@
   function DateDevisContrainte() {
     DateDevisContrainte_instance = this;
     var tmp = '' + DateTravaux_getInstance()._get_identifier__0_k$() + ' - ' + DateDevis_getInstance()._get_identifier__0_k$() + ' >= 7 days';
-    var tmp_0 = trimIndent("\n        Un d\xE9lai minimal de sept jours francs est respect\xE9 entre la date d'acceptation du devis et la date de d\xE9but des travaux (pose de l'isolant).\n    ");
+    var tmp_0 = trimIndent("\n        Un d\xE9lai minimal de sept jours francs est respect\xE9 entre la date d'acceptation du devis \n        et la date de d\xE9but des travaux (pose de l'isolant).\n    ");
     var tmp_1 = ConditionsDelivranceCertificats_getInstance();
     var tmp_2 = listOf([DateDevis_getInstance(), DateTravaux_getInstance()]);
     Constraint_init_$Init$(tmp, 'dateDevisContrainte', tmp_0, tmp_1, tmp_2, null, null, 96, null, this);
