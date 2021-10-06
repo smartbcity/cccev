@@ -1,3 +1,3 @@
 window._env_ = {
-  //the environnement variables
+  apiUrl: "https://app.impactmate.earth/api"
 };

@@ -8,88 +8,9 @@ import { objToArray } from "utils"
 import { FormPartialField, useFormWithPartialFields } from "@smartb/g2-forms"
 import { Button } from "@smartb/g2-components"
 import { useTranslation } from "react-i18next"
-
-interface InformationConcept {
-    id: string
-    name: string
-    category: {
-        id: string
-        name: string
-    }
-    unit: {
-        type: "string" | "date" | "number" | "boolean"
-        notation?: string
-    }
-    value?: any
-    hasEvidence: boolean
-}
-
-const fictivInformationConcepts: InformationConcept[] = [{
-    id: "field-batimentIdustriel",
-    name: 'Le batiment d’installation est de type "industriel"',
-    category: {
-        id: "afirmation-category",
-        name: "Affirmation"
-    },
-    unit: {
-        type: "boolean"
-    },
-    value: false,
-    hasEvidence: true
-},
-{
-    id: "field-pasDetectionMouvement",
-    name: 'L’installation n’est pas utilisé pour un dispositif de détection de mouvement',
-    category: {
-        id: "afirmation-category",
-        name: "Affirmation à confirmer"
-    },
-    unit: {
-        type: "boolean"
-    },
-    value: false,
-    hasEvidence: true
-},
-{
-    id: "field-dureDeVie",
-    name: 'Durée de vie calculée à 25°C avec une chute du flux lumineux inferieure à 20%',
-    category: {
-        id: "value-category",
-        name: "Valeur à renseigner"
-    },
-    unit: {
-        type: "number",
-        notation: "heures"
-    },
-    hasEvidence: false
-},
-{
-    id: "field-efficacitéLumineuse",
-    name: 'Efiicacité lumineuse',
-    category: {
-        id: "value-category",
-        name: "Valeur à renseigner"
-    },
-    unit: {
-        type: "number",
-        notation: "lm/W"
-    },
-    hasEvidence: true
-},
-{
-    id: "field-distorsionHarmonique",
-    name: 'Taux de distorsion harmonique',
-    category: {
-        id: "value-category",
-        name: "Valeur à renseigner"
-    },
-    unit: {
-        type: "number",
-        notation: "%"
-    },
-    hasEvidence: true
-}]
-
+import { useAsyncResponse } from "utils"
+import { getInformationConcepts, InformationConceptDTO } from "datahub"
+import { MainLoading } from "./MainLoading"
 
 interface MainProps {
     filters: FiltersState
@@ -99,12 +20,17 @@ interface MainProps {
 export const Main = (props: MainProps) => {
     const { filters, changeFilters } = props
 
-    const {t} = useTranslation()
+    const { t } = useTranslation()
 
-    const partialFields = useMemo(() => fictivInformationConcepts.map((info): FormPartialField => ({    
-        name: info.id,
-        defaultValue: info.value
-    })), [])
+    const informationConcepts = useAsyncResponse(getInformationConcepts)
+
+    const partialFields = useMemo(() => informationConcepts.result ?
+        informationConcepts.result.informationConcepts.map((info): FormPartialField => ({
+            name: info.identifier,
+            defaultValue: info.unit.type === "boolean" ? false : undefined
+        }))
+        :
+        [], [informationConcepts.result])
 
     const onSubmit = useCallback(
         (values: any) => {
@@ -118,32 +44,39 @@ export const Main = (props: MainProps) => {
         onSubmit: onSubmit
     })
 
-    const categories = useMemo(() => informationConceptsToCategories(fictivInformationConcepts), [])
+    const categories = useMemo(() => informationConcepts.result ? informationConceptsToCategories(informationConcepts.result.informationConcepts) : [], [informationConcepts.result])
 
+    if (informationConcepts.status !== "SUCCESS" || informationConcepts.result === undefined) return (
+        <MainLoading />
+    )
     return (
         <Box sx={{ padding: "10px 20px", paddingTop: "70px", maxWidth: "1500px", margin: "auto" }}>
             <PageFilters filters={filters} changeFilters={changeFilters} />
             <CertificatFillerAccrodion globalFormState={globalFormState} categories={categories} />
             <LanguageSelector />
-            <Box sx={{display: "flex", justifyContent: "center", paddingBottom: "30px"}}>
-                <Button onClick={globalFormState.submitForm} style={{width: "150px", fontSize: "17px"}}>{t("validate")}</Button>
+            <Box sx={{ display: "flex", justifyContent: "center", paddingBottom: "30px" }}>
+                <Button onClick={globalFormState.submitForm} style={{ width: "150px", fontSize: "17px" }}>{t("validate")}</Button>
             </Box>
         </Box>
     )
 }
 
-const informationConceptsToCategories = (informationConcepts: InformationConcept[]): Category[] => {
+const informationConceptsToCategories = (informationConcepts: InformationConceptDTO[]): Category[] => {
+    console.log(informationConcepts)
     const objCategories: { [key: string]: Category } = {}
-    informationConcepts.forEach((el) => {
+    //@ts-ignore
+    informationConcepts.forEach((el: (InformationConceptDTO & { category: { id: string, name: string } })) => {
+        el.category.id = "value-category"
+        el.category.name = "Valeur à renseigner"
         const newField: CcevFormField = {
-            key: el.id,
-            name: el.id,
+            key: el.identifier,
+            name: el.identifier,
             label: el.name,
             type: enumTypeToEnumFields(el.unit.type),
             textFieldProps: {
                 textFieldType: el.unit.type === "number" ? "number" : "text",
             },
-            hasEvidence: el.hasEvidence,
+            hasEvidence: false,
             fieldUnit: el.unit.notation
         }
         const fields = objCategories[el.category.id]?.fields ? [...objCategories[el.category.id].fields, newField] : [newField]

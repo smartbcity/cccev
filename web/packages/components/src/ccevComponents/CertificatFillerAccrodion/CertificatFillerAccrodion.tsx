@@ -18,7 +18,7 @@ interface CertificatFillerAccrodionProps {
 export const CertificatFillerAccrodion = (props: CertificatFillerAccrodionProps) => {
     const { categories, globalFormState } = props
 
-    const [currentPan, setcurrentPan] = useState<string | undefined>(categories[0].key ?? undefined)
+    const [currentPan, setcurrentPan] = useState<string | undefined>(categories[0]?.key ?? undefined)
 
     const accordions = useMemo(() => categories.map((category) => (
         <Accordion key={category.key} expanded={currentPan === category.key} onChange={() => setcurrentPan(category.key)}>

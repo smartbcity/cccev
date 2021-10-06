@@ -25,6 +25,7 @@
     "@smartb/g2": "^1.0.0-alpha.6",
     "utils": "^1.0.0",
     "components": "^1.0.0",
+    "datahub": "^1.0.0",
     "qs":"^6.10.1",
     "react-dropzone": "^11.4.2",
     "connected-react-router": "^6.9.1",

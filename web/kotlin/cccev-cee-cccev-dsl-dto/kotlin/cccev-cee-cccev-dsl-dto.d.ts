@@ -1,4 +1,9 @@
-type Nullable<T> = T | null | undefined
+type Nullable<T> = T | undefined
+type Array<T> = T[]
+export namespace kotlin.collections {
+    type List<T> = T[]
+}
+
 export namespace ccev.dsl.core {
     interface Code {
     }
