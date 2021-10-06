@@ -20,5 +20,9 @@ include(
 	"cccev-test"
 )
 include(
+	"cccev-s2:request:request-app",
+	"cccev-s2:request:request-domain"
+)
+include(
 	"proto"
 )

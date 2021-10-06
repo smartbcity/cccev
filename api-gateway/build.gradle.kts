@@ -8,6 +8,7 @@ plugins {
 dependencies {
     api("city.smartb.f2:f2-spring-boot-starter-function-http:${Versions.f2}")
     implementation(project(":cccev-api"))
+    implementation(project(":cccev-s2:request:request-app"))
 }
 
 tasks.withType<org.springframework.boot.gradle.tasks.bundling.BootBuildImage> {

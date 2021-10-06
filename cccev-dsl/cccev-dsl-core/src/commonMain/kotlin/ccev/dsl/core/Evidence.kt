@@ -2,6 +2,7 @@ package ccev.dsl.core
 
 typealias EvidenceId = String
 typealias SupportedValueId = String
+typealias InformationConceptId = String
 
 expect interface EvidenceDTO {
     val isConformantTo: List<EvidenceTypeId>
