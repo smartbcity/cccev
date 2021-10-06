@@ -10,6 +10,6 @@ dependencies {
     implementation(project(":cccev-api"))
 }
 
-//tasks.withType<org.springframework.boot.gradle.tasks.bundling.BootBuildImage> {
-//    imageName = "proto/cccev-gateway:${this.project.version}"
-//}
+tasks.withType<org.springframework.boot.gradle.tasks.bundling.BootBuildImage> {
+    imageName = "proto/cccev-gateway:${this.project.version}"
+}
