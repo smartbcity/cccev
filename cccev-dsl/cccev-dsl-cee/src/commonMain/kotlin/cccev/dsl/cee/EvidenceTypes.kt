@@ -1,11 +1,11 @@
 package cccev.dsl.cee
 
-import ccev.dsl.core.EvidenceType
-import ccev.dsl.core.EvidenceTypeList
+import ccev.dsl.core.EvidenceTypeBase
+import ccev.dsl.core.EvidenceTypeListBase
 import ccev.dsl.core.PeriodOfTime
 
 
-object CertificatProfessionnel: EvidenceTypeList(
+object CertificatProfessionnel: EvidenceTypeListBase(
     identifier = "CertificatProfessionnel",
     name = "Certificat Professionnel",
     description = "CertificatProfessionnel",
@@ -14,8 +14,9 @@ object CertificatProfessionnel: EvidenceTypeList(
     )
 )
 
-object CertificatCerfa: EvidenceType(
+object CertificatCerfa: EvidenceTypeBase(
     identifier = "CERFA-2321122",
+    name = "Certificat Cerfat",
     evidenceTypeClassification = CerfaCode,
     validityPeriodConstraint = PeriodOfTime(
         duration = "10 ans"

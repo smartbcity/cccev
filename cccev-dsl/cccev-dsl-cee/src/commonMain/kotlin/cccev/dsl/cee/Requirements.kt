@@ -1,8 +1,8 @@
 package cccev.dsl.cee
 
 import ccev.dsl.core.Criterion
-import ccev.dsl.core.EvidenceType
-import ccev.dsl.core.EvidenceTypeList
+import ccev.dsl.core.EvidenceTypeBase
+import ccev.dsl.core.EvidenceTypeListBase
 import ccev.dsl.core.InformationRequirement
 import ccev.dsl.core.PartialRequirement
 import ccev.dsl.core.Requirement
@@ -56,14 +56,15 @@ class DureeVieConventionnelle(
         AucunPrecedentDossierPourMemeOperationEtConditions
     ),
     hasEvidenceTypeList = listOf(
-        EvidenceTypeList(
+        EvidenceTypeListBase(
             description = "Précédent dossier CEE pour la même opération et dans les mêmes conditions",
             identifier = "precedentDossierCee",
             name = "Précédent dossier CEE",
             specifiesEvidenceType = listOf(
-                EvidenceType(
+                EvidenceTypeBase(
                     evidenceTypeClassification = DossierCee,
-                    identifier = "dossierCee"
+                    identifier = "dossierCee",
+                    name = "Précédent dossier CEE"
                 )
             )
         )
@@ -76,14 +77,15 @@ object AucunPrecedentDossierPourMemeOperationEtConditions: InformationRequiremen
     name = "Aucun précédent dossier pour meme operation et conditions",
     type = FicheCode.DureeVieConventionnelle,
     hasEvidenceTypeList = listOf(
-        EvidenceTypeList(
+        EvidenceTypeListBase(
             description = "Déclare sur l'honneur ne jamais avoir bénéficié de crédits CEE avec la même fiche et dans les mêmes conditions",
-            identifier = "declarationHonneurDureeVieConditionnelle",
-            name = "Declaration honneur durée vie conditionnelle",
+            identifier = "declarationHonneurDureeVieConventionnelle",
+            name = "Declaration honneur durée vie conventionnelle",
             specifiesEvidenceType = listOf(
-                EvidenceType(
+                EvidenceTypeBase(
                     evidenceTypeClassification = DeclarationHonneur,
-                    identifier = "declarationHonneurDureeVieConditionnelle"
+                    identifier = "declarationHonneurDureeVieConventionnelle",
+                    name = "Déclaration honneur durée vie conventionnelle"
                 )
             )
         )

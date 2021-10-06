@@ -14,7 +14,8 @@ object ResistanceThermiqueMinimale: Constraint(
     description = "${ResistanceThermique.identifier} >= 6",
     identifier = "resistanceThermiqueMinimale",
     name = """
-        La résistance thermique R de l'isolation installée est supérieure ou égale à 6 m².K/W en plancher de comble perdu ou en rampant de toiture.
+        La résistance thermique R de l'isolation installée est supérieure ou égale à 6 m².K/W 
+        en plancher de comble perdu ou en rampant de toiture.
         La résistance thermique est évaluée selon la norme NF EN 12664, la norme NF EN 12667 ou la norme NF EN 12939 
         pour les isolants non réfléchissants et selon la norme NF EN 16012+A1 pour les isolants réfléchissants.
     """.trimIndent(),
@@ -41,7 +42,8 @@ object DateTravauxRegles: Criterion(
     description = "Contraintes sur la date des travaux",
     identifier = "dateTravauxRegles",
     name = """
-        Un délai minimal de sept jours francs est respecté entre la date d'acceptation du devis et la date de début des travaux (pose de l'isolant).
+        Un délai minimal de sept jours francs est respecté entre la date d'acceptation du devis 
+        et la date de début des travaux (pose de l'isolant).
         Une opération ne peut être engagée moins de douze mois suivant 
         l'engagement d'une opération portant sur un même bâtiment et un même bénéficiaire.
     """.trimIndent(),
@@ -56,7 +58,8 @@ object DateDevisContrainte: Constraint(
     description = "${DateTravaux.identifier} - ${DateDevis.identifier} >= 7 days",
     identifier = "dateDevisContrainte",
     name = """
-        Un délai minimal de sept jours francs est respecté entre la date d'acceptation du devis et la date de début des travaux (pose de l'isolant).
+        Un délai minimal de sept jours francs est respecté entre la date d'acceptation du devis 
+        et la date de début des travaux (pose de l'isolant).
     """.trimIndent(),
     type = FicheCode.ConditionsDelivranceCertificats,
     hasConcept = listOf(

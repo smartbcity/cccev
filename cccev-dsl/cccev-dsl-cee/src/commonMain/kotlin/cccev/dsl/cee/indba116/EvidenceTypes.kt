@@ -1,10 +1,10 @@
 package cccev.dsl.cee.indba116
 
 import cccev.dsl.cee.FicheCode
-import ccev.dsl.core.EvidenceType
-import ccev.dsl.core.EvidenceTypeList
+import ccev.dsl.core.EvidenceTypeBase
+import ccev.dsl.core.EvidenceTypeListBase
 
-object EtudeDimensionnementEclairagePrealable: EvidenceTypeList(
+object EtudeDimensionnementEclairagePrealable: EvidenceTypeListBase(
     identifier = "etudeDimensionnementEclairagePrealable",
     name = """
         Le document justificatif spécifique à l’opération est l’étude de dimensionnement de l’éclairage préalable à la mise 
@@ -16,12 +16,13 @@ object EtudeDimensionnementEclairagePrealable: EvidenceTypeList(
     )
 )
 
-object EtudeDimensionnementEclairagePrealableDocument: EvidenceType(
+object EtudeDimensionnementEclairagePrealableDocument: EvidenceTypeBase(
     identifier = "etudeDimensionnementEclairagePrealableDoc",
+    name = "Etude préalable dimensionnement éclairage",
     evidenceTypeClassification = Etude
 )
 
-object Annexe1AvecDetailsEquipement: EvidenceTypeList(
+object Annexe1AvecDetailsEquipement: EvidenceTypeListBase(
     identifier = "annexe1Detaillee",
     name = """
         La preuve de réalisation de l’opération mentionne la mise en place de luminaires à modules LED, la quantité 
@@ -37,12 +38,13 @@ object Annexe1AvecDetailsEquipement: EvidenceTypeList(
     )
 )
 
-object Annexe1AvecDetailsEquipementDocument: EvidenceType(
+object Annexe1AvecDetailsEquipementDocument: EvidenceTypeBase(
     identifier = "annexe1DetailleeDoc",
+    name = "Annexe 1 avec détails équipements",
     evidenceTypeClassification = FicheCode.Annexe1
 )
 
-object Annexe1AvecReferencesEquipement: EvidenceTypeList(
+object Annexe1AvecReferencesEquipement: EvidenceTypeListBase(
     identifier = "annexe1References",
     name = """
         A défaut, la preuve de réalisation de l’opération mentionne : 
@@ -64,12 +66,14 @@ object Annexe1AvecReferencesEquipement: EvidenceTypeList(
     )
 )
 
-object Annexe1AvecReferencesEquipementDocument: EvidenceType(
+object Annexe1AvecReferencesEquipementDocument: EvidenceTypeBase(
     identifier = "annexe1ReferencesDoc",
+    name = "Annexe 1 avec références équipements",
     evidenceTypeClassification = FicheCode.Annexe1
 )
 
-object Annexe1FicheConstructeur: EvidenceType(
+object Annexe1FicheConstructeur: EvidenceTypeBase(
     identifier = "annexe1References",
+    name = "Fiches constructeur",
     evidenceTypeClassification = FicheCode.Annexe1
 )
