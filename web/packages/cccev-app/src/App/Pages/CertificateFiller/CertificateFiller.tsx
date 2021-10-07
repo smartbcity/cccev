@@ -1,5 +1,8 @@
 import { Box } from '@mui/material'
+import { EvidenceTypeDTO, EvidenceTypeListDTO } from 'datahub'
+import { useEffect } from 'react'
 import { FiltersState } from 'store/filters/filters.reducer'
+import { AsyncStatus } from 'utils'
 import { EvidenceBar } from './components/EvidenceBar/EvidenceBar'
 import { Header } from './components/Header/Header'
 import { Main } from './components/Main/Main'
@@ -11,10 +14,19 @@ interface CertificateFillerProps {
     evidenceTypeAdded?: string
     setEvidenceTypeAdded: (evidenceTypeId?: string | undefined) => void
     addEvidenceType: (evidenceTypeId?: string | undefined) => void
+    fetchEvidenceTypeLists: () => void
+    evidenceTypeLists?: EvidenceTypeListDTO[][]
+    evidenceTypeMap?: Map<string, EvidenceTypeDTO>
+    evidenceTypeListsFetchStatus?: AsyncStatus
 }
 
 export const CertificateFiller = (props: CertificateFillerProps) => {
-    const { filters, changeFilters, changeEvidence, addEvidenceType, setEvidenceTypeAdded, evidenceTypeAdded } = props
+    const { filters, changeFilters, changeEvidence, addEvidenceType, setEvidenceTypeAdded, evidenceTypeAdded, fetchEvidenceTypeLists, evidenceTypeLists, evidenceTypeListsFetchStatus, evidenceTypeMap } = props
+
+    useEffect(() => {
+        fetchEvidenceTypeLists()
+    }, [])
+
     return (
         <>
             <Box
@@ -47,9 +59,18 @@ export const CertificateFiller = (props: CertificateFillerProps) => {
                 >
                     <Header />
                 </Box>
-                <Main filters={filters} changeFilters={changeFilters} />
+                <Main evidenceTypeMap={evidenceTypeMap} filters={filters} changeFilters={changeFilters} />
             </Box>
-            <EvidenceBar addEvidenceType={addEvidenceType} setEvidenceTypeAdded={setEvidenceTypeAdded} evidenceTypeAdded={evidenceTypeAdded}  currentEvidence={filters.evidence} changeEvidence={changeEvidence} />
+            <EvidenceBar
+                addEvidenceType={addEvidenceType}
+                setEvidenceTypeAdded={setEvidenceTypeAdded}
+                evidenceTypeAdded={evidenceTypeAdded}
+                currentEvidence={filters.evidence}
+                changeEvidence={changeEvidence}
+                evidenceTypeLists={evidenceTypeLists}
+                evidenceTypeMap={evidenceTypeMap}
+                evidenceTypeListsFetchStatus={evidenceTypeListsFetchStatus}
+            />
         </>
     )
 }

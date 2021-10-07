@@ -3,18 +3,18 @@ import { PopUp, PopUpAction } from '@smartb/g2-layout'
 import { Select, Option } from '@smartb/g2-forms'
 import { useTheme } from '@smartb/g2-themes'
 import { Typography } from '@mui/material'
-import { EvidenceTypeList } from 'components'
+import { EvidenceTypeDTO } from 'datahub'
 
 interface addEvidencePopUpProps {
     open: boolean
     errorMessage?: string
     onClose: () => void
     onValidate: (evidenceTypeId: string) => void
-    evidences: EvidenceTypeList[]
+    evidenceTypeMap?: Map<string, EvidenceTypeDTO>
 }
 
 export const AddEvidencePopUp = (props: addEvidencePopUpProps) => {
-    const { open, onClose, onValidate, errorMessage, evidences } = props
+    const { open, onClose, onValidate, errorMessage, evidenceTypeMap } = props
     const theme = useTheme()
     const [evidenceTypeId, setEvidenceTypeId] = useState<string | undefined>(undefined)
 
@@ -53,16 +53,17 @@ export const AddEvidencePopUp = (props: addEvidencePopUpProps) => {
 
     const selectOptions = useMemo(() => {
         const options: Option[] = []
-        evidences.forEach((evidenceTypeList) => evidenceTypeList.specifiesEvidenceType.forEach((evidence) => {
-            if (!evidence.isAdded) {
+        if (!evidenceTypeMap) return []
+        evidenceTypeMap.forEach((evidenceType, evidenceTypeId) => {
+            if (!evidenceType.evidence) {
                 options.push({
-                    key: evidence.id,
-                    label: evidence.label
+                    key: evidenceTypeId,
+                    label: evidenceType.name
                 }) 
             }
-        }))
+        })
         return options
-    }, [evidences])
+    }, [evidenceTypeMap])
 
     return (
         <PopUp

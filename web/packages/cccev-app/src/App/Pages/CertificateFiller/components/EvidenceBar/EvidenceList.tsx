@@ -2,21 +2,21 @@ import { Divider, Stack, Typography } from '@mui/material'
 import { Button } from '@smartb/g2-components'
 import { DropFileIcon } from './DropFileIcon'
 import { Title } from './Title'
-import { Evidence, EvidenceTypeList, EvidenceType } from 'components'
-import { useCallback } from 'react'
+import { EvidenceTypeListDisplayer } from 'components'
+import { useCallback, useMemo } from 'react'
 import { useTranslation } from "react-i18next"
+import { EvidenceTypeListDTO } from 'datahub'
 
 interface EvidenceListProps {
     changeEvidence: (evidence?: string) => void
     addEvidenceType: (evidenceTypeId?: string | undefined) => void
-    evidences: EvidenceTypeList[]
+    evidenceTypeLists?: EvidenceTypeListDTO[][]
 }
 
 export const EvidenceList = (props: EvidenceListProps) => {
-    const {changeEvidence, addEvidenceType, evidences} = props
+    const { changeEvidence, addEvidenceType, evidenceTypeLists } = props
 
-    const {t} = useTranslation()
-
+    const { t } = useTranslation()
 
     const onAddEvidence = useCallback(
         () => {
@@ -32,6 +32,19 @@ export const EvidenceList = (props: EvidenceListProps) => {
         [addEvidenceType],
     )
 
+    const onViewEvidence = useCallback(
+        (evidenceTypeId: string) => {
+            changeEvidence(evidenceTypeId)
+        },
+        [changeEvidence],
+    )
+
+    
+    const evidenceTypeListsUi = useMemo(() => evidenceTypeLists?.map((el) => (
+        <EvidenceTypeListDisplayer onView={onViewEvidence} onUpload={onUploadEvidence} evidenceTypeLists={el} />
+    )), [evidenceTypeLists, onUploadEvidence, onViewEvidence])
+
+
     return (
         <>
             <Stack
@@ -40,10 +53,9 @@ export const EvidenceList = (props: EvidenceListProps) => {
                 spacing={3}
             >
                 <Title />
-                    <Divider sx={{ borderColor: "#8294A3", borderBottomWidth: "2px" }} style={{marginTop: "5px"}} flexItem />
-                    <EvidenceType onView={() => changeEvidence("evidenceExample")} onUpload={onUploadEvidence} evidences={evidences} />
-                <Evidence onView={() => changeEvidence("evidenceExample")} label="Etude préalable du dimensionnement de l’éclairage.pdf" />
-                <Button onClick={onAddEvidence} style={{width: "180px", zIndex: 1}}>{t("addAnEvidence")}</Button>
+                <Divider sx={{ borderColor: "#8294A3", borderBottomWidth: "2px" }} style={{ marginTop: "5px" }} flexItem />
+                {evidenceTypeListsUi}
+                <Button onClick={onAddEvidence} style={{ width: "180px", zIndex: 1 }}>{t("addAnEvidence")}</Button>
             </Stack>
             <Stack
                 direction="row"
@@ -59,7 +71,7 @@ export const EvidenceList = (props: EvidenceListProps) => {
                 <DropFileIcon style={{ width: "80px" }} />
                 <Typography variant="body2" color="#787878">
                     {t("canDropFile")}
-                    </Typography>
+                </Typography>
             </Stack>
         </>
     )

@@ -1,34 +1,12 @@
 import { ArrowBackRounded } from '@mui/icons-material'
 import { Box, IconButton, styled } from '@mui/material'
-import { EvidenceTypeList, PdfDisplayer } from 'components'
+import { PdfDisplayer } from 'components'
+import { EvidenceTypeDTO, EvidenceTypeListDTO } from 'datahub'
 import { useCallback } from 'react'
+import { AsyncStatus } from 'utils'
 import { Dropzone } from './Dropzone'
 import { EvidenceList } from './EvidenceList'
-
-const evidences: EvidenceTypeList[] = [
-    {
-        id: "EvidenceTypeList-1",
-        name: "Justificatifs des critères techniques",
-        specifiesEvidenceType: [{
-            id: "evidence-1",
-            isAdded: false,
-            label: "Document du détail de l’équipement ajouté"
-        }]
-    },
-    {
-        id: "EvidenceTypeList-2",
-        name: "Justificatifs des critères techniques",
-        specifiesEvidenceType: [{
-            id: "evidence-2",
-            isAdded: false,
-            label: "Fiche technique des luminaires venant du constructeur"
-        }, {
-            id: "evidence-3",
-            isAdded: true,
-            label: "Référence équipement.pdf"
-        }]
-    }
-]
+import { EvidenceListLoading } from './EvidenceListLoading'
 
 const EvidenceBarContainer = styled(Box)({
     position: "fixed",
@@ -58,21 +36,31 @@ interface EvidenceBarProps {
     evidenceTypeAdded?: string
     setEvidenceTypeAdded: (evidenceTypeId?: string | undefined) => void
     addEvidenceType: (evidenceTypeId?: string | undefined) => void
+    evidenceTypeLists?: EvidenceTypeListDTO[][]
+    evidenceTypeMap?: Map<string, EvidenceTypeDTO>
+    evidenceTypeListsFetchStatus?: AsyncStatus
 }
 
 export const EvidenceBar = (props: EvidenceBarProps) => {
-    const { currentEvidence, changeEvidence, addEvidenceType, setEvidenceTypeAdded, evidenceTypeAdded } = props
+    const { currentEvidence, changeEvidence, addEvidenceType, setEvidenceTypeAdded, evidenceTypeAdded, evidenceTypeLists, evidenceTypeListsFetchStatus, evidenceTypeMap } = props
 
     const removeCurrentEvidence = useCallback(
         () => changeEvidence(),
         [changeEvidence],
     )
 
+    if (evidenceTypeListsFetchStatus === "PENDING" || evidenceTypeLists === undefined) {
+        return (
+            <EvidenceBarContainer>
+                <EvidenceListLoading />
+            </EvidenceBarContainer>
+        )
+    }
     if (!currentEvidence) {
         return (
             <EvidenceBarContainer>
-                <EvidenceList evidences={evidences} addEvidenceType={addEvidenceType} changeEvidence={changeEvidence} />
-                <Dropzone evidences={evidences} setEvidenceTypeAdded={setEvidenceTypeAdded} evidenceTypeAdded={evidenceTypeAdded} />
+                <EvidenceList evidenceTypeLists={evidenceTypeLists} addEvidenceType={addEvidenceType} changeEvidence={changeEvidence} />
+                <Dropzone evidenceTypeMap={evidenceTypeMap} setEvidenceTypeAdded={setEvidenceTypeAdded} evidenceTypeAdded={evidenceTypeAdded} />
             </EvidenceBarContainer>
         )
     }

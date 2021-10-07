@@ -21,6 +21,7 @@
     "react-infinite-scroll-component": "^6.1.0"
   },
   "dependencies": {
-    "utils": "^1.0.0"
+    "utils": "^1.0.0",
+    "datahub": "^1.0.0"
   }
 }

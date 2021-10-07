@@ -2,35 +2,23 @@ import { Box, Divider, Stack, Typography } from "@mui/material"
 import { Fragment, useMemo } from "react"
 import { Evidence } from "./Evidence"
 import { useTranslation } from "react-i18next"
+import { EvidenceTypeListDTO } from "datahub"
 
-
-interface EvidenceType {
-    id: string
-    label: string
-    isAdded: boolean
-}
-
-export interface EvidenceTypeList {
-    id: string
-    name: string
-    specifiesEvidenceType: EvidenceType[]
-}
-
-export interface EvidenceTypeProps {
-    evidences: EvidenceTypeList[]
+export interface EvidenceTypeListDisplayerProps {
+    evidenceTypeLists: EvidenceTypeListDTO[]
     onUpload?: (evidenceId: string) => void
     onView?: (evidenceId: string) => void
     onDelete?: (evidenceId: string) => void
 }
 
-export const EvidenceType = (props: EvidenceTypeProps) => {
-    const { evidences, onDelete, onUpload, onView } = props
+export const EvidenceTypeListDisplayer = (props: EvidenceTypeListDisplayerProps) => {
+    const { evidenceTypeLists, onDelete, onUpload, onView } = props
 
-    const {t} = useTranslation()
+    const { t } = useTranslation()
 
-    const evidencesDisplay = useMemo(() => evidences.map((evidenceTypeList, firstIndex) => (
-        <Fragment key={evidenceTypeList.id}>
-            {evidenceTypeList.specifiesEvidenceType.map((evidence, secondIndex) => {
+    const evidencesDisplay = useMemo(() => evidenceTypeLists.map((evidenceTypeList, firstIndex) => (
+        <Fragment key={evidenceTypeList.identifier}>
+            {evidenceTypeList.specifiesEvidenceType.map((evidenceType, secondIndex) => {
                 let divider: JSX.Element = <Divider sx={{ borderBottom: "2px solid black", width: "20px" }} />
                 if (firstIndex === 0 && secondIndex === 0) {
                     divider = (
@@ -45,7 +33,7 @@ export const EvidenceType = (props: EvidenceTypeProps) => {
                         </Stack>
                     )
                 }
-                if (firstIndex + 1 === evidences.length && secondIndex + 1 === evidenceTypeList.specifiesEvidenceType.length) {
+                if (firstIndex + 1 === evidenceTypeLists.length && secondIndex + 1 === evidenceTypeList.specifiesEvidenceType.length) {
                     divider = (
                         <Stack
                             sx={{
@@ -59,22 +47,22 @@ export const EvidenceType = (props: EvidenceTypeProps) => {
                     )
                 }
                 return (
-                    <Stack alignItems="center" key={evidence.id} direction="row">
+                    <Stack alignItems="center" key={evidenceType.identifier} direction="row">
                         {divider}
-                        <Evidence 
-                            label={evidence.label} 
-                            variant={evidence.isAdded ? "added" : "needed"} 
-                            onDelete={() => onDelete && onDelete(evidence.id)}
-                            onUpload={() => onUpload && onUpload(evidence.id)}
-                            onView={() => onView && onView(evidence.id)}
+                        <Evidence
+                            label={evidenceType.name}
+                            variant={!!evidenceType.evidence ? "added" : "needed"}
+                            onDelete={() => onDelete && onDelete(evidenceType.identifier)}
+                            onUpload={() => onUpload && onUpload(evidenceType.identifier)}
+                            onView={() => onView && onView(evidenceType.identifier)}
                         />
                     </Stack>
                 )
             }
             )}
-            {firstIndex + 1 < evidences.length && (
+            {firstIndex + 1 < evidenceTypeLists.length && (
                 <Box
-                    key={`${evidenceTypeList.id}-or`}
+                    key={`${evidenceTypeList.identifier}-or`}
                     sx={{
                         width: "100%",
                         padding: "2px 10px",
@@ -88,18 +76,20 @@ export const EvidenceType = (props: EvidenceTypeProps) => {
                 </Box>
             )}
         </Fragment>
-    )), [evidences, onDelete, onUpload, onView])
+    )), [evidenceTypeLists, onDelete, onUpload, onView])
 
     return (
-        <Box>
-            <Typography sx={{marginLeft: "35px"}} variant="subtitle1">
-                {evidences[0].name}
+        <Box sx={{ width: "100%" }}>
+            <Typography sx={{ marginLeft: "35px" }} variant="subtitle1">
+                {evidenceTypeLists[0]?.name}
             </Typography>
             <Stack
+                sx={{ width: "100%" }}
                 direction="row"
             >
-                <Divider orientation="vertical" sx={{ borderRight: "2px solid black" }} flexItem />
+                {evidenceTypeLists.length > 1 && <Divider orientation="vertical" sx={{ borderRight: "2px solid black" }} flexItem />}
                 <Stack
+                    sx={{ width: "100%" }}
                     spacing={2}
                 >
                     {evidencesDisplay}

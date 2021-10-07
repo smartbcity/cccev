@@ -9,16 +9,17 @@ import { FormPartialField, useFormWithPartialFields } from "@smartb/g2-forms"
 import { Button } from "@smartb/g2-components"
 import { useTranslation } from "react-i18next"
 import { useAsyncResponse } from "utils"
-import { getInformationConcepts, InformationConceptDTO } from "datahub"
+import { EvidenceTypeDTO, getInformationConcepts, InformationConceptDTO } from "datahub"
 import { MainLoading } from "./MainLoading"
 
 interface MainProps {
     filters: FiltersState
     changeFilters: (filters: FiltersState) => void
+    evidenceTypeMap?: Map<string, EvidenceTypeDTO>
 }
 
 export const Main = (props: MainProps) => {
-    const { filters, changeFilters } = props
+    const { filters, changeFilters, evidenceTypeMap } = props
 
     const { t } = useTranslation()
 
@@ -51,7 +52,7 @@ export const Main = (props: MainProps) => {
     )
     return (
         <Box sx={{ padding: "10px 20px", paddingTop: "70px", maxWidth: "1500px", margin: "auto" }}>
-            <PageFilters filters={filters} changeFilters={changeFilters} />
+            <PageFilters evidenceTypeMap={evidenceTypeMap} filters={filters} changeFilters={changeFilters} />
             <CertificatFillerAccrodion globalFormState={globalFormState} categories={categories} />
             <LanguageSelector />
             <Box sx={{ display: "flex", justifyContent: "center", paddingBottom: "30px" }}>
@@ -66,8 +67,7 @@ const informationConceptsToCategories = (informationConcepts: InformationConcept
     const objCategories: { [key: string]: Category } = {}
     //@ts-ignore
     informationConcepts.forEach((el: (InformationConceptDTO & { category: { id: string, name: string } })) => {
-        el.category.id = "value-category"
-        el.category.name = "Valeur à renseigner"
+        el.category = {id: "value-category", name: "Valeur à renseigner"}
         const newField: CcevFormField = {
             key: el.identifier,
             name: el.identifier,

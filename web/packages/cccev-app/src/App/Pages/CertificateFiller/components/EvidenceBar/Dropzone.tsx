@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import { EvidenceTypeList } from 'components'
+import { EvidenceTypeDTO } from 'datahub'
 import { useCallback, useState } from 'react'
 import { FileRejection, useDropzone } from "react-dropzone"
 import { AddEvidencePopUp } from './AddEvidencePopUp'
@@ -7,11 +7,11 @@ import { AddEvidencePopUp } from './AddEvidencePopUp'
 interface DropzoneProps {
     evidenceTypeAdded?: string
     setEvidenceTypeAdded: (evidenceTypeId?: string | undefined) => void
-    evidences: EvidenceTypeList[]
+    evidenceTypeMap?: Map<string, EvidenceTypeDTO>
 }
 
 export const Dropzone = (props: DropzoneProps) => {
-    const { setEvidenceTypeAdded, evidenceTypeAdded, evidences } = props
+    const { setEvidenceTypeAdded, evidenceTypeAdded, evidenceTypeMap } = props
 
     const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined)
     const [lastAddedFile, setLastAddedFile] = useState<File | undefined>(undefined)
@@ -92,7 +92,7 @@ export const Dropzone = (props: DropzoneProps) => {
             >
                 <input id="evidenceBar-dropzoneInput" {...getInputProps()} />
             </Box>
-            <AddEvidencePopUp evidences={evidences} errorMessage={errorMessage} open={openPopup} onClose={onClosePopup} onValidate={onValidatePopup} />
+            <AddEvidencePopUp evidenceTypeMap={evidenceTypeMap} errorMessage={errorMessage} open={openPopup} onClose={onClosePopup} onValidate={onValidatePopup} />
         </>
     )
 }

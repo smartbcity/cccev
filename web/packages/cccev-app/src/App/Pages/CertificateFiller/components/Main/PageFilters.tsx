@@ -1,18 +1,20 @@
 import { Box } from '@mui/material'
-import { Filters, FiltersField, useFilters } from "@smartb/g2-forms"
-import {  useEffect, useMemo } from 'react'
+import { Filters, FiltersField, useFilters, Option } from "@smartb/g2-forms"
+import { EvidenceTypeDTO } from 'datahub'
+import { useEffect, useMemo } from 'react'
 import { useTranslation } from "react-i18next"
 import { FiltersState } from 'store/filters/filters.reducer'
 
 interface PageFiltersProps {
     filters: FiltersState
     changeFilters: (filters: FiltersState) => void
+    evidenceTypeMap?: Map<string, EvidenceTypeDTO>
 }
 
 
 export const PageFilters = (props: PageFiltersProps) => {
-    const { filters, changeFilters } = props
-    const {t} = useTranslation()
+    const { filters, changeFilters, evidenceTypeMap } = props
+    const { t } = useTranslation()
 
     const fields = useMemo((): FiltersField[] => [
         {
@@ -32,7 +34,7 @@ export const PageFilters = (props: PageFiltersProps) => {
             type: "select",
             defaultValue: filters.evidence,
             selectProps: {
-                options: [{ key: "evidenceExample", label: 'evidence example' }]
+                options: getEvidencesOptions(evidenceTypeMap)
             }
         }, {
             key: "ccevApp-filters-field-search",
@@ -40,11 +42,11 @@ export const PageFilters = (props: PageFiltersProps) => {
             label: t("searchATerm"),
             type: "textfield",
             defaultValue: filters.search,
-            textFieldProps:{
-                style:{width: "180px"}
+            textFieldProps: {
+                style: { width: "180px" }
             }
         }
-    ], [t])
+    ], [t, evidenceTypeMap])
 
     const formState = useFilters({
         fields: fields,
@@ -67,4 +69,18 @@ export const PageFilters = (props: PageFiltersProps) => {
             <Filters actions={[]} fields={fields} formState={formState} />
         </Box>
     )
+}
+
+const getEvidencesOptions = (evidenceTypeMap?: Map<string, EvidenceTypeDTO>): Option[] => {
+    const options: Option[] = []
+    if (!evidenceTypeMap) return options
+    evidenceTypeMap.forEach((evidenceType) => {
+        if (!!evidenceType.evidence) {
+            options.push({
+                key: evidenceType.identifier,
+                label: evidenceType.name
+            })
+        }
+    })
+    return options
 }

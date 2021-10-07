@@ -119,7 +119,7 @@ export namespace f2.dsl.fnc {
 }
 export namespace cccev.dsl.dto.model {
     interface EvidenceTypeDTO extends ccev.dsl.core.EvidenceType {
-        readonly evidence: Nullable<ccev.dsl.core.Evidence>;
+        readonly evidence: Nullable<ccev.dsl.core.EvidenceDTO>;
     }
 }
 export namespace cccev.dsl.dto.model {
