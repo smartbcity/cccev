@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from 'react'
 import { pdfjs, Document, Page } from 'react-pdf'
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`
-import pdf from "./Rapport d'alternance de Basile Savouret chez SmartB de fin de parcours.pdf"
 import { LoadingPdf } from './LoadingPdf'
 import { styled } from '@mui/material'
 import InfiniteScroll from 'react-infinite-scroll-component'
@@ -15,7 +14,12 @@ const StyledInfiniteScroll = styled(InfiniteScroll)({
     }
 })
 
-export const PdfDisplayer = () => {
+interface PdfDisplayerProps {
+    file: string
+}
+
+export const PdfDisplayer = (props: PdfDisplayerProps) => {
+    const { file } = props
 
     const [numPages, setNumPages] = useState<number>(0);
     const [pages, setPages] = useState<React.ReactNode[]>([])
@@ -80,7 +84,7 @@ export const PdfDisplayer = () => {
             className="PdfDisplayer-infiniteScroll"
         >
             <Document
-                file={pdf}
+                file={file}
                 onLoadSuccess={onDocumentLoadSuccess}
                 loading={<LoadingPdf />}
             >

@@ -50,7 +50,7 @@ export const EvidenceTypeListDisplayer = (props: EvidenceTypeListDisplayerProps)
                     <Stack alignItems="center" key={evidenceType.identifier} direction="row">
                         {divider}
                         <Evidence
-                            label={evidenceType.name}
+                            label={!!evidenceType.evidence ? evidenceType.evidence.name : evidenceType.name}
                             variant={!!evidenceType.evidence ? "added" : "needed"}
                             onDelete={() => onDelete && onDelete(evidenceType.identifier)}
                             onUpload={() => onUpload && onUpload(evidenceType.identifier)}

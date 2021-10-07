@@ -5,16 +5,17 @@ import { Title } from './Title'
 import { EvidenceTypeListDisplayer } from 'components'
 import { useCallback, useMemo } from 'react'
 import { useTranslation } from "react-i18next"
-import { EvidenceTypeListDTO } from 'datahub'
+import { EvidenceTypeListDTO, requestEvidenceRemoveCommand } from 'datahub'
 
 interface EvidenceListProps {
     changeEvidence: (evidence?: string) => void
     addEvidenceType: (evidenceTypeId?: string | undefined) => void
     evidenceTypeLists?: EvidenceTypeListDTO[][]
+    fetchEvidenceTypeLists: () => void
 }
 
 export const EvidenceList = (props: EvidenceListProps) => {
-    const { changeEvidence, addEvidenceType, evidenceTypeLists } = props
+    const { changeEvidence, addEvidenceType, evidenceTypeLists, fetchEvidenceTypeLists } = props
 
     const { t } = useTranslation()
 
@@ -39,10 +40,18 @@ export const EvidenceList = (props: EvidenceListProps) => {
         [changeEvidence],
     )
 
+    const onDeleteEvidence = useCallback(
+        async (evidenceTypeId: string) => {
+            await requestEvidenceRemoveCommand(evidenceTypeId)
+            fetchEvidenceTypeLists()
+        },
+        [fetchEvidenceTypeLists],
+    )
+
     
     const evidenceTypeListsUi = useMemo(() => evidenceTypeLists?.map((el, index) => (
-        <EvidenceTypeListDisplayer key={`evidenceTypeLists-${index}`} onView={onViewEvidence} onUpload={onUploadEvidence} evidenceTypeLists={el} />
-    )), [evidenceTypeLists, onUploadEvidence, onViewEvidence])
+        <EvidenceTypeListDisplayer key={`evidenceTypeLists-${index}`} onDelete={onDeleteEvidence} onView={onViewEvidence} onUpload={onUploadEvidence} evidenceTypeLists={el} />
+    )), [evidenceTypeLists, onUploadEvidence, onViewEvidence, onDeleteEvidence])
 
 
     return (

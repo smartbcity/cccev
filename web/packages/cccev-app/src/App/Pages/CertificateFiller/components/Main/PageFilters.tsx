@@ -75,12 +75,10 @@ const getEvidencesOptions = (evidenceTypeMapped?: Map<string, EvidenceTypeDTO>):
     const options: Option[] = []
     if (!evidenceTypeMapped) return options
     evidenceTypeMapped.forEach((evidenceType) => {
-        if (!!evidenceType.evidence) {
-            options.push({
-                key: evidenceType.identifier,
-                label: evidenceType.name
-            })
-        }
+        options.push({
+            key: evidenceType.identifier,
+            label: evidenceType.name
+        })
     })
     return options
 }

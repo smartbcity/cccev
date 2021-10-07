@@ -32,7 +32,7 @@ export const Dropzone = (props: DropzoneProps) => {
             const reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = () => {
-                requestEvidenceAddCommand(evidenceTypeId, reader.result as string).then(() => {
+                requestEvidenceAddCommand(evidenceTypeId, reader.result as string, file.name).then(() => {
                     fetchEvidenceTypeLists()
                     resolve("resolved")
                 })
@@ -55,10 +55,7 @@ export const Dropzone = (props: DropzoneProps) => {
     const onUpload = useCallback(
         (acceptedFiles: File[]) => {
             if (!!evidenceTypeAdded) {
-                console.log("file added:")
-                console.log(acceptedFiles[0])
-                console.log("bounded to:")
-                console.log(evidenceTypeAdded)
+                pushEvidence(evidenceTypeAdded, acceptedFiles[0])
                 setEvidenceTypeAdded()
             } else {
                 setLastAddedFile(acceptedFiles[0])

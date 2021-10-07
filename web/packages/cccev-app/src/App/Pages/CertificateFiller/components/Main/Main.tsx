@@ -1,7 +1,7 @@
 import { Box } from "@mui/material"
 import { PageFilters } from "./PageFilters"
 import { CertificatFillerAccrodion, Category, CcevFormField } from "components"
-import { useCallback, useMemo } from "react"
+import { useCallback, useEffect, useMemo } from "react"
 import { LanguageSelector } from "./LanguageSelector"
 import { FiltersState } from "store/filters/filters.reducer"
 import { objToArray } from "utils"
@@ -9,7 +9,7 @@ import { FormPartialField, useFormWithPartialFields } from "@smartb/g2-forms"
 import { Button } from "@smartb/g2-components"
 import { useTranslation } from "react-i18next"
 import { useAsyncResponse } from "utils"
-import { EvidenceTypeDTO, getInformationConcepts, InformationConceptDTO } from "datahub"
+import { EvidenceTypeDTO, getInformationConcepts, InformationConceptDTO, requestSupportedValueAddCommand, SupportedValueDTO } from "datahub"
 import { MainLoading } from "./MainLoading"
 
 interface MainProps {
@@ -26,24 +26,49 @@ export const Main = (props: MainProps) => {
     const informationConcepts = useAsyncResponse(getInformationConcepts)
 
     const partialFields = useMemo(() => informationConcepts.result ?
-        informationConcepts.result.informationConcepts.map((info): FormPartialField => ({
-            name: info.identifier,
-            defaultValue: info.unit.type === "boolean" ? false : undefined
-        }))
+        informationConcepts.result.informationConcepts.map((info): FormPartialField => {
+            return {
+                name: info.identifier,
+                defaultValue: getDefaultValue(info.unit.type, info.supportedValue.value) ?? (info.unit.type === "boolean" ? false : undefined),
+                //@ts-ignore
+                test: info
+            }
+        })
         :
         [], [informationConcepts.result])
 
+    console.log(partialFields)
+
     const onSubmit = useCallback(
         (values: any) => {
-            console.log(values)
+            if (informationConcepts.result) {
+                const supportedValues = informationConcepts.result.informationConcepts.map((info): SupportedValueDTO => ({
+                    identifier: info.supportedValue.identifier,
+                    providesValueFor: info.identifier,
+                    value: info.unit.type === "date" ? values[info.identifier].getTime() : info.unit.type === "string" ? values[info.identifier] : values[info.identifier].toString(),
+                    query: undefined
+                }))
+                requestSupportedValueAddCommand(supportedValues)
+            }
         },
-        [],
+        [informationConcepts.result],
     )
 
     const globalFormState = useFormWithPartialFields({
         partialfFields: partialFields,
         onSubmit: onSubmit
     })
+
+    useEffect(() => {
+        if (informationConcepts.status === "SUCCESS" && informationConcepts.result !== undefined) {
+            informationConcepts.result.informationConcepts.forEach((info) => {
+                const value = getDefaultValue(info.unit.type, info.supportedValue.value)
+                if (value) {
+                    globalFormState.setFieldValue(info.identifier, value)
+                }
+            })
+        }
+    }, [globalFormState.setFieldValue, informationConcepts.status, informationConcepts.result])
 
     const categories = useMemo(() => informationConcepts.result && evidenceTypeMapped ? informationConceptsToCategories(informationConcepts.result.informationConcepts, evidenceTypeMapped) : [], [informationConcepts.result, evidenceTypeMapped])
 
@@ -66,7 +91,7 @@ const informationConceptsToCategories = (informationConcepts: InformationConcept
     const objCategories: { [key: string]: Category } = {}
     //@ts-ignore
     informationConcepts.forEach((el: (InformationConceptDTO & { category: { id: string, name: string } })) => {
-        el.category = {id: "value-category", name: "Valeur à renseigner"}
+        el.category = { id: "value-category", name: "Valeur à renseigner" }
         const newField: CcevFormField = {
             key: el.identifier,
             name: el.identifier,
@@ -100,5 +125,21 @@ const enumTypeToEnumFields = (type: "string" | "date" | "number" | "boolean"): "
             return "checkbox"
         default:
             return "textfield"
+    }
+}
+
+const getDefaultValue = (type: "string" | "date" | "number" | "boolean", value?: any): Date | string | number | boolean | undefined => {
+    if (value === undefined) return undefined
+    switch (type) {
+        case "date":
+            return new Date(Number(value))
+        case "number":
+            return Number(value)
+        case "boolean":
+            return value === "true"
+        case "string":
+            return value
+        default:
+            return undefined
     }
 }

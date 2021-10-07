@@ -8,18 +8,21 @@ import { ThemeContextProvider } from "@smartb/g2-themes";
 import { LoadingComponent } from "components";
 import { muiTheme, theme } from "Themes";
 import App from "App";
+import { InitApp } from "./InitApp";
 
 ReactDOM.render(
   <React.StrictMode>
     <ThemeContextProvider theme={theme} customMuiTheme={muiTheme}>
-        <AppProvider
-          languages={languages}
-          reduxStore={store}
-          history={history}
-          loadingComponent={<LoadingComponent/>}
-        >
+      <AppProvider
+        languages={languages}
+        reduxStore={store}
+        history={history}
+        loadingComponent={<LoadingComponent />}
+      >
+        <InitApp>
           <App />
-        </AppProvider>
+        </InitApp>
+      </AppProvider>
     </ThemeContextProvider>
   </React.StrictMode>,
   document.getElementById("root")

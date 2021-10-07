@@ -2,7 +2,7 @@ import { ArrowBackRounded } from '@mui/icons-material'
 import { Box, IconButton, styled } from '@mui/material'
 import { PdfDisplayer } from 'components'
 import { EvidenceTypeDTO, EvidenceTypeListDTO } from 'datahub'
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 import { AsyncStatus } from 'utils'
 import { Dropzone } from './Dropzone'
 import { EvidenceList } from './EvidenceList'
@@ -50,6 +50,8 @@ export const EvidenceBar = (props: EvidenceBarProps) => {
         [changeEvidence],
     )
 
+    const currentFile = useMemo(() => currentEvidence ? evidenceTypeMapped?.get(currentEvidence)?.evidence?.file : undefined, [currentEvidence])
+
     if (evidenceTypeListsFetchStatus !== "SUCCESS" || evidenceTypeLists === undefined) {
         return (
             <EvidenceBarContainer>
@@ -57,10 +59,10 @@ export const EvidenceBar = (props: EvidenceBarProps) => {
             </EvidenceBarContainer>
         )
     }
-    if (!currentEvidence) {
+    if (!currentFile) {
         return (
             <EvidenceBarContainer>
-                <EvidenceList evidenceTypeLists={evidenceTypeLists} addEvidenceType={addEvidenceType} changeEvidence={changeEvidence} />
+                <EvidenceList fetchEvidenceTypeLists={fetchEvidenceTypeLists} evidenceTypeLists={evidenceTypeLists} addEvidenceType={addEvidenceType} changeEvidence={changeEvidence} />
                 <Dropzone fetchEvidenceTypeLists={fetchEvidenceTypeLists} evidenceTypeMapped={evidenceTypeMapped} setEvidenceTypeAdded={setEvidenceTypeAdded} evidenceTypeAdded={evidenceTypeAdded} />
             </EvidenceBarContainer>
         )
@@ -70,7 +72,7 @@ export const EvidenceBar = (props: EvidenceBarProps) => {
             <IconButton size="small" className="evidenceBar-backButton" onClick={removeCurrentEvidence} >
                 <ArrowBackRounded className="evidenceBar-backArrow" />
             </IconButton>
-            <PdfDisplayer />
+            <PdfDisplayer file={currentFile} />
         </EvidenceBarContainer>
     )
 }

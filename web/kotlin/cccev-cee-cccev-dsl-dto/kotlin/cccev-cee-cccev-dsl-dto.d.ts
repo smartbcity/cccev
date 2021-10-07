@@ -1,4 +1,8 @@
-type Nullable<T> = T | null | undefined
+type Nullable<T> = T | undefined
+type Array<T> = T[]
+export namespace kotlin.collections {
+    type List<T> = T[]
+}
 export namespace ccev.dsl.core {
     interface Code {
     }
@@ -360,7 +364,7 @@ export namespace cccev.dsl.dto.model {
 export namespace cccev.dsl.dto.query {
     interface GetEvidenceTypeListsQueryDTO {
         readonly requirement: string;
-        readonly requestId: string;
+        readonly id: string;
     }
     interface GetEvidenceTypeListsQueryResultDTO {
         readonly evidenceTypeLists: kotlin.collections.List<kotlin.collections.List<cccev.dsl.dto.model.EvidenceTypeListDTO>>;
@@ -369,7 +373,7 @@ export namespace cccev.dsl.dto.query {
 export namespace cccev.dsl.dto.query {
     interface GetInformationConceptsQueryDTO {
         readonly requirement: string;
-        readonly requestId: string;
+        readonly id: string;
     }
     interface GetInformationConceptsQueryResultDTO {
         readonly informationConcepts: kotlin.collections.List<cccev.dsl.dto.model.InformationConceptDTO>;
