@@ -5,6 +5,7 @@ export namespace ccev.dsl.core {
 }
 export namespace ccev.dsl.core {
     interface EvidenceDTO {
+        readonly identifier: string;
         readonly isConformantTo: kotlin.collections.List<string>;
         readonly supportsValue: kotlin.collections.List<string>;
         readonly supportsConcept: kotlin.collections.List<string>;

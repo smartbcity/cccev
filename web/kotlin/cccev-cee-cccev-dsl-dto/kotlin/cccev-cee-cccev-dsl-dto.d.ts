@@ -1,15 +1,11 @@
-type Nullable<T> = T | undefined
-type Array<T> = T[]
-export namespace kotlin.collections {
-    type List<T> = T[]
-}
-
+type Nullable<T> = T | null | undefined
 export namespace ccev.dsl.core {
     interface Code {
     }
 }
 export namespace ccev.dsl.core {
     interface EvidenceDTO {
+        readonly identifier: string;
         readonly isConformantTo: kotlin.collections.List<string>;
         readonly supportsValue: kotlin.collections.List<string>;
         readonly supportsConcept: kotlin.collections.List<string>;
@@ -65,45 +61,34 @@ export namespace f2.dsl.cqrs {
     }
 }
 export namespace f2.dsl.cqrs {
-    interface Event {
-    }
-}
-export namespace f2.dsl.cqrs {
-    interface Query {
-    }
-}
-export namespace f2.dsl.cqrs.error {
-    interface ErrorDTO<PAYLOAD> {
-        readonly severity: f2.dsl.cqrs.error.ErrorSeverity;
+    interface Error<PAYLOAD> {
+        readonly severity: f2.dsl.cqrs.ErrorSeverity;
         readonly type: string;
         readonly description: string;
         readonly date: string;
         readonly payload: PAYLOAD;
     }
 }
-export namespace f2.dsl.cqrs.page {
-    interface OffsetPaginationDTO {
-        readonly offset: number;
-        readonly limit: number;
+export namespace f2.dsl.cqrs {
+    interface Event {
     }
-    interface PagePaginationDTO {
+}
+export namespace f2.dsl.cqrs {
+    interface Page<OBJECT> {
+        readonly page: number;
+        readonly size: number;
+        readonly total: kotlin.Long;
+        readonly list: kotlin.collections.List<OBJECT>;
+    }
+}
+export namespace f2.dsl.cqrs {
+    interface PageRequest {
         readonly page: Nullable<number>;
         readonly size: Nullable<number>;
     }
 }
-export namespace f2.dsl.cqrs.page {
-    interface PageDTO<OBJECT> {
-        readonly total: number;
-        readonly list: kotlin.collections.List<OBJECT>;
-    }
-}
-export namespace f2.dsl.cqrs.page {
-    interface PageQuery extends f2.dsl.cqrs.Query {
-        readonly pagination: Nullable<f2.dsl.cqrs.page.OffsetPaginationDTO>;
-    }
-    interface PageQueryResult<OBJECT> extends f2.dsl.cqrs.Event {
-        readonly pagination: Nullable<f2.dsl.cqrs.page.OffsetPaginationDTO>;
-        readonly page: f2.dsl.cqrs.page.PageDTO<OBJECT>;
+export namespace f2.dsl.cqrs {
+    interface Query {
     }
 }
 export namespace f2.dsl.fnc {
@@ -170,55 +155,54 @@ export namespace ccev.dsl.core {
         constructor(duration: Nullable<string>, endTime: Nullable<number>, startTime: Nullable<number>);
     }
 }
-export namespace f2.dsl.cqrs.error {
-    class Error<PAYLOAD> implements f2.dsl.cqrs.error.ErrorDTO<PAYLOAD> {
-        constructor(type: string, description: string, date: string, payload: PAYLOAD, severity: f2.dsl.cqrs.error.ErrorSeverity);
-        readonly type: string;
-        readonly description: string;
-        readonly date: string;
-        readonly payload: PAYLOAD;
-        readonly severity: f2.dsl.cqrs.error.ErrorSeverity;
-    }
+export namespace f2.dsl.cqrs {
     class ErrorSeverity {
         constructor(severity: string);
         readonly severity: string;
     }
-    class ErrorSeverityWarning extends f2.dsl.cqrs.error.ErrorSeverity {
+    class ErrorSeverityWarning extends f2.dsl.cqrs.ErrorSeverity {
         constructor();
     }
-    class AlertSeverityError extends f2.dsl.cqrs.error.ErrorSeverity {
+    class AlertSeverityError extends f2.dsl.cqrs.ErrorSeverity {
         constructor();
+    }
+}
+export namespace f2.dsl.cqrs.base {
+    class ErrorBase<PAYLOAD> implements f2.dsl.cqrs.Error<PAYLOAD> {
+        constructor(type: string, description: string, date: string, payload: PAYLOAD, severity: f2.dsl.cqrs.ErrorSeverity);
+        readonly type: string;
+        readonly description: string;
+        readonly date: string;
+        readonly payload: PAYLOAD;
+        readonly severity: f2.dsl.cqrs.ErrorSeverity;
+    }
+}
+export namespace f2.dsl.cqrs.base {
+    class PageBase<OBJECT> implements f2.dsl.cqrs.Page<OBJECT> {
+        constructor(page: number, size: number, total: kotlin.Long, list: kotlin.collections.List<OBJECT>);
+        readonly page: number;
+        readonly size: number;
+        readonly total: kotlin.Long;
+        readonly list: kotlin.collections.List<OBJECT>;
+    }
+}
+export namespace f2.dsl.cqrs.base {
+    class PageRequestBase implements f2.dsl.cqrs.PageRequest {
+        constructor(page: Nullable<number>, size: Nullable<number>);
+        readonly page: Nullable<number>;
+        readonly size: Nullable<number>;
     }
 }
 export namespace f2.dsl.cqrs.exception {
     class R2Exception extends kotlin.Exception {
-        constructor(id: string, error: f2.dsl.cqrs.error.ErrorDTO<any /*UnknownType **/>);
+        constructor(id: string, error: f2.dsl.cqrs.Error<any /*UnknownType **/>);
         readonly id: string;
-        readonly error: f2.dsl.cqrs.error.ErrorDTO<any /*UnknownType **/>;
+        readonly error: f2.dsl.cqrs.Error<any /*UnknownType **/>;
     }
 }
 export namespace f2.dsl.cqrs.exception {
     class R2NotFoundException extends kotlin.Exception {
         constructor(message: string);
-    }
-}
-export namespace f2.dsl.cqrs.page {
-    class Page<OBJECT> implements f2.dsl.cqrs.page.PageDTO<OBJECT> {
-        constructor(total: number, list: kotlin.collections.List<OBJECT>);
-        readonly total: number;
-        readonly list: kotlin.collections.List<OBJECT>;
-    }
-}
-export namespace f2.dsl.cqrs.page {
-    class OffsetRequest implements f2.dsl.cqrs.page.OffsetPaginationDTO, f2.dsl.cqrs.page.Pagination {
-        constructor(offset: number, limit: number);
-        readonly offset: number;
-        readonly limit: number;
-    }
-    class PagePagination implements f2.dsl.cqrs.page.PagePaginationDTO, f2.dsl.cqrs.page.Pagination {
-        constructor(page: Nullable<number>, size: Nullable<number>);
-        readonly page: Nullable<number>;
-        readonly size: Nullable<number>;
     }
 }
 export as namespace cccev_cee_cccev_dsl_dto;
