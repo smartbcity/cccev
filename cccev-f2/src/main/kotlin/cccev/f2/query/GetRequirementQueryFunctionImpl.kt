@@ -1,6 +1,7 @@
 package cccev.f2.query
 
 import cccev.dsl.cc.CarbonCopy
+import cccev.dsl.cc.Equity
 import cccev.dsl.cee.baten101.BAT_EN_101
 import cccev.dsl.cee.indba116.IND_BA_116
 import cccev.dsl.dto.query.GetRequirementQueryFunction
@@ -15,7 +16,7 @@ import org.springframework.context.annotation.Configuration
 class GetRequirementQueryFunctionImpl {
 
     companion object {
-        val AVAILABLE_REQUIREMENTS = listOf(CarbonCopy, BAT_EN_101, IND_BA_116).associateBy(Requirement::identifier)
+        val AVAILABLE_REQUIREMENTS = listOf(CarbonCopy, Equity, BAT_EN_101, IND_BA_116).associateBy(Requirement::identifier)
     }
 
     @Bean

@@ -32,3 +32,17 @@ object VintagePeriod: InformationRequirement(
         BilanCarboneETL,
     )
 )
+
+object EquityInfo: InformationRequirement(
+    identifier = "equity",
+    name = "Participation",
+    description = "Pariticipation",
+    type = CCE.Participation,
+    hasConcept = listOf(
+        Participation,
+        AllocatedEmissions
+    ),
+    hasEvidenceTypeList = listOf(
+        BilanCarboneETL,
+    )
+)

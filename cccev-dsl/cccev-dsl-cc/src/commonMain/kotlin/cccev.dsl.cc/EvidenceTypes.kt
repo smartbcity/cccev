@@ -17,3 +17,18 @@ object BilanCarboneET: EvidenceTypeBase(
     name = "Bilan Carbone",
     evidenceTypeClassification = BilanCarbone
 )
+
+object BilanParticipationETL: EvidenceTypeListBase(
+    identifier = "bilanParticipationETL",
+    name = "Bilan Participation",
+    description = "BilanParticipation",
+    specifiesEvidenceType = listOf(
+        BilanParticipationET
+    )
+)
+
+object BilanParticipationET: EvidenceTypeBase(
+    identifier = "bilanParticipationET",
+    name = "Bilan Participation",
+    evidenceTypeClassification = BilanParticipation
+)

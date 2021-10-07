@@ -7,4 +7,11 @@ object CC: Code {
     object Vintage: Code
 }
 
+object CCE: Code {
+    object Scope: Code
+    object Vintage: Code
+    object Participation: Code
+}
+
 object BilanCarbone: Code
+object BilanParticipation: Code

@@ -9,3 +9,14 @@ val CarbonCopy = criterion {
     +ScopeInfo
     +VintagePeriod
 }
+
+val Equity = criterion {
+    identifier = "carbonequity"
+    name = "Equity participation"
+    description = "Equity participation refers to the ownership of shares in a company or property. " +
+            "The greater the equity participation rate, the higher the percentage of carbon emissions affected to stakeholders"
+    type = CC
+    +ScopeInfo
+    +VintagePeriod
+    +EquityInfo
+}

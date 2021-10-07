@@ -1,6 +1,7 @@
 package cccev.dsl.cc
 
 import ccev.dsl.core.InformationConceptBase
+import ccev.dsl.core.Ratio
 import ccev.dsl.core.XSDDate
 
 object Scope1: InformationConceptBase(
@@ -56,3 +57,22 @@ object VintagePeriodEnd: InformationConceptBase(
     description = "Scope 3",
     expressionOfExpectedValue = null
 )
+
+object Participation: InformationConceptBase(
+    identifier = "1633282057103x338292671526627460",
+    name = "Fin période référence",
+    unit = Ratio,
+    type = CCE.Participation,
+    description = "Pourcentage de participation",
+    expressionOfExpectedValue = null
+)
+
+object AllocatedEmissions: InformationConceptBase(
+    identifier = "allocatedEmissions",
+    name = "Émissions allouées",
+    unit = TonsCo2E,
+    type = CCE.Participation,
+    description = "Émissions allouées",
+    expressionOfExpectedValue = "${ScopeTotal.identifier} * ${Participation.identifier} / 100"
+)
+

@@ -4,6 +4,7 @@ import cccev.dsl.cee.FicheCode
 import cccev.dsl.cee.KWhCumac
 import ccev.dsl.core.Duration
 import ccev.dsl.core.InformationConceptBase
+import ccev.dsl.core.Ratio
 import ccev.dsl.core.XSDInt
 import ccev.dsl.core.XSDString
 

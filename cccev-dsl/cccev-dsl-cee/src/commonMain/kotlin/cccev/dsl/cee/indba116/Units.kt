@@ -11,14 +11,6 @@ object LumenPerW: CUnit(
     type = CUnitType.number
 )
 
-object Ratio: CUnit(
-    identifier = "ration",
-    name = "Ration",
-    description = "Ratio entre deux valeurs",
-    notation = "%",
-    type = CUnitType.number
-)
-
 object Variation: CUnit(
     identifier = "variation",
     name = "Variation",
