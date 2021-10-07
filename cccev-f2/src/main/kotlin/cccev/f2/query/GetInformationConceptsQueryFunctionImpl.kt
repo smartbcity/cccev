@@ -8,21 +8,25 @@ import cccev.dsl.dto.query.GetRequirementQuery
 import cccev.dsl.dto.query.GetRequirementQueryFunction
 import cccev.f2.exception.NotFoundException
 import cccev.f2.model.toDTO
+import cccev.s2.request.app.RequestService
 import cccev.s2.request.app.entity.RequestEntity
 import cccev.s2.request.app.entity.RequestRepository
+import cccev.s2.request.domain.features.command.RequestInitCommand
 import ccev.dsl.core.EvidenceTypeListBase
 import ccev.dsl.core.InformationConceptBase
 import ccev.dsl.core.Requirement
 import f2.dsl.fnc.f2Function
 import f2.dsl.fnc.invoke
 import kotlinx.coroutines.reactor.awaitSingle
+import kotlinx.coroutines.reactor.awaitSingleOrNull
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
 class GetInformationConceptsQueryFunctionImpl(
     private val getRequirementQueryFunction: GetRequirementQueryFunction,
-    private val requestRepository: RequestRepository
+    private val requestRepository: RequestRepository,
+    private val requestService: RequestService
 ) {
     @Bean
     fun getInformationConceptsQueryFunction(): GetInformationConceptsQueryFunction = f2Function { query ->
@@ -30,7 +34,10 @@ class GetInformationConceptsQueryFunctionImpl(
         val requirement = getRequirementQueryFunction.invoke(getRequirementQuery).requirement
             ?: throw NotFoundException("Requirement not found")
 
-        val request = requestRepository.findById(query.requestId).awaitSingle()
+        val request = requestRepository.findById(query.requestId).awaitSingleOrNull()
+            ?: requestService.init().invoke(RequestInitCommand(id = query.requestId, frameworkId = query.requirement)).id.let {
+                requestRepository.findById(it).awaitSingle()
+            }
 
         GetInformationConceptsQueryResult(requirement.informationConcepts(request))
     }
