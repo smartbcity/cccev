@@ -11,6 +11,7 @@ export namespace ccev.dsl.core {
         readonly supportsConcept: kotlin.collections.List<string>;
         readonly supportsRequirement: kotlin.collections.List<string>;
         readonly validityPeriod: Nullable<ccev.dsl.core.PeriodOfTime>;
+        readonly name: string;
         readonly file: Nullable<string>;
     }
 }

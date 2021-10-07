@@ -6077,9 +6077,6 @@
     interfaces: []
   };
   var S2Request;
-  function s2Request_0() {
-    return S2Request;
-  }
   function Created() {
     Created_instance = this;
     RequestState.call(this, 0);
@@ -6143,9 +6140,6 @@
   function RequestState(position) {
     this._position = position;
   }
-  RequestState.prototype._set_position__majfzk_k$ = function (_set___) {
-    this._position = _set___;
-  };
   RequestState.prototype._get_position__0_k$ = function () {
     return this._position;
   };
@@ -6159,17 +6153,10 @@
     get: RequestState.prototype._get_position__0_k$,
     set: RequestState.prototype._set_position__majfzk_k$
   });
-  function EditorRole_0() {
+  function EditorRole() {
   }
-  EditorRole_0.$metadata$ = {
+  EditorRole.$metadata$ = {
     simpleName: 'EditorRole',
-    kind: 'class',
-    interfaces: []
-  };
-  function AuditorRole_0() {
-  }
-  AuditorRole_0.$metadata$ = {
-    simpleName: 'AuditorRole',
     kind: 'class',
     interfaces: []
   };
@@ -6177,7 +6164,7 @@
   }
   _no_name_provided__23.prototype.invoke_rrlm82_k$ = function ($this$init) {
     $this$init._to_5 = Created_getInstance();
-    $this$init._role_3 = new EditorRole_0();
+    $this$init._role_3 = new EditorRole();
     $this$init._cmd_0 = getKClass_0(RequestInitCommand);
   };
   _no_name_provided__23.prototype.invoke_20e8_k$ = function (p1) {
@@ -6193,8 +6180,8 @@
   _no_name_provided__24.prototype.invoke_r5tatw_k$ = function ($this$transaction) {
     $this$transaction._from_3 = Created_getInstance();
     $this$transaction._to_4 = Created_getInstance();
-    $this$transaction._role_2 = new EditorRole_0();
-    $this$transaction._cmd = getKClass_0(RequestEvidenceAddCommand_0);
+    $this$transaction._role_2 = new EditorRole();
+    $this$transaction._cmd = getKClass_0(RequestEvidenceAddCommand);
   };
   _no_name_provided__24.prototype.invoke_20e8_k$ = function (p1) {
     this.invoke_r5tatw_k$(p1 instanceof S2TransitionBuilder_0 ? p1 : THROW_CCE());
@@ -6209,8 +6196,8 @@
   _no_name_provided__25.prototype.invoke_kl4zs3_k$ = function ($this$transaction) {
     $this$transaction._from_3 = Created_getInstance();
     $this$transaction._to_4 = Created_getInstance();
-    $this$transaction._role_2 = new EditorRole_0();
-    $this$transaction._cmd = getKClass_0(RequestEvidenceRemoveCommand_0);
+    $this$transaction._role_2 = new EditorRole();
+    $this$transaction._cmd = getKClass_0(RequestEvidenceRemoveCommand);
   };
   _no_name_provided__25.prototype.invoke_20e8_k$ = function (p1) {
     this.invoke_kl4zs3_k$(p1 instanceof S2TransitionBuilder_0 ? p1 : THROW_CCE());
@@ -6225,8 +6212,8 @@
   _no_name_provided__26.prototype.invoke_2xoj34_k$ = function ($this$transaction) {
     $this$transaction._from_3 = Created_getInstance();
     $this$transaction._to_4 = Created_getInstance();
-    $this$transaction._role_2 = new EditorRole_0();
-    $this$transaction._cmd = getKClass_0(RequestSupportedValueAddCommand_0);
+    $this$transaction._role_2 = new EditorRole();
+    $this$transaction._cmd = getKClass_0(RequestSupportedValueAddCommand);
   };
   _no_name_provided__26.prototype.invoke_20e8_k$ = function (p1) {
     this.invoke_2xoj34_k$(p1 instanceof S2TransitionBuilder_0 ? p1 : THROW_CCE());
@@ -6241,8 +6228,8 @@
   _no_name_provided__27.prototype.invoke_rvxavq_k$ = function ($this$transaction) {
     $this$transaction._from_3 = Created_getInstance();
     $this$transaction._to_4 = Sent_getInstance();
-    $this$transaction._role_2 = new EditorRole_0();
-    $this$transaction._cmd = getKClass_0(RequestSendCommand_0);
+    $this$transaction._role_2 = new EditorRole();
+    $this$transaction._cmd = getKClass_0(RequestSendCommand);
   };
   _no_name_provided__27.prototype.invoke_20e8_k$ = function (p1) {
     this.invoke_rvxavq_k$(p1 instanceof S2TransitionBuilder_0 ? p1 : THROW_CCE());
@@ -6257,8 +6244,8 @@
   _no_name_provided__28.prototype.invoke_r9u9lt_k$ = function ($this$transaction) {
     $this$transaction._from_3 = Sent_getInstance();
     $this$transaction._to_4 = Signed_getInstance();
-    $this$transaction._role_2 = new EditorRole_0();
-    $this$transaction._cmd = getKClass_0(RequestSignCommand_0);
+    $this$transaction._role_2 = new EditorRole();
+    $this$transaction._cmd = getKClass_0(RequestSignCommand);
   };
   _no_name_provided__28.prototype.invoke_20e8_k$ = function (p1) {
     this.invoke_r9u9lt_k$(p1 instanceof S2TransitionBuilder_0 ? p1 : THROW_CCE());
@@ -6273,8 +6260,8 @@
   _no_name_provided__29.prototype.invoke_7qbg8t_k$ = function ($this$transaction) {
     $this$transaction._from_3 = Signed_getInstance();
     $this$transaction._to_4 = Audited_getInstance();
-    $this$transaction._role_2 = new EditorRole_0();
-    $this$transaction._cmd = getKClass_0(RequestAuditCommand_0);
+    $this$transaction._role_2 = new EditorRole();
+    $this$transaction._cmd = getKClass_0(RequestAuditCommand);
   };
   _no_name_provided__29.prototype.invoke_20e8_k$ = function (p1) {
     this.invoke_7qbg8t_k$(p1 instanceof S2TransitionBuilder_0 ? p1 : THROW_CCE());
@@ -6289,8 +6276,8 @@
   _no_name_provided__30.prototype.invoke_tw2x6_k$ = function ($this$transaction) {
     $this$transaction._from_3 = Signed_getInstance();
     $this$transaction._to_4 = Created_getInstance();
-    $this$transaction._role_2 = new EditorRole_0();
-    $this$transaction._cmd = getKClass_0(RequestRefuseCommand_0);
+    $this$transaction._role_2 = new EditorRole();
+    $this$transaction._cmd = getKClass_0(RequestRefuseCommand);
   };
   _no_name_provided__30.prototype.invoke_20e8_k$ = function (p1) {
     this.invoke_tw2x6_k$(p1 instanceof S2TransitionBuilder_0 ? p1 : THROW_CCE());
@@ -6384,188 +6371,73 @@
       return Unit_getInstance();
     };
   }
-  function RequestAuditCommand_0(id) {
+  function RequestAuditCommand(id) {
     this._id_5 = id;
   }
-  RequestAuditCommand_0.prototype._get_id__0_k$ = function () {
+  RequestAuditCommand.prototype._get_id__0_k$ = function () {
     return this._id_5;
   };
-  RequestAuditCommand_0.$metadata$ = {
+  RequestAuditCommand.$metadata$ = {
     simpleName: 'RequestAuditCommand',
     kind: 'class',
     interfaces: []
   };
-  Object.defineProperty(RequestAuditCommand_0.prototype, 'id', {
+  Object.defineProperty(RequestAuditCommand.prototype, 'id', {
     configurable: true,
-    get: RequestAuditCommand_0.prototype._get_id__0_k$
+    get: RequestAuditCommand.prototype._get_id__0_k$
   });
-  function RequestAuditedEvent_init_$Init$(id, type, $mask0, $marker, $this) {
-    if (!(($mask0 & 2) === 0))
-      type = Audited_getInstance();
-    RequestAuditedEvent_0.call($this, id, type);
-    return $this;
-  }
-  function RequestAuditedEvent_init_$Create$(id, type, $mask0, $marker) {
-    return RequestAuditedEvent_init_$Init$(id, type, $mask0, $marker, Object.create(RequestAuditedEvent_0.prototype));
-  }
-  function RequestAuditedEvent_0(id, type) {
-    var type_0 = type === void 1 ? Audited_getInstance() : type;
+  function RequestEvidenceAddCommand(id, evidence) {
     this._id_6 = id;
-    this._type_4 = type_0;
-  }
-  RequestAuditedEvent_0.prototype._get_id__0_k$ = function () {
-    return this._id_6;
-  };
-  RequestAuditedEvent_0.prototype._get_type__0_k$ = function () {
-    return this._type_4;
-  };
-  RequestAuditedEvent_0.$metadata$ = {
-    simpleName: 'RequestAuditedEvent',
-    kind: 'class',
-    interfaces: []
-  };
-  Object.defineProperty(RequestAuditedEvent_0.prototype, 'id', {
-    configurable: true,
-    get: RequestAuditedEvent_0.prototype._get_id__0_k$
-  });
-  Object.defineProperty(RequestAuditedEvent_0.prototype, 'type', {
-    configurable: true,
-    get: RequestAuditedEvent_0.prototype._get_type__0_k$
-  });
-  function RequestEvidenceAddCommand_0(id, evidence) {
-    this._id_7 = id;
     this._evidence = evidence;
   }
-  RequestEvidenceAddCommand_0.prototype._get_id__0_k$ = function () {
-    return this._id_7;
+  RequestEvidenceAddCommand.prototype._get_id__0_k$ = function () {
+    return this._id_6;
   };
-  RequestEvidenceAddCommand_0.prototype._get_evidence__0_k$ = function () {
+  RequestEvidenceAddCommand.prototype._get_evidence__0_k$ = function () {
     return this._evidence;
   };
-  RequestEvidenceAddCommand_0.$metadata$ = {
+  RequestEvidenceAddCommand.$metadata$ = {
     simpleName: 'RequestEvidenceAddCommand',
     kind: 'class',
     interfaces: []
   };
-  Object.defineProperty(RequestEvidenceAddCommand_0.prototype, 'id', {
+  Object.defineProperty(RequestEvidenceAddCommand.prototype, 'id', {
     configurable: true,
-    get: RequestEvidenceAddCommand_0.prototype._get_id__0_k$
+    get: RequestEvidenceAddCommand.prototype._get_id__0_k$
   });
-  Object.defineProperty(RequestEvidenceAddCommand_0.prototype, 'evidence', {
+  Object.defineProperty(RequestEvidenceAddCommand.prototype, 'evidence', {
     configurable: true,
-    get: RequestEvidenceAddCommand_0.prototype._get_evidence__0_k$
+    get: RequestEvidenceAddCommand.prototype._get_evidence__0_k$
   });
-  function RequestEvidenceAddedEvent_init_$Init$(id, type, evidenceId, $mask0, $marker, $this) {
-    if (!(($mask0 & 2) === 0))
-      type = Created_getInstance();
-    RequestEvidenceAddedEvent_0.call($this, id, type, evidenceId);
-    return $this;
+  function RequestEvidenceRemoveCommand(id, evidenceTypeId) {
+    this._id_7 = id;
+    this._evidenceTypeId = evidenceTypeId;
   }
-  function RequestEvidenceAddedEvent_init_$Create$(id, type, evidenceId, $mask0, $marker) {
-    return RequestEvidenceAddedEvent_init_$Init$(id, type, evidenceId, $mask0, $marker, Object.create(RequestEvidenceAddedEvent_0.prototype));
-  }
-  function RequestEvidenceAddedEvent_0(id, type, evidenceId) {
-    var type_0 = type === void 1 ? Created_getInstance() : type;
-    this._id_8 = id;
-    this._type_5 = type_0;
-    this._evidenceId = evidenceId;
-  }
-  RequestEvidenceAddedEvent_0.prototype._get_id__0_k$ = function () {
-    return this._id_8;
+  RequestEvidenceRemoveCommand.prototype._get_id__0_k$ = function () {
+    return this._id_7;
   };
-  RequestEvidenceAddedEvent_0.prototype._get_type__0_k$ = function () {
-    return this._type_5;
+  RequestEvidenceRemoveCommand.prototype._get_evidenceTypeId__0_k$ = function () {
+    return this._evidenceTypeId;
   };
-  RequestEvidenceAddedEvent_0.prototype._get_evidenceId__0_k$ = function () {
-    return this._evidenceId;
-  };
-  RequestEvidenceAddedEvent_0.$metadata$ = {
-    simpleName: 'RequestEvidenceAddedEvent',
-    kind: 'class',
-    interfaces: []
-  };
-  Object.defineProperty(RequestEvidenceAddedEvent_0.prototype, 'id', {
-    configurable: true,
-    get: RequestEvidenceAddedEvent_0.prototype._get_id__0_k$
-  });
-  Object.defineProperty(RequestEvidenceAddedEvent_0.prototype, 'type', {
-    configurable: true,
-    get: RequestEvidenceAddedEvent_0.prototype._get_type__0_k$
-  });
-  Object.defineProperty(RequestEvidenceAddedEvent_0.prototype, 'evidenceId', {
-    configurable: true,
-    get: RequestEvidenceAddedEvent_0.prototype._get_evidenceId__0_k$
-  });
-  function RequestEvidenceRemoveCommand_0(id, evidenceId) {
-    this._id_9 = id;
-    this._evidenceId_0 = evidenceId;
-  }
-  RequestEvidenceRemoveCommand_0.prototype._get_id__0_k$ = function () {
-    return this._id_9;
-  };
-  RequestEvidenceRemoveCommand_0.prototype._get_evidenceId__0_k$ = function () {
-    return this._evidenceId_0;
-  };
-  RequestEvidenceRemoveCommand_0.$metadata$ = {
+  RequestEvidenceRemoveCommand.$metadata$ = {
     simpleName: 'RequestEvidenceRemoveCommand',
     kind: 'class',
     interfaces: []
   };
-  Object.defineProperty(RequestEvidenceRemoveCommand_0.prototype, 'id', {
+  Object.defineProperty(RequestEvidenceRemoveCommand.prototype, 'id', {
     configurable: true,
-    get: RequestEvidenceRemoveCommand_0.prototype._get_id__0_k$
+    get: RequestEvidenceRemoveCommand.prototype._get_id__0_k$
   });
-  Object.defineProperty(RequestEvidenceRemoveCommand_0.prototype, 'evidenceId', {
+  Object.defineProperty(RequestEvidenceRemoveCommand.prototype, 'evidenceTypeId', {
     configurable: true,
-    get: RequestEvidenceRemoveCommand_0.prototype._get_evidenceId__0_k$
-  });
-  function RequestEvidenceRemovedEvent_init_$Init$(id, type, evidenceId, $mask0, $marker, $this) {
-    if (!(($mask0 & 2) === 0))
-      type = Created_getInstance();
-    RequestEvidenceRemovedEvent_0.call($this, id, type, evidenceId);
-    return $this;
-  }
-  function RequestEvidenceRemovedEvent_init_$Create$(id, type, evidenceId, $mask0, $marker) {
-    return RequestEvidenceRemovedEvent_init_$Init$(id, type, evidenceId, $mask0, $marker, Object.create(RequestEvidenceRemovedEvent_0.prototype));
-  }
-  function RequestEvidenceRemovedEvent_0(id, type, evidenceId) {
-    var type_0 = type === void 1 ? Created_getInstance() : type;
-    this._id_10 = id;
-    this._type_6 = type_0;
-    this._evidenceId_1 = evidenceId;
-  }
-  RequestEvidenceRemovedEvent_0.prototype._get_id__0_k$ = function () {
-    return this._id_10;
-  };
-  RequestEvidenceRemovedEvent_0.prototype._get_type__0_k$ = function () {
-    return this._type_6;
-  };
-  RequestEvidenceRemovedEvent_0.prototype._get_evidenceId__0_k$ = function () {
-    return this._evidenceId_1;
-  };
-  RequestEvidenceRemovedEvent_0.$metadata$ = {
-    simpleName: 'RequestEvidenceRemovedEvent',
-    kind: 'class',
-    interfaces: []
-  };
-  Object.defineProperty(RequestEvidenceRemovedEvent_0.prototype, 'id', {
-    configurable: true,
-    get: RequestEvidenceRemovedEvent_0.prototype._get_id__0_k$
-  });
-  Object.defineProperty(RequestEvidenceRemovedEvent_0.prototype, 'type', {
-    configurable: true,
-    get: RequestEvidenceRemovedEvent_0.prototype._get_type__0_k$
-  });
-  Object.defineProperty(RequestEvidenceRemovedEvent_0.prototype, 'evidenceId', {
-    configurable: true,
-    get: RequestEvidenceRemovedEvent_0.prototype._get_evidenceId__0_k$
+    get: RequestEvidenceRemoveCommand.prototype._get_evidenceTypeId__0_k$
   });
   function RequestInitCommand(id, frameworkId) {
-    this._id_11 = id;
+    this._id_8 = id;
     this._frameworkId = frameworkId;
   }
   RequestInitCommand.prototype._get_id__0_k$ = function () {
-    return this._id_11;
+    return this._id_8;
   };
   RequestInitCommand.prototype._get_frameworkId__0_k$ = function () {
     return this._frameworkId;
@@ -6583,219 +6455,79 @@
     configurable: true,
     get: RequestInitCommand.prototype._get_frameworkId__0_k$
   });
-  function RequestRefuseCommand_0(id) {
-    this._id_12 = id;
+  function RequestRefuseCommand(id) {
+    this._id_9 = id;
   }
-  RequestRefuseCommand_0.prototype._get_id__0_k$ = function () {
-    return this._id_12;
+  RequestRefuseCommand.prototype._get_id__0_k$ = function () {
+    return this._id_9;
   };
-  RequestRefuseCommand_0.$metadata$ = {
+  RequestRefuseCommand.$metadata$ = {
     simpleName: 'RequestRefuseCommand',
     kind: 'class',
     interfaces: []
   };
-  Object.defineProperty(RequestRefuseCommand_0.prototype, 'id', {
+  Object.defineProperty(RequestRefuseCommand.prototype, 'id', {
     configurable: true,
-    get: RequestRefuseCommand_0.prototype._get_id__0_k$
+    get: RequestRefuseCommand.prototype._get_id__0_k$
   });
-  function RequestRefusedEvent_init_$Init$(id, type, $mask0, $marker, $this) {
-    if (!(($mask0 & 2) === 0))
-      type = Created_getInstance();
-    RequestRefusedEvent_0.call($this, id, type);
-    return $this;
+  function RequestSendCommand(id) {
+    this._id_10 = id;
   }
-  function RequestRefusedEvent_init_$Create$(id, type, $mask0, $marker) {
-    return RequestRefusedEvent_init_$Init$(id, type, $mask0, $marker, Object.create(RequestRefusedEvent_0.prototype));
-  }
-  function RequestRefusedEvent_0(id, type) {
-    var type_0 = type === void 1 ? Created_getInstance() : type;
-    this._id_13 = id;
-    this._type_7 = type_0;
-  }
-  RequestRefusedEvent_0.prototype._get_id__0_k$ = function () {
-    return this._id_13;
+  RequestSendCommand.prototype._get_id__0_k$ = function () {
+    return this._id_10;
   };
-  RequestRefusedEvent_0.prototype._get_type__0_k$ = function () {
-    return this._type_7;
-  };
-  RequestRefusedEvent_0.$metadata$ = {
-    simpleName: 'RequestRefusedEvent',
-    kind: 'class',
-    interfaces: []
-  };
-  Object.defineProperty(RequestRefusedEvent_0.prototype, 'id', {
-    configurable: true,
-    get: RequestRefusedEvent_0.prototype._get_id__0_k$
-  });
-  Object.defineProperty(RequestRefusedEvent_0.prototype, 'type', {
-    configurable: true,
-    get: RequestRefusedEvent_0.prototype._get_type__0_k$
-  });
-  function RequestSendCommand_0(id) {
-    this._id_14 = id;
-  }
-  RequestSendCommand_0.prototype._get_id__0_k$ = function () {
-    return this._id_14;
-  };
-  RequestSendCommand_0.$metadata$ = {
+  RequestSendCommand.$metadata$ = {
     simpleName: 'RequestSendCommand',
     kind: 'class',
     interfaces: []
   };
-  Object.defineProperty(RequestSendCommand_0.prototype, 'id', {
+  Object.defineProperty(RequestSendCommand.prototype, 'id', {
     configurable: true,
-    get: RequestSendCommand_0.prototype._get_id__0_k$
+    get: RequestSendCommand.prototype._get_id__0_k$
   });
-  function RequestSentEvent_init_$Init$(id, type, $mask0, $marker, $this) {
-    if (!(($mask0 & 2) === 0))
-      type = Sent_getInstance();
-    RequestSentEvent_0.call($this, id, type);
-    return $this;
+  function RequestSignCommand(id) {
+    this._id_11 = id;
   }
-  function RequestSentEvent_init_$Create$(id, type, $mask0, $marker) {
-    return RequestSentEvent_init_$Init$(id, type, $mask0, $marker, Object.create(RequestSentEvent_0.prototype));
-  }
-  function RequestSentEvent_0(id, type) {
-    var type_0 = type === void 1 ? Sent_getInstance() : type;
-    this._id_15 = id;
-    this._type_8 = type_0;
-  }
-  RequestSentEvent_0.prototype._get_id__0_k$ = function () {
-    return this._id_15;
+  RequestSignCommand.prototype._get_id__0_k$ = function () {
+    return this._id_11;
   };
-  RequestSentEvent_0.prototype._get_type__0_k$ = function () {
-    return this._type_8;
-  };
-  RequestSentEvent_0.$metadata$ = {
-    simpleName: 'RequestSentEvent',
-    kind: 'class',
-    interfaces: []
-  };
-  Object.defineProperty(RequestSentEvent_0.prototype, 'id', {
-    configurable: true,
-    get: RequestSentEvent_0.prototype._get_id__0_k$
-  });
-  Object.defineProperty(RequestSentEvent_0.prototype, 'type', {
-    configurable: true,
-    get: RequestSentEvent_0.prototype._get_type__0_k$
-  });
-  function RequestSignCommand_0(id) {
-    this._id_16 = id;
-  }
-  RequestSignCommand_0.prototype._get_id__0_k$ = function () {
-    return this._id_16;
-  };
-  RequestSignCommand_0.$metadata$ = {
+  RequestSignCommand.$metadata$ = {
     simpleName: 'RequestSignCommand',
     kind: 'class',
     interfaces: []
   };
-  Object.defineProperty(RequestSignCommand_0.prototype, 'id', {
+  Object.defineProperty(RequestSignCommand.prototype, 'id', {
     configurable: true,
-    get: RequestSignCommand_0.prototype._get_id__0_k$
+    get: RequestSignCommand.prototype._get_id__0_k$
   });
-  function RequestSignedEvent_init_$Init$(id, type, $mask0, $marker, $this) {
-    if (!(($mask0 & 2) === 0))
-      type = Signed_getInstance();
-    RequestSignedEvent_0.call($this, id, type);
-    return $this;
-  }
-  function RequestSignedEvent_init_$Create$(id, type, $mask0, $marker) {
-    return RequestSignedEvent_init_$Init$(id, type, $mask0, $marker, Object.create(RequestSignedEvent_0.prototype));
-  }
-  function RequestSignedEvent_0(id, type) {
-    var type_0 = type === void 1 ? Signed_getInstance() : type;
-    this._id_17 = id;
-    this._type_9 = type_0;
-  }
-  RequestSignedEvent_0.prototype._get_id__0_k$ = function () {
-    return this._id_17;
-  };
-  RequestSignedEvent_0.prototype._get_type__0_k$ = function () {
-    return this._type_9;
-  };
-  RequestSignedEvent_0.$metadata$ = {
-    simpleName: 'RequestSignedEvent',
-    kind: 'class',
-    interfaces: []
-  };
-  Object.defineProperty(RequestSignedEvent_0.prototype, 'id', {
-    configurable: true,
-    get: RequestSignedEvent_0.prototype._get_id__0_k$
-  });
-  Object.defineProperty(RequestSignedEvent_0.prototype, 'type', {
-    configurable: true,
-    get: RequestSignedEvent_0.prototype._get_type__0_k$
-  });
-  function RequestSupportedValueAddCommand_0(id, supportedValue) {
-    this._id_18 = id;
+  function RequestSupportedValueAddCommand(id, supportedValue) {
+    this._id_12 = id;
     this._supportedValue = supportedValue;
   }
-  RequestSupportedValueAddCommand_0.prototype._get_id__0_k$ = function () {
-    return this._id_18;
+  RequestSupportedValueAddCommand.prototype._get_id__0_k$ = function () {
+    return this._id_12;
   };
-  RequestSupportedValueAddCommand_0.prototype._get_supportedValue__0_k$ = function () {
+  RequestSupportedValueAddCommand.prototype._get_supportedValue__0_k$ = function () {
     return this._supportedValue;
   };
-  RequestSupportedValueAddCommand_0.$metadata$ = {
+  RequestSupportedValueAddCommand.$metadata$ = {
     simpleName: 'RequestSupportedValueAddCommand',
     kind: 'class',
     interfaces: []
   };
-  Object.defineProperty(RequestSupportedValueAddCommand_0.prototype, 'id', {
+  Object.defineProperty(RequestSupportedValueAddCommand.prototype, 'id', {
     configurable: true,
-    get: RequestSupportedValueAddCommand_0.prototype._get_id__0_k$
+    get: RequestSupportedValueAddCommand.prototype._get_id__0_k$
   });
-  Object.defineProperty(RequestSupportedValueAddCommand_0.prototype, 'supportedValue', {
+  Object.defineProperty(RequestSupportedValueAddCommand.prototype, 'supportedValue', {
     configurable: true,
-    get: RequestSupportedValueAddCommand_0.prototype._get_supportedValue__0_k$
-  });
-  function RequestSupportedValueAddedEvent_init_$Init$(id, type, providesValueFor, $mask0, $marker, $this) {
-    if (!(($mask0 & 2) === 0))
-      type = Created_getInstance();
-    RequestSupportedValueAddedEvent_0.call($this, id, type, providesValueFor);
-    return $this;
-  }
-  function RequestSupportedValueAddedEvent_init_$Create$(id, type, providesValueFor, $mask0, $marker) {
-    return RequestSupportedValueAddedEvent_init_$Init$(id, type, providesValueFor, $mask0, $marker, Object.create(RequestSupportedValueAddedEvent_0.prototype));
-  }
-  function RequestSupportedValueAddedEvent_0(id, type, providesValueFor) {
-    var type_0 = type === void 1 ? Created_getInstance() : type;
-    this._id_19 = id;
-    this._type_10 = type_0;
-    this._providesValueFor = providesValueFor;
-  }
-  RequestSupportedValueAddedEvent_0.prototype._get_id__0_k$ = function () {
-    return this._id_19;
-  };
-  RequestSupportedValueAddedEvent_0.prototype._get_type__0_k$ = function () {
-    return this._type_10;
-  };
-  RequestSupportedValueAddedEvent_0.prototype._get_providesValueFor__0_k$ = function () {
-    return this._providesValueFor;
-  };
-  RequestSupportedValueAddedEvent_0.$metadata$ = {
-    simpleName: 'RequestSupportedValueAddedEvent',
-    kind: 'class',
-    interfaces: []
-  };
-  Object.defineProperty(RequestSupportedValueAddedEvent_0.prototype, 'id', {
-    configurable: true,
-    get: RequestSupportedValueAddedEvent_0.prototype._get_id__0_k$
-  });
-  Object.defineProperty(RequestSupportedValueAddedEvent_0.prototype, 'type', {
-    configurable: true,
-    get: RequestSupportedValueAddedEvent_0.prototype._get_type__0_k$
-  });
-  Object.defineProperty(RequestSupportedValueAddedEvent_0.prototype, 'providesValueFor', {
-    configurable: true,
-    get: RequestSupportedValueAddedEvent_0.prototype._get_providesValueFor__0_k$
+    get: RequestSupportedValueAddCommand.prototype._get_supportedValue__0_k$
   });
   function RequestModel_0(id) {
-    this._id_20 = id;
+    this._id_13 = id;
   }
   RequestModel_0.prototype._get_id__0_k$ = function () {
-    return this._id_20;
+    return this._id_13;
   };
   RequestModel_0.$metadata$ = {
     simpleName: 'RequestModel',
@@ -6914,24 +6646,6 @@
   var $s2$dsl$automate$builder = $s2$dsl$automate.builder || ($s2$dsl$automate.builder = {});
   $s2$dsl$automate$builder.s2 = s2_0;
   $s2$dsl$automate$builder.S2TransitionBuilder = S2TransitionBuilder_0;
-  $cccev$s2$request$domain.s2Request = s2Request_0;
-  $cccev$s2$request$domain.RequestState = RequestState;
-  $cccev$s2$request$domain.EditorRole = EditorRole_0;
-  $cccev$s2$request$domain.AuditorRole = AuditorRole_0;
-  $cccev$s2$request$domain$features$command.RequestAuditCommand = RequestAuditCommand_0;
-  $cccev$s2$request$domain$features$command.RequestAuditedEvent = RequestAuditedEvent_0;
-  $cccev$s2$request$domain$features$command.RequestEvidenceAddCommand = RequestEvidenceAddCommand_0;
-  $cccev$s2$request$domain$features$command.RequestEvidenceAddedEvent = RequestEvidenceAddedEvent_0;
-  $cccev$s2$request$domain$features$command.RequestEvidenceRemoveCommand = RequestEvidenceRemoveCommand_0;
-  $cccev$s2$request$domain$features$command.RequestEvidenceRemovedEvent = RequestEvidenceRemovedEvent_0;
-  $cccev$s2$request$domain$features$command.RequestRefuseCommand = RequestRefuseCommand_0;
-  $cccev$s2$request$domain$features$command.RequestRefusedEvent = RequestRefusedEvent_0;
-  $cccev$s2$request$domain$features$command.RequestSendCommand = RequestSendCommand_0;
-  $cccev$s2$request$domain$features$command.RequestSentEvent = RequestSentEvent_0;
-  $cccev$s2$request$domain$features$command.RequestSignCommand = RequestSignCommand_0;
-  $cccev$s2$request$domain$features$command.RequestSignedEvent = RequestSignedEvent_0;
-  $cccev$s2$request$domain$features$command.RequestSupportedValueAddCommand = RequestSupportedValueAddCommand_0;
-  $cccev$s2$request$domain$features$command.RequestSupportedValueAddedEvent = RequestSupportedValueAddedEvent_0;
   var $cccev$s2$request$domain$model = $cccev$s2$request$domain.model || ($cccev$s2$request$domain.model = {});
   $cccev$s2$request$domain$model.RequestModel = RequestModel_0;
   return _;

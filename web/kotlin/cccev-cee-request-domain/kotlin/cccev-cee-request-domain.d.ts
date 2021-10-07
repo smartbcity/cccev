@@ -1,8 +1,4 @@
-type Nullable<T> = T | undefined
-type Array<T> = T[]
-export namespace kotlin.collections {
-    type List<T> = T[]
-}
+type Nullable<T> = T | null | undefined
 export namespace ccev.dsl.core {
     interface Code {
     }
@@ -15,6 +11,7 @@ export namespace ccev.dsl.core {
         readonly supportsConcept: kotlin.collections.List<string>;
         readonly supportsRequirement: kotlin.collections.List<string>;
         readonly validityPeriod: Nullable<ccev.dsl.core.PeriodOfTime>;
+        readonly name: string;
         readonly file: Nullable<string>;
     }
 }
@@ -289,12 +286,12 @@ export namespace cccev.s2.request.domain.features.command {
 export namespace cccev.s2.request.domain.features.command {
     interface RequestEvidenceRemoveCommandDTO extends cccev.s2.request.domain.RequestCommand {
         readonly id: string;
-        readonly evidenceId: string;
+        readonly evidenceTypeId: string;
     }
     interface RequestEvidenceRemovedEventDTO extends cccev.s2.request.domain.RequestEvent {
         readonly id: string;
         readonly type: typeof cccev.s2.request.domain.RequestState.Created;
-        readonly evidenceId: string;
+        readonly evidenceTypeId: string;
     }
 }
 export namespace cccev.s2.request.domain.features.command {
@@ -780,110 +777,6 @@ export namespace s2.dsl.automate.builder {
         to: s2.dsl.automate.S2State;
         role: s2.dsl.automate.S2Role;
         cmd: kotlin.reflect.KClass<CMD>;
-    }
-}
-export namespace cccev.s2.request.domain {
-    function s2Request(): s2.dsl.automate.S2Automate;
-    class RequestState implements s2.dsl.automate.S2State {
-        constructor(position: number);
-        position: number;
-        readonly Created: {
-        } & cccev.s2.request.domain.RequestState;
-        readonly Sent: {
-        } & cccev.s2.request.domain.RequestState;
-        readonly Signed: {
-        } & cccev.s2.request.domain.RequestState;
-        readonly Audited: {
-        } & cccev.s2.request.domain.RequestState;
-    }
-    class EditorRole implements s2.dsl.automate.S2Role {
-        constructor();
-    }
-    class AuditorRole implements s2.dsl.automate.S2Role {
-        constructor();
-    }
-}
-export namespace cccev.s2.request.domain.features.command {
-    class RequestAuditCommand implements cccev.s2.request.domain.features.command.RequestAuditCommandDTO {
-        constructor(id: string);
-        readonly id: string;
-    }
-    class RequestAuditedEvent implements cccev.s2.request.domain.features.command.RequestAuditedEventDTO {
-        constructor(id: string, type: typeof cccev.s2.request.domain.RequestState.Audited);
-        readonly id: string;
-        readonly type: typeof cccev.s2.request.domain.RequestState.Audited;
-    }
-}
-export namespace cccev.s2.request.domain.features.command {
-    class RequestEvidenceAddCommand implements cccev.s2.request.domain.features.command.RequestEvidenceAddCommandDTO {
-        constructor(id: string, evidence: ccev.dsl.core.Evidence);
-        readonly id: string;
-        readonly evidence: ccev.dsl.core.Evidence;
-    }
-    class RequestEvidenceAddedEvent implements cccev.s2.request.domain.features.command.RequestEvidenceAddedEventDTO {
-        constructor(id: string, type: typeof cccev.s2.request.domain.RequestState.Created, evidenceId: string);
-        readonly id: string;
-        readonly type: typeof cccev.s2.request.domain.RequestState.Created;
-        readonly evidenceId: string;
-    }
-}
-export namespace cccev.s2.request.domain.features.command {
-    class RequestEvidenceRemoveCommand implements cccev.s2.request.domain.features.command.RequestEvidenceRemoveCommandDTO {
-        constructor(id: string, evidenceId: string);
-        readonly id: string;
-        readonly evidenceId: string;
-    }
-    class RequestEvidenceRemovedEvent implements cccev.s2.request.domain.features.command.RequestEvidenceRemovedEventDTO {
-        constructor(id: string, type: typeof cccev.s2.request.domain.RequestState.Created, evidenceId: string);
-        readonly id: string;
-        readonly type: typeof cccev.s2.request.domain.RequestState.Created;
-        readonly evidenceId: string;
-    }
-}
-export namespace cccev.s2.request.domain.features.command {
-    class RequestRefuseCommand implements cccev.s2.request.domain.features.command.RequestRefuseCommandDTO {
-        constructor(id: string);
-        readonly id: string;
-    }
-    class RequestRefusedEvent implements cccev.s2.request.domain.features.command.RequestRefusedEventDTO {
-        constructor(id: string, type: typeof cccev.s2.request.domain.RequestState.Created);
-        readonly id: string;
-        readonly type: typeof cccev.s2.request.domain.RequestState.Created;
-    }
-}
-export namespace cccev.s2.request.domain.features.command {
-    class RequestSendCommand implements cccev.s2.request.domain.features.command.RequestSendCommandDTO {
-        constructor(id: string);
-        readonly id: string;
-    }
-    class RequestSentEvent implements cccev.s2.request.domain.features.command.RequestSentEventDTO {
-        constructor(id: string, type: typeof cccev.s2.request.domain.RequestState.Sent);
-        readonly id: string;
-        readonly type: typeof cccev.s2.request.domain.RequestState.Sent;
-    }
-}
-export namespace cccev.s2.request.domain.features.command {
-    class RequestSignCommand implements cccev.s2.request.domain.features.command.RequestSignCommandDTO {
-        constructor(id: string);
-        readonly id: string;
-    }
-    class RequestSignedEvent implements cccev.s2.request.domain.features.command.RequestSignedEventDTO {
-        constructor(id: string, type: typeof cccev.s2.request.domain.RequestState.Signed);
-        readonly id: string;
-        readonly type: typeof cccev.s2.request.domain.RequestState.Signed;
-    }
-}
-export namespace cccev.s2.request.domain.features.command {
-    class RequestSupportedValueAddCommand implements cccev.s2.request.domain.features.command.RequestSupportedValueAddCommandDTO {
-        constructor(id: string, supportedValue: ccev.dsl.core.SupportedValue);
-        readonly id: string;
-        readonly supportedValue: ccev.dsl.core.SupportedValue;
-    }
-    class RequestSupportedValueAddedEvent implements cccev.s2.request.domain.features.command.RequestSupportedValueAddedEventDTO {
-        constructor(id: string, type: typeof cccev.s2.request.domain.RequestState.Created, providesValueFor: string);
-        readonly id: string;
-        readonly type: typeof cccev.s2.request.domain.RequestState.Created;
-        readonly providesValueFor: string;
     }
 }
 export namespace cccev.s2.request.domain.model {

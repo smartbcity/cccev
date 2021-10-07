@@ -39,6 +39,8 @@
   CriterionBuilder.prototype.constructor = CriterionBuilder;
   CUnitType.prototype = Object.create(Enum.prototype);
   CUnitType.prototype.constructor = CUnitType;
+  XSDDate.prototype = Object.create(CUnit.prototype);
+  XSDDate.prototype.constructor = XSDDate;
   Scope1.prototype = Object.create(InformationConceptBase.prototype);
   Scope1.prototype.constructor = Scope1;
   Scope2.prototype = Object.create(InformationConceptBase.prototype);
@@ -47,12 +49,18 @@
   Scope3.prototype.constructor = Scope3;
   ScopeTotal.prototype = Object.create(InformationConceptBase.prototype);
   ScopeTotal.prototype.constructor = ScopeTotal;
+  VintagePeriodStart.prototype = Object.create(InformationConceptBase.prototype);
+  VintagePeriodStart.prototype.constructor = VintagePeriodStart;
+  VintagePeriodEnd.prototype = Object.create(InformationConceptBase.prototype);
+  VintagePeriodEnd.prototype.constructor = VintagePeriodEnd;
   BilanCarboneETL.prototype = Object.create(EvidenceTypeListBase.prototype);
   BilanCarboneETL.prototype.constructor = BilanCarboneETL;
   BilanCarboneET.prototype = Object.create(EvidenceTypeBase.prototype);
   BilanCarboneET.prototype.constructor = BilanCarboneET;
   ScopeInfo.prototype = Object.create(InformationRequirement.prototype);
   ScopeInfo.prototype.constructor = ScopeInfo;
+  VintagePeriod.prototype = Object.create(InformationRequirement.prototype);
+  VintagePeriod.prototype.constructor = VintagePeriod;
   TonsCo2E.prototype = Object.create(CUnit.prototype);
   TonsCo2E.prototype.constructor = TonsCo2E;
   function joinToString(_this_, separator, prefix, postfix, limit, truncated, transform) {
@@ -3040,6 +3048,27 @@
     kind: 'class',
     interfaces: []
   };
+  function XSDDate() {
+    XSDDate_instance = this;
+    CUnit_init_$Init$('xsdDate', 'XSDDate', 'Date', null, CUnitType_date_getInstance(), 8, null, this);
+  }
+  XSDDate.$metadata$ = {
+    simpleName: 'XSDDate',
+    kind: 'object',
+    interfaces: []
+  };
+  var XSDDate_instance;
+  function XSDDate_getInstance() {
+    if (XSDDate_instance == null)
+      new XSDDate();
+    return XSDDate_instance;
+  }
+  function CUnit_init_$Init$(identifier, name, description, notation, type, $mask0, $marker, $this) {
+    if (!(($mask0 & 8) === 0))
+      notation = null;
+    CUnit.call($this, identifier, name, description, notation, type);
+    return $this;
+  }
   function CUnit(identifier, name, description, notation, type) {
     this._identifier_5 = identifier;
     this._name_6 = name;
@@ -3087,6 +3116,10 @@
     configurable: true,
     get: CUnit.prototype._get_type__0_k$
   });
+  function CUnitType_date_getInstance() {
+    CUnitType_initEntries();
+    return CUnitType_date_instance;
+  }
   function CUnitType_number_getInstance() {
     CUnitType_initEntries();
     return CUnitType_number_instance;
@@ -3099,6 +3132,7 @@
     $this$criterion._set_name__qlpr75_k$('Carbon Copy');
     $this$criterion._set_type__erbbi9_k$(CC_getInstance());
     $this$criterion.unaryPlus_9n4va8_k$(ScopeInfo_getInstance());
+    $this$criterion.unaryPlus_9n4va8_k$(VintagePeriod_getInstance());
   };
   _no_name_provided__22.prototype.invoke_20e8_k$ = function (p1) {
     this.invoke_oywfzr_k$(p1 instanceof CriterionBuilder ? p1 : THROW_CCE());
@@ -3128,6 +3162,20 @@
     if (Scope_instance == null)
       new Scope();
     return Scope_instance;
+  }
+  function Vintage() {
+    Vintage_instance = this;
+  }
+  Vintage.$metadata$ = {
+    simpleName: 'Vintage',
+    kind: 'object',
+    interfaces: []
+  };
+  var Vintage_instance;
+  function Vintage_getInstance() {
+    if (Vintage_instance == null)
+      new Vintage();
+    return Vintage_instance;
   }
   function CC() {
     CC_instance = this;
@@ -3159,7 +3207,7 @@
   }
   function Scope1() {
     Scope1_instance = this;
-    InformationConceptBase.call(this, 'scope1', 'Scope 1', TonsCo2E_getInstance(), Scope_getInstance(), 'Scope 1', null);
+    InformationConceptBase.call(this, '1631745628421x226481125220847400', 'Scope 1', TonsCo2E_getInstance(), Scope_getInstance(), 'Scope 1', null);
   }
   Scope1.$metadata$ = {
     simpleName: 'Scope1',
@@ -3174,7 +3222,7 @@
   }
   function Scope2() {
     Scope2_instance = this;
-    InformationConceptBase.call(this, 'scope2', 'Scope 2', TonsCo2E_getInstance(), Scope_getInstance(), 'Scope 2', null);
+    InformationConceptBase.call(this, '1631745725079x715449360344731600', 'Scope 2', TonsCo2E_getInstance(), Scope_getInstance(), 'Scope 2', null);
   }
   Scope2.$metadata$ = {
     simpleName: 'Scope2',
@@ -3189,7 +3237,7 @@
   }
   function Scope3() {
     Scope3_instance = this;
-    InformationConceptBase.call(this, 'scope3', 'Scope 3', TonsCo2E_getInstance(), Scope_getInstance(), 'Scope 3', null);
+    InformationConceptBase.call(this, '1631745764693x799770971892103800', 'Scope 3', TonsCo2E_getInstance(), Scope_getInstance(), 'Scope 3', null);
   }
   Scope3.$metadata$ = {
     simpleName: 'Scope3',
@@ -3216,6 +3264,36 @@
     if (ScopeTotal_instance == null)
       new ScopeTotal();
     return ScopeTotal_instance;
+  }
+  function VintagePeriodStart() {
+    VintagePeriodStart_instance = this;
+    InformationConceptBase.call(this, 'vintagePeriodStart', 'D\xE9but p\xE9riode r\xE9f\xE9rence', XSDDate_getInstance(), Vintage_getInstance(), 'Scope 3', null);
+  }
+  VintagePeriodStart.$metadata$ = {
+    simpleName: 'VintagePeriodStart',
+    kind: 'object',
+    interfaces: []
+  };
+  var VintagePeriodStart_instance;
+  function VintagePeriodStart_getInstance() {
+    if (VintagePeriodStart_instance == null)
+      new VintagePeriodStart();
+    return VintagePeriodStart_instance;
+  }
+  function VintagePeriodEnd() {
+    VintagePeriodEnd_instance = this;
+    InformationConceptBase.call(this, 'vintagePeriodEnd', 'Fin p\xE9riode r\xE9f\xE9rence', XSDDate_getInstance(), Vintage_getInstance(), 'Scope 3', null);
+  }
+  VintagePeriodEnd.$metadata$ = {
+    simpleName: 'VintagePeriodEnd',
+    kind: 'object',
+    interfaces: []
+  };
+  var VintagePeriodEnd_instance;
+  function VintagePeriodEnd_getInstance() {
+    if (VintagePeriodEnd_instance == null)
+      new VintagePeriodEnd();
+    return VintagePeriodEnd_instance;
   }
   function BilanCarboneETL() {
     BilanCarboneETL_instance = this;
@@ -3265,6 +3343,24 @@
     if (ScopeInfo_instance == null)
       new ScopeInfo();
     return ScopeInfo_instance;
+  }
+  function VintagePeriod() {
+    VintagePeriod_instance = this;
+    var tmp0_type = Vintage_getInstance();
+    var tmp1_hasConcept = listOf([VintagePeriodStart_getInstance(), VintagePeriodEnd_getInstance()]);
+    var tmp2_hasEvidenceTypeList = listOf_0(BilanCarboneETL_getInstance());
+    InformationRequirement_init_$Init$('P\xE9riode de r\xE9f\xE9rence', 'vintagePeriod', 'P\xE9riode de r\xE9f\xE9rence', tmp0_type, tmp1_hasConcept, null, tmp2_hasEvidenceTypeList, 32, null, this);
+  }
+  VintagePeriod.$metadata$ = {
+    simpleName: 'VintagePeriod',
+    kind: 'object',
+    interfaces: []
+  };
+  var VintagePeriod_instance;
+  function VintagePeriod_getInstance() {
+    if (VintagePeriod_instance == null)
+      new VintagePeriod();
+    return VintagePeriod_instance;
   }
   function TonsCo2E() {
     TonsCo2E_instance = this;
