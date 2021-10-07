@@ -1,11 +1,10 @@
 package cccev.bubble.core
 
-sealed interface ObjType {
-
-}
+sealed interface ObjType
 
 typealias EntryId = String
 
+@Suppress("ConstructorParameterNaming")
 data class Entry(
 	val _id: EntryId,
 	val suportedValues: String?,
@@ -23,6 +22,7 @@ data class Entry(
 typealias SupportedValueId = String
 typealias RequiremenetId = String
 
+@Suppress("ConstructorParameterNaming")
 data class SupportedValue(
 	val _id: SupportedValueId?,
 	/**
