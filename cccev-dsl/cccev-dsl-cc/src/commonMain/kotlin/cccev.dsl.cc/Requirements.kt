@@ -18,3 +18,17 @@ object ScopeInfo: InformationRequirement(
         BilanCarboneETL,
     )
 )
+
+object VintagePeriod: InformationRequirement(
+    identifier = "vintagePeriod",
+    name = "Période de référence",
+    description = "Période de référence",
+    type = CC.Vintage,
+    hasConcept = listOf(
+        VintagePeriodStart,
+        VintagePeriodEnd
+    ),
+    hasEvidenceTypeList = listOf(
+        BilanCarboneETL,
+    )
+)

@@ -4,7 +4,7 @@ import cccev.s2.request.domain.RequestCommand
 import cccev.s2.request.domain.RequestEvent
 import cccev.s2.request.domain.RequestState
 import cccev.s2.request.domain.model.RequestId
-import ccev.dsl.core.EvidenceId
+import ccev.dsl.core.EvidenceTypeId
 import f2.dsl.fnc.F2Function
 
 /**
@@ -26,9 +26,9 @@ expect interface RequestEvidenceRemoveCommandDTO: RequestCommand {
 	override val id: RequestId
 
 	/**
-	 * Identifier of the evidence to remove.
+	 * Identifier of the evidence type to remove.
 	 */
-	val evidenceId: EvidenceId
+	val evidenceTypeId: EvidenceTypeId
 }
 
 /**
@@ -49,18 +49,18 @@ expect interface RequestEvidenceRemovedEventDTO: RequestEvent {
 	override val type: RequestState.Created
 
 	/**
-	 * Identifier of the removed evidence.
+	 * Identifier of the removed evidence type.
 	 */
-	val evidenceId: EvidenceId
+	val evidenceTypeId: EvidenceTypeId
 }
 
 class RequestEvidenceRemoveCommand(
 	override val id: RequestId,
-	override val evidenceId: EvidenceId,
+	override val evidenceTypeId: EvidenceTypeId,
 ): RequestEvidenceRemoveCommandDTO
 
 class RequestEvidenceRemovedEvent(
 	override val id: RequestId,
 	override val type: RequestState.Created = RequestState.Created,
-	override val evidenceId: EvidenceId,
+	override val evidenceTypeId: EvidenceTypeId,
 ): RequestEvidenceRemovedEventDTO

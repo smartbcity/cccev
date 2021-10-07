@@ -9,5 +9,6 @@ actual external interface EvidenceDTO {
     actual val supportsConcept: List<InformationConceptId>
     actual val supportsRequirement: List<RequirementId>
     actual val validityPeriod: PeriodOfTime?
+    actual val name: String
     actual val file: String?
 }

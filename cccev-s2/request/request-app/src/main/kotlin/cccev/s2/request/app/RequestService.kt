@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service
 @Service
 class RequestService(
 	private val aggregate: RequestS2Aggregate,
+//	private val ktorRepository: KtorRepository
 ): RequestAggregate {
 	@Bean
 	override fun init(): RequestInitCommandFunction = f2Function { cmd ->
@@ -44,7 +45,7 @@ class RequestService(
 	@Bean
 	override fun removeEvidence(): RequestEvidenceRemoveCommandFunction = f2Function { cmd ->
 		aggregate.doTransition(cmd) {
-			this to removeEvidence(cmd.evidenceId)
+			this to removeEvidence(cmd.evidenceTypeId)
 		}
 	}
 
@@ -58,6 +59,7 @@ class RequestService(
 	@Bean
 	override fun send(): RequestSendCommandFunction = f2Function { cmd ->
 		aggregate.doTransition(cmd) {
+
 			this to send()
 		}
 	}
@@ -82,6 +84,4 @@ class RequestService(
 			this to refuse()
 		}
 	}
-
-
 }

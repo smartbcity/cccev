@@ -7,4 +7,5 @@ val CarbonCopy = criterion {
     name = "Carbon Copy"
     type = CC
     +ScopeInfo
+    +VintagePeriod
 }

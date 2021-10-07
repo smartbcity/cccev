@@ -10,6 +10,7 @@ expect interface EvidenceDTO {
     val supportsConcept: List<InformationConceptId>
     val supportsRequirement: List<RequirementId>
     val validityPeriod: PeriodOfTime?
+    val name: String
     val file: String?
 }
 
@@ -20,6 +21,7 @@ open class Evidence(
     override val supportsConcept: List<InformationConceptId> = emptyList(),
     override val supportsRequirement: List<RequirementId> = emptyList(),
     override val validityPeriod: PeriodOfTime? = null,
+    override val name: String = "",
     override val file: String? = null
 ): EvidenceDTO
 

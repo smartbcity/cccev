@@ -9,5 +9,5 @@ dependencies {
 
 	api(project(":cccev-bubble:cccev-bubble-core"))
 
-	Dependencies.Jvm.s2Mongo.forEach { implementation(it) }
+	Dependencies.Jvm.s2Mongo.forEach { api(it) }
 }

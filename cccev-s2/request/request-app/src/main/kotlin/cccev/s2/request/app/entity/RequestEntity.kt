@@ -10,7 +10,7 @@ import cccev.s2.request.domain.features.command.RequestSignedEvent
 import cccev.s2.request.domain.features.command.RequestSupportedValueAddedEvent
 import cccev.s2.request.domain.model.RequestId
 import ccev.dsl.core.Evidence
-import ccev.dsl.core.EvidenceId
+import ccev.dsl.core.EvidenceTypeId
 import ccev.dsl.core.InformationConceptId
 import ccev.dsl.core.RequirementId
 import ccev.dsl.core.SupportedValue
@@ -43,12 +43,12 @@ class RequestEntity(
 		)
 	}
 
-	fun removeEvidence(evidenceId: EvidenceId): RequestEvidenceRemovedEvent {
-		evidences.removeIf { evidence -> evidence.identifier == evidenceId }
+	fun removeEvidence(evidenceTypeId: EvidenceTypeId): RequestEvidenceRemovedEvent {
+		evidences.removeIf { evidence -> evidenceTypeId in evidence.isConformantTo }
 
 		return RequestEvidenceRemovedEvent(
 			id = id,
-			evidenceId = evidenceId
+			evidenceTypeId = evidenceTypeId
 		)
 	}
 
