@@ -41,6 +41,8 @@
   CUnitType.prototype.constructor = CUnitType;
   XSDDate.prototype = Object.create(CUnit.prototype);
   XSDDate.prototype.constructor = XSDDate;
+  Ratio.prototype = Object.create(CUnit.prototype);
+  Ratio.prototype.constructor = Ratio;
   Scope1.prototype = Object.create(InformationConceptBase.prototype);
   Scope1.prototype.constructor = Scope1;
   Scope2.prototype = Object.create(InformationConceptBase.prototype);
@@ -53,6 +55,10 @@
   VintagePeriodStart.prototype.constructor = VintagePeriodStart;
   VintagePeriodEnd.prototype = Object.create(InformationConceptBase.prototype);
   VintagePeriodEnd.prototype.constructor = VintagePeriodEnd;
+  Participation_0.prototype = Object.create(InformationConceptBase.prototype);
+  Participation_0.prototype.constructor = Participation_0;
+  AllocatedEmissions.prototype = Object.create(InformationConceptBase.prototype);
+  AllocatedEmissions.prototype.constructor = AllocatedEmissions;
   BilanCarboneETL.prototype = Object.create(EvidenceTypeListBase.prototype);
   BilanCarboneETL.prototype.constructor = BilanCarboneETL;
   BilanCarboneET.prototype = Object.create(EvidenceTypeBase.prototype);
@@ -61,6 +67,8 @@
   ScopeInfo.prototype.constructor = ScopeInfo;
   VintagePeriod.prototype = Object.create(InformationRequirement.prototype);
   VintagePeriod.prototype.constructor = VintagePeriod;
+  EquityInfo.prototype = Object.create(InformationRequirement.prototype);
+  EquityInfo.prototype.constructor = EquityInfo;
   TonsCo2E.prototype = Object.create(CUnit.prototype);
   TonsCo2E.prototype.constructor = TonsCo2E;
   function joinToString(_this_, separator, prefix, postfix, limit, truncated, transform) {
@@ -2980,6 +2988,9 @@
     }
     tmp._requirements = tmp$ret$0;
   }
+  AbstractRequirementBuilder.prototype._set_description__qlpr75_k$ = function (_set___) {
+    this._description_3 = _set___;
+  };
   AbstractRequirementBuilder.prototype._get_description__0_k$ = function () {
     return this._description_3;
   };
@@ -3063,6 +3074,21 @@
       new XSDDate();
     return XSDDate_instance;
   }
+  function Ratio() {
+    Ratio_instance = this;
+    CUnit.call(this, 'ration', 'Ration', 'Ratio entre deux valeurs', '%', CUnitType_number_getInstance());
+  }
+  Ratio.$metadata$ = {
+    simpleName: 'Ratio',
+    kind: 'object',
+    interfaces: []
+  };
+  var Ratio_instance;
+  function Ratio_getInstance() {
+    if (Ratio_instance == null)
+      new Ratio();
+    return Ratio_instance;
+  }
   function CUnit_init_$Init$(identifier, name, description, notation, type, $mask0, $marker, $this) {
     if (!(($mask0 & 8) === 0))
       notation = null;
@@ -3125,6 +3151,7 @@
     return CUnitType_number_instance;
   }
   var CarbonCopy;
+  var Equity;
   function _no_name_provided__22() {
   }
   _no_name_provided__22.prototype.invoke_oywfzr_k$ = function ($this$criterion) {
@@ -3142,8 +3169,34 @@
     kind: 'class',
     interfaces: []
   };
+  function _no_name_provided__23() {
+  }
+  _no_name_provided__23.prototype.invoke_oywfzr_k$ = function ($this$criterion) {
+    $this$criterion._set_identifier__qlpr75_k$('carbonequity');
+    $this$criterion._set_name__qlpr75_k$('Equity participation');
+    $this$criterion._set_description__qlpr75_k$('Equity participation refers to the ownership of shares in a company or property. The greater the equity participation rate, the higher the percentage of carbon emissions affected to stakeholders');
+    $this$criterion._set_type__erbbi9_k$(CC_getInstance());
+    $this$criterion.unaryPlus_9n4va8_k$(ScopeInfo_getInstance());
+    $this$criterion.unaryPlus_9n4va8_k$(VintagePeriod_getInstance());
+    $this$criterion.unaryPlus_9n4va8_k$(EquityInfo_getInstance());
+  };
+  _no_name_provided__23.prototype.invoke_20e8_k$ = function (p1) {
+    this.invoke_oywfzr_k$(p1 instanceof CriterionBuilder ? p1 : THROW_CCE());
+    return Unit_getInstance();
+  };
+  _no_name_provided__23.$metadata$ = {
+    kind: 'class',
+    interfaces: []
+  };
   function _no_name_provided_$factory_21() {
     var i = new _no_name_provided__22();
+    return function (p1) {
+      i.invoke_oywfzr_k$(p1);
+      return Unit_getInstance();
+    };
+  }
+  function _no_name_provided_$factory_22() {
+    var i = new _no_name_provided__23();
     return function (p1) {
       i.invoke_oywfzr_k$(p1);
       return Unit_getInstance();
@@ -3190,6 +3243,20 @@
     if (CC_instance == null)
       new CC();
     return CC_instance;
+  }
+  function Participation() {
+    Participation_instance = this;
+  }
+  Participation.$metadata$ = {
+    simpleName: 'Participation',
+    kind: 'object',
+    interfaces: []
+  };
+  var Participation_instance;
+  function Participation_getInstance() {
+    if (Participation_instance == null)
+      new Participation();
+    return Participation_instance;
   }
   function BilanCarbone() {
     BilanCarbone_instance = this;
@@ -3295,6 +3362,36 @@
       new VintagePeriodEnd();
     return VintagePeriodEnd_instance;
   }
+  function Participation_0() {
+    Participation_instance_0 = this;
+    InformationConceptBase.call(this, '1633282057103x338292671526627460', 'Fin p\xE9riode r\xE9f\xE9rence', Ratio_getInstance(), Participation_getInstance(), 'Pourcentage de participation', null);
+  }
+  Participation_0.$metadata$ = {
+    simpleName: 'Participation',
+    kind: 'object',
+    interfaces: []
+  };
+  var Participation_instance_0;
+  function Participation_getInstance_0() {
+    if (Participation_instance_0 == null)
+      new Participation_0();
+    return Participation_instance_0;
+  }
+  function AllocatedEmissions() {
+    AllocatedEmissions_instance = this;
+    InformationConceptBase.call(this, 'allocatedEmissions', '\xC9missions allou\xE9es', TonsCo2E_getInstance(), Participation_getInstance(), '\xC9missions allou\xE9es', '' + ScopeTotal_getInstance()._get_identifier__0_k$() + ' * ' + Participation_getInstance_0()._get_identifier__0_k$() + ' / 100');
+  }
+  AllocatedEmissions.$metadata$ = {
+    simpleName: 'AllocatedEmissions',
+    kind: 'object',
+    interfaces: []
+  };
+  var AllocatedEmissions_instance;
+  function AllocatedEmissions_getInstance() {
+    if (AllocatedEmissions_instance == null)
+      new AllocatedEmissions();
+    return AllocatedEmissions_instance;
+  }
   function BilanCarboneETL() {
     BilanCarboneETL_instance = this;
     var tmp0_specifiesEvidenceType = listOf_0(BilanCarboneET_getInstance());
@@ -3362,6 +3459,24 @@
       new VintagePeriod();
     return VintagePeriod_instance;
   }
+  function EquityInfo() {
+    EquityInfo_instance = this;
+    var tmp0_type = Participation_getInstance();
+    var tmp1_hasConcept = listOf([Participation_getInstance_0(), AllocatedEmissions_getInstance()]);
+    var tmp2_hasEvidenceTypeList = listOf_0(BilanCarboneETL_getInstance());
+    InformationRequirement_init_$Init$('Pariticipation', 'equity', 'Participation', tmp0_type, tmp1_hasConcept, null, tmp2_hasEvidenceTypeList, 32, null, this);
+  }
+  EquityInfo.$metadata$ = {
+    simpleName: 'EquityInfo',
+    kind: 'object',
+    interfaces: []
+  };
+  var EquityInfo_instance;
+  function EquityInfo_getInstance() {
+    if (EquityInfo_instance == null)
+      new EquityInfo();
+    return EquityInfo_instance;
+  }
   function TonsCo2E() {
     TonsCo2E_instance = this;
     CUnit.call(this, 'tonsCO2e', 'Tonnes de CO2e', 'Tonnes de CO2 \xE9quivalent', 'tCO2e', CUnitType_number_getInstance());
@@ -3387,6 +3502,7 @@
   MIN_VALUE = new Long(0, -2147483648);
   TWO_PWR_24_ = fromInt(16777216);
   CarbonCopy = criterion(_no_name_provided_$factory_21());
+  Equity = criterion(_no_name_provided_$factory_22());
   var $ccev = _.ccev || (_.ccev = {});
   var $ccev$dsl = $ccev.dsl || ($ccev.dsl = {});
   var $ccev$dsl$core = $ccev$dsl.core || ($ccev$dsl.core = {});

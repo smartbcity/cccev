@@ -57,6 +57,8 @@
   Hour.prototype.constructor = Hour;
   Year.prototype = Object.create(CUnit.prototype);
   Year.prototype.constructor = Year;
+  Ratio.prototype = Object.create(CUnit.prototype);
+  Ratio.prototype.constructor = Ratio;
   XSDInt.prototype = Object.create(CUnit.prototype);
   XSDInt.prototype.constructor = XSDInt;
   DateTravaux.prototype = Object.create(InformationConceptBase.prototype);
@@ -181,8 +183,6 @@
   CalculCertificatsCumac_0.prototype.constructor = CalculCertificatsCumac_0;
   LumenPerW.prototype = Object.create(CUnit.prototype);
   LumenPerW.prototype.constructor = LumenPerW;
-  Ratio.prototype = Object.create(CUnit.prototype);
-  Ratio.prototype.constructor = Ratio;
   Variation.prototype = Object.create(CUnit.prototype);
   Variation.prototype.constructor = Variation;
   KWhCumacPerW.prototype = Object.create(CUnit.prototype);
@@ -4978,6 +4978,21 @@
       new Year();
     return Year_instance;
   }
+  function Ratio() {
+    Ratio_instance = this;
+    CUnit.call(this, 'ration', 'Ration', 'Ratio entre deux valeurs', '%', CUnitType_number_getInstance());
+  }
+  Ratio.$metadata$ = {
+    simpleName: 'Ratio',
+    kind: 'object',
+    interfaces: []
+  };
+  var Ratio_instance;
+  function Ratio_getInstance() {
+    if (Ratio_instance == null)
+      new Ratio();
+    return Ratio_instance;
+  }
   function XSDInt() {
     XSDInt_instance = this;
     CUnit_init_$Init$('xsdInt', 'XSDInt', 'Nombre entier quelconque', null, CUnitType_number_getInstance(), 8, null, this);
@@ -6182,21 +6197,6 @@
     if (LumenPerW_instance == null)
       new LumenPerW();
     return LumenPerW_instance;
-  }
-  function Ratio() {
-    Ratio_instance = this;
-    CUnit.call(this, 'ration', 'Ration', 'Ratio entre deux valeurs', '%', CUnitType_number_getInstance());
-  }
-  Ratio.$metadata$ = {
-    simpleName: 'Ratio',
-    kind: 'object',
-    interfaces: []
-  };
-  var Ratio_instance;
-  function Ratio_getInstance() {
-    if (Ratio_instance == null)
-      new Ratio();
-    return Ratio_instance;
   }
   function Variation() {
     Variation_instance = this;
