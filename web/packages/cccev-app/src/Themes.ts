@@ -36,6 +36,16 @@ export const theme: DeepPartial<AruiTheme> = {
 };
 
 export const muiTheme: ThemeOptions = {
+  components: {
+    MuiTooltip: {
+      styleOverrides: {
+        tooltip: {
+          fontFamily: "roboto",
+          fontWeight: 500
+        }
+      }
+    }
+  },
   typography: {
     subtitle2: {
       fontFamily: "roboto",
@@ -55,6 +65,10 @@ export const muiTheme: ThemeOptions = {
       fontFamily: "roboto",
     },
     button: {
+      fontFamily: "roboto",
+      fontWeight: 500,
+    },
+    allVariants: {
       fontFamily: "roboto",
       fontWeight: 500
     }

@@ -69,6 +69,7 @@ export const CertificateFiller = (props: CertificateFillerProps) => {
                 evidenceTypeLists={evidenceTypeLists}
                 evidenceTypeMapped={evidenceTypeMapped}
                 evidenceTypeListsFetchStatus={evidenceTypeListsFetchStatus}
+                fetchEvidenceTypeLists={fetchEvidenceTypeLists}
             />
         </>
     )

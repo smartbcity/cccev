@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "utils": "^1.0.0",
-    "cccev-cee-cccev-dsl-dto": "0.0.0-latest"
+    "cccev-cee-cccev-dsl-dto": "0.0.0-latest",
+    "cccev-cee-request-domain": "0.0.0-latest"
   }
 }

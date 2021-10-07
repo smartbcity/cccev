@@ -39,10 +39,11 @@ interface EvidenceBarProps {
     evidenceTypeLists?: EvidenceTypeListDTO[][]
     evidenceTypeMapped?: Map<string, EvidenceTypeDTO>
     evidenceTypeListsFetchStatus?: AsyncStatus
+    fetchEvidenceTypeLists: () => void
 }
 
 export const EvidenceBar = (props: EvidenceBarProps) => {
-    const { currentEvidence, changeEvidence, addEvidenceType, setEvidenceTypeAdded, evidenceTypeAdded, evidenceTypeLists, evidenceTypeListsFetchStatus, evidenceTypeMapped } = props
+    const { currentEvidence, changeEvidence, addEvidenceType, setEvidenceTypeAdded, evidenceTypeAdded, evidenceTypeLists, evidenceTypeListsFetchStatus, evidenceTypeMapped, fetchEvidenceTypeLists } = props
 
     const removeCurrentEvidence = useCallback(
         () => changeEvidence(),
@@ -60,7 +61,7 @@ export const EvidenceBar = (props: EvidenceBarProps) => {
         return (
             <EvidenceBarContainer>
                 <EvidenceList evidenceTypeLists={evidenceTypeLists} addEvidenceType={addEvidenceType} changeEvidence={changeEvidence} />
-                <Dropzone evidenceTypeMapped={evidenceTypeMapped} setEvidenceTypeAdded={setEvidenceTypeAdded} evidenceTypeAdded={evidenceTypeAdded} />
+                <Dropzone fetchEvidenceTypeLists={fetchEvidenceTypeLists} evidenceTypeMapped={evidenceTypeMapped} setEvidenceTypeAdded={setEvidenceTypeAdded} evidenceTypeAdded={evidenceTypeAdded} />
             </EvidenceBarContainer>
         )
     }

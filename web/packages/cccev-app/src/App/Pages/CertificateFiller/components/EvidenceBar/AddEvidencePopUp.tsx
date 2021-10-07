@@ -17,8 +17,9 @@ export const AddEvidencePopUp = (props: addEvidencePopUpProps) => {
     const { open, onClose, onValidate, errorMessage, evidenceTypeMapped } = props
     const theme = useTheme()
     const [evidenceTypeId, setEvidenceTypeId] = useState<string | undefined>(undefined)
+    
     const onValidateMemoized = useCallback(
-        () => evidenceTypeId && onValidate(evidenceTypeId),
+        async () => evidenceTypeId && (await onValidate(evidenceTypeId)),
         [onValidate, evidenceTypeId],
     )
 

@@ -45,7 +45,7 @@ export const Main = (props: MainProps) => {
         onSubmit: onSubmit
     })
 
-    const categories = useMemo(() => informationConcepts.result ? informationConceptsToCategories(informationConcepts.result.informationConcepts) : [], [informationConcepts.result])
+    const categories = useMemo(() => informationConcepts.result && evidenceTypeMapped ? informationConceptsToCategories(informationConcepts.result.informationConcepts, evidenceTypeMapped) : [], [informationConcepts.result, evidenceTypeMapped])
 
     if (informationConcepts.status !== "SUCCESS" || informationConcepts.result === undefined) return (
         <MainLoading />
@@ -62,7 +62,7 @@ export const Main = (props: MainProps) => {
     )
 }
 
-const informationConceptsToCategories = (informationConcepts: InformationConceptDTO[]): Category[] => {
+const informationConceptsToCategories = (informationConcepts: InformationConceptDTO[], evidenceTypeMapped: Map<string, EvidenceTypeDTO>): Category[] => {
     const objCategories: { [key: string]: Category } = {}
     //@ts-ignore
     informationConcepts.forEach((el: (InformationConceptDTO & { category: { id: string, name: string } })) => {
@@ -75,7 +75,7 @@ const informationConceptsToCategories = (informationConcepts: InformationConcept
             textFieldProps: {
                 textFieldType: el.unit.type === "number" ? "number" : "text",
             },
-            hasEvidence: false,
+            hasEvidence: !!evidenceTypeMapped.get(el.identifier)?.evidence,
             fieldUnit: el.unit.notation
         }
         const fields = objCategories[el.category.id]?.fields ? [...objCategories[el.category.id].fields, newField] : [newField]

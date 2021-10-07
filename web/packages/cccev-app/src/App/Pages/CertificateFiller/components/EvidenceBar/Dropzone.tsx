@@ -3,15 +3,17 @@ import { EvidenceTypeDTO } from 'datahub'
 import { useCallback, useState } from 'react'
 import { FileRejection, useDropzone } from "react-dropzone"
 import { AddEvidencePopUp } from './AddEvidencePopUp'
+import { requestEvidenceAddCommand } from 'datahub'
 
 interface DropzoneProps {
     evidenceTypeAdded?: string
     setEvidenceTypeAdded: (evidenceTypeId?: string | undefined) => void
     evidenceTypeMapped?: Map<string, EvidenceTypeDTO>
+    fetchEvidenceTypeLists: () => void
 }
 
 export const Dropzone = (props: DropzoneProps) => {
-    const { setEvidenceTypeAdded, evidenceTypeAdded, evidenceTypeMapped } = props
+    const { setEvidenceTypeAdded, evidenceTypeAdded, evidenceTypeMapped, fetchEvidenceTypeLists } = props
 
     const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined)
     const [lastAddedFile, setLastAddedFile] = useState<File | undefined>(undefined)
@@ -25,13 +27,26 @@ export const Dropzone = (props: DropzoneProps) => {
         [],
     )
 
+    const pushEvidence = useCallback(
+        async (evidenceTypeId: string, file: File) => new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => {
+                requestEvidenceAddCommand(evidenceTypeId, reader.result as string).then(() => {
+                    fetchEvidenceTypeLists()
+                    resolve("resolved")
+                })
+            };
+        }),
+        [fetchEvidenceTypeLists],
+    )
+
     const onValidatePopup = useCallback(
-        (evidenceTypeId: string) => {
+        async (evidenceTypeId: string) => {
+            if (lastAddedFile) {
+                await pushEvidence(evidenceTypeId, lastAddedFile)
+            }
             setOpenPopup(false)
-            console.log("file added:")
-            console.log(lastAddedFile)
-            console.log("bounded to:")
-            console.log(evidenceTypeId)
         },
         [lastAddedFile],
     )
