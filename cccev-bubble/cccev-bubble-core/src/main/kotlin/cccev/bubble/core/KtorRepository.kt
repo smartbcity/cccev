@@ -12,6 +12,7 @@ import io.ktor.client.features.json.JacksonSerializer
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.request.get
 import io.ktor.client.request.header
+import io.ktor.client.request.patch
 import io.ktor.client.request.post
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
@@ -51,10 +52,27 @@ class KtorRepository(
 		return client(bearerToken).get(baseUrl("${T::class.simpleName!!}/${id}"))
 	}
 
+	suspend inline fun <reified T> getOne(
+		id: String,
+		typeName: String
+	): BubbleResponse<T> {
+		return client(bearerToken).get(baseUrl("$typeName/$id"))
+	}
+
 	suspend inline fun <reified T: Any> saveObject(
 		obj: T,
 	): BubbleCreateResponse {
 		return client(bearerToken).post(baseUrl(T::class.simpleName!!)) {
+			contentType(ContentType.Application.Json)
+			body = obj
+		}
+	}
+
+	suspend inline fun <reified T: Any> updateObject(
+		id: String,
+		obj: T,
+	): Any {
+		return client(bearerToken).patch(baseUrl("${T::class.simpleName!!}/$id")) {
 			contentType(ContentType.Application.Json)
 			body = obj
 		}

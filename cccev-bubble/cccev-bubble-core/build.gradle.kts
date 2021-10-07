@@ -8,4 +8,5 @@ dependencies {
     api("city.smartb.f2:f2-spring-boot-starter-function-http:${Versions.f2}")
     Dependencies.Jvm.ktorClient(::implementation)
     testImplementation(project(":cccev-test"))
+    testImplementation(project(":cccev-dsl:cccev-dsl-cc"))
 }

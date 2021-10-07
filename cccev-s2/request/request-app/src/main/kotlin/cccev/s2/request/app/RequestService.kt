@@ -20,7 +20,6 @@ import org.springframework.stereotype.Service
 @Service
 class RequestService(
 	private val aggregate: RequestS2Aggregate,
-//	private val ktorRepository: KtorRepository
 ): RequestAggregate {
 	@Bean
 	override fun init(): RequestInitCommandFunction = f2Function { cmd ->

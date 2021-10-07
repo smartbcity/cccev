@@ -1,5 +1,8 @@
 package cccev.bubble.core
 
+import cccev.dsl.cc.Scope1
+import cccev.dsl.cc.Scope2
+import cccev.dsl.cc.Scope3
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Test
 
@@ -13,9 +16,19 @@ internal class KtorRepositoryTest {
 		val list = ktorRepository.getList<SupportedValue>()
 
 		list.response.results.forEach {
-			val getOne = ktorRepository.getOne<SupportedValue>(it._id!!)
 			println(it)
-			println(getOne)
+//			val getOne = ktorRepository.getOne<SupportedValue>(it._id!!)
+//			println(getOne)
+		}
+	}
+	@Test
+	fun getEntries() = runBlocking {
+		val list = ktorRepository.getList<Entry>()
+
+		list.response.results.forEach {
+			println(it)
+//			val getOne = ktorRepository.getOne<SupportedValue>(it._id!!)
+//			println(getOne)
 		}
 	}
 
@@ -35,4 +48,78 @@ internal class KtorRepositoryTest {
 		println(created)
 
 	}
+
+	@Test
+	fun getRequest(): Unit = runBlocking {
+		val request = ktorRepository.getOne<Request>("1633610619203x148433928885895170", "Request").response
+		println(request)
+	}
+
+//	@Test
+//	fun test(): Unit = runBlocking {
+//		val requestId = "1633612321219x665281861109153800"
+//		val entryId =
+//
+//		val request = ktorRepository.getOne<Request>(requestId).response
+//		request.entry = entryId
+//		ktorRepository.updateObject(requestId, request)
+//	}
+
+	@Test
+	fun sendDraft(): Unit = runBlocking {
+		val requestId = "1633612321219x665281861109153800"
+		val request = ktorRepository.getOne<Request>(requestId).response
+		val registry = request.registry
+
+		// ENTRY
+		val entry = Entry(
+			_id = null,
+			request = requestId,
+			value = "100",
+			status = "Pending",
+			registry = registry,
+			refDateFrom = "2021-01-01T11:00:00.000Z",
+			refDateTo = "2021-12-31T11:00:00.000Z",
+		)
+		val result = ktorRepository.saveObject(entry)
+		val entryId = result.id
+
+		// REQUEST
+		request.entry = entryId
+		ktorRepository.updateObject(requestId, request)
+
+		// SCOPES
+		val scope1 = SupportedValue(
+			_id = null,
+			entry = entryId,
+			label = "Scope 1",
+			requirement = Scope1.identifier,
+			value = "20"
+		)
+
+		val scope2 = SupportedValue(
+			_id = null,
+			entry = entryId,
+			label = "Scope 2",
+			requirement = Scope2.identifier,
+			value = "30"
+		)
+
+		val scope3 = SupportedValue(
+			_id = null,
+			entry = entryId,
+			label = "Scope 3",
+			requirement = Scope3.identifier,
+			value = "50"
+		)
+		ktorRepository.saveObject(scope1)
+		ktorRepository.saveObject(scope2)
+		ktorRepository.saveObject(scope3)
+	}
 }
+
+/**
+ * Scope 3 = 1631745764693x799770971892103800
+ * scope 2 = 1631745725079x715449360344731600
+ * scope 1 = 1631745628421x226481125220847400
+ */
