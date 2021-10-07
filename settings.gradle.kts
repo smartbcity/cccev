@@ -24,5 +24,8 @@ include(
 	"cccev-s2:request:request-domain"
 )
 include(
+	"cccev-bubble:cccev-bubble-core",
+)
+include(
 	"proto"
 )

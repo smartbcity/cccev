@@ -1,3 +1,5 @@
+import org.gradle.api.artifacts.Dependency
+
 object PluginVersions {
 	const val kotlin = "1.5.30"
 	const val fixers = "experimental-SNAPSHOT"
@@ -7,6 +9,8 @@ object PluginVersions {
 object Versions {
 	const val s2 = "next-SNAPSHOT"
 	const val f2 = "next-SNAPSHOT"
+
+	const val ktor = "1.6.3"
 
 	const val junit = "5.7.0"
 	const val junitPlateform = "1.8.1"
@@ -23,6 +27,13 @@ object Dependencies {
 			"city.smartb.f2:f2-spring-data-mongodb:${Versions.f2}",
 			"city.smartb.s2:s2-spring-boot-starter-utils-logger:${Versions.s2}"
 		)
+
+		fun ktorClient(scope: Scope) = scope.add(
+			"io.ktor:ktor-client-core:${Versions.ktor}",
+			"io.ktor:ktor-client-cio:${Versions.ktor}",
+			"io.ktor:ktor-client-jackson:${Versions.ktor}"
+		)
+
 		val junit = arrayOf(
 			"org.junit.jupiter:junit-jupiter:${Versions.junit}",
 			"org.junit.jupiter:junit-jupiter-api:${Versions.junit}",
@@ -30,4 +41,12 @@ object Dependencies {
 			"org.assertj:assertj-core:${Versions.assertj}"
 		)
 	}
+}
+
+
+typealias Scope = (dependencyNotation: Any) -> Dependency?
+
+fun Scope.add(vararg deps: String): Scope {
+	deps.forEach { this(it) }
+	return this
 }

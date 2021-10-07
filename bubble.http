@@ -1,0 +1,12 @@
+GET https://impactmate.earth/version-test/api/1.1/obj/Entry
+Authorization: Bearer
+Accept: application/json
+
+###
+GET https://impactmate.earth/version-test/api/1.1/obj/Entry/1633526615552x703979258083541000
+Authorization: Bearer
+Accept: application/json
+
+###
+GET https://impactmate.earth/version-test/api/1.1/obj/SupportedValue
+Authorization: Bearer
