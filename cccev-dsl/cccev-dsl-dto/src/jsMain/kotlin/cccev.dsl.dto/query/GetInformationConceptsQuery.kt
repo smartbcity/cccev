@@ -8,7 +8,7 @@ import ccev.dsl.core.RequirementId
 @JsName("GetInformationConceptsQueryDTO")
 actual external interface GetInformationConceptsQueryDTO {
     actual val requirement: RequirementId
-    actual val requestId: RequestId
+    actual val id: RequestId
 }
 
 @JsExport

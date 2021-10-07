@@ -9,13 +9,13 @@ import f2.dsl.fnc.F2Function
 typealias GetEvidenceTypeListsQueryFunction = F2Function<GetEvidenceTypeListsQuery, GetEvidenceTypeListsQueryResult>
 
 expect interface GetEvidenceTypeListsQueryDTO {
+    val id: RequestId
     val requirement: RequirementId
-    val requestId: RequestId
 }
 
 class GetEvidenceTypeListsQuery(
-    override val requirement: RequirementId,
-    override val requestId: RequestId
+    override val id: RequestId,
+    override val requirement: RequirementId
 ): GetEvidenceTypeListsQueryDTO
 
 expect interface GetEvidenceTypeListsQueryResultDTO {

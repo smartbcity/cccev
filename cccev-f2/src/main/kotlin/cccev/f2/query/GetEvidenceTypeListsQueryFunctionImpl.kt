@@ -34,8 +34,8 @@ class GetEvidenceTypeListsQueryFunctionImpl(
         val requirement = getRequirementQueryFunction.invoke(getRequirementQuery).requirement
             ?: throw NotFoundException("Requirement not found")
 
-        val request = requestRepository.findById(query.requestId).awaitSingleOrNull()
-            ?: requestService.init().invoke(RequestInitCommand(id = query.requestId, frameworkId = query.requirement)).id.let {
+        val request = requestRepository.findById(query.id).awaitSingleOrNull()
+            ?: requestService.init().invoke(RequestInitCommand(id = query.id, frameworkId = query.requirement)).id.let {
                 requestRepository.findById(it).awaitSingle()
             }
 

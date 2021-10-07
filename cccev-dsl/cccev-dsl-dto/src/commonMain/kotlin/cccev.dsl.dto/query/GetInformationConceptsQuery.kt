@@ -8,13 +8,13 @@ import f2.dsl.fnc.F2Function
 typealias GetInformationConceptsQueryFunction = F2Function<GetInformationConceptsQuery, GetInformationConceptsQueryResult>
 
 expect interface GetInformationConceptsQueryDTO {
+    val id: RequestId
     val requirement: RequirementId
-    val requestId: RequestId
 }
 
 class GetInformationConceptsQuery(
-    override val requirement: RequirementId,
-    override val requestId: RequestId
+    override val id: RequestId,
+    override val requirement: RequirementId
 ): GetInformationConceptsQueryDTO
 
 expect interface GetInformationConceptsQueryResultDTO {

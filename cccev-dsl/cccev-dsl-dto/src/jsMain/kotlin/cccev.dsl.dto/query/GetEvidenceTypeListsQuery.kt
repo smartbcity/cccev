@@ -8,7 +8,7 @@ import ccev.dsl.core.RequirementId
 @JsName("GetEvidenceTypeListsQueryDTO")
 actual external interface GetEvidenceTypeListsQueryDTO {
     actual val requirement: RequirementId
-    actual val requestId: RequestId
+    actual val id: RequestId
 }
 
 @JsExport
