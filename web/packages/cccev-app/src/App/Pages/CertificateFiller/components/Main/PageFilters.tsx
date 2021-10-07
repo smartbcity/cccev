@@ -8,12 +8,12 @@ import { FiltersState } from 'store/filters/filters.reducer'
 interface PageFiltersProps {
     filters: FiltersState
     changeFilters: (filters: FiltersState) => void
-    evidenceTypeMap?: Map<string, EvidenceTypeDTO>
+    evidenceTypeMapped?: Map<string, EvidenceTypeDTO>
 }
 
 
 export const PageFilters = (props: PageFiltersProps) => {
-    const { filters, changeFilters, evidenceTypeMap } = props
+    const { filters, changeFilters, evidenceTypeMapped } = props
     const { t } = useTranslation()
 
     const fields = useMemo((): FiltersField[] => [
@@ -34,7 +34,7 @@ export const PageFilters = (props: PageFiltersProps) => {
             type: "select",
             defaultValue: filters.evidence,
             selectProps: {
-                options: getEvidencesOptions(evidenceTypeMap)
+                options: getEvidencesOptions(evidenceTypeMapped)
             }
         }, {
             key: "ccevApp-filters-field-search",
@@ -46,7 +46,7 @@ export const PageFilters = (props: PageFiltersProps) => {
                 style: { width: "180px" }
             }
         }
-    ], [t, evidenceTypeMap])
+    ], [t, evidenceTypeMapped])
 
     const formState = useFilters({
         fields: fields,
@@ -71,10 +71,10 @@ export const PageFilters = (props: PageFiltersProps) => {
     )
 }
 
-const getEvidencesOptions = (evidenceTypeMap?: Map<string, EvidenceTypeDTO>): Option[] => {
+const getEvidencesOptions = (evidenceTypeMapped?: Map<string, EvidenceTypeDTO>): Option[] => {
     const options: Option[] = []
-    if (!evidenceTypeMap) return options
-    evidenceTypeMap.forEach((evidenceType) => {
+    if (!evidenceTypeMapped) return options
+    evidenceTypeMapped.forEach((evidenceType) => {
         if (!!evidenceType.evidence) {
             options.push({
                 key: evidenceType.identifier,

@@ -16,13 +16,12 @@ interface CertificateFillerProps {
     addEvidenceType: (evidenceTypeId?: string | undefined) => void
     fetchEvidenceTypeLists: () => void
     evidenceTypeLists?: EvidenceTypeListDTO[][]
-    evidenceTypeMap?: Map<string, EvidenceTypeDTO>
+    evidenceTypeMapped?: Map<string, EvidenceTypeDTO>
     evidenceTypeListsFetchStatus?: AsyncStatus
 }
 
 export const CertificateFiller = (props: CertificateFillerProps) => {
-    const { filters, changeFilters, changeEvidence, addEvidenceType, setEvidenceTypeAdded, evidenceTypeAdded, fetchEvidenceTypeLists, evidenceTypeLists, evidenceTypeListsFetchStatus, evidenceTypeMap } = props
-
+    const { filters, changeFilters, changeEvidence, addEvidenceType, setEvidenceTypeAdded, evidenceTypeAdded, fetchEvidenceTypeLists, evidenceTypeLists, evidenceTypeListsFetchStatus, evidenceTypeMapped } = props
     useEffect(() => {
         fetchEvidenceTypeLists()
     }, [])
@@ -59,7 +58,7 @@ export const CertificateFiller = (props: CertificateFillerProps) => {
                 >
                     <Header />
                 </Box>
-                <Main evidenceTypeMap={evidenceTypeMap} filters={filters} changeFilters={changeFilters} />
+                <Main evidenceTypeMapped={evidenceTypeMapped} filters={filters} changeFilters={changeFilters} />
             </Box>
             <EvidenceBar
                 addEvidenceType={addEvidenceType}
@@ -68,7 +67,7 @@ export const CertificateFiller = (props: CertificateFillerProps) => {
                 currentEvidence={filters.evidence}
                 changeEvidence={changeEvidence}
                 evidenceTypeLists={evidenceTypeLists}
-                evidenceTypeMap={evidenceTypeMap}
+                evidenceTypeMapped={evidenceTypeMapped}
                 evidenceTypeListsFetchStatus={evidenceTypeListsFetchStatus}
             />
         </>

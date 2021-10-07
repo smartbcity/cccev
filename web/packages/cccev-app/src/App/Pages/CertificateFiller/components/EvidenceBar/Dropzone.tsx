@@ -7,11 +7,11 @@ import { AddEvidencePopUp } from './AddEvidencePopUp'
 interface DropzoneProps {
     evidenceTypeAdded?: string
     setEvidenceTypeAdded: (evidenceTypeId?: string | undefined) => void
-    evidenceTypeMap?: Map<string, EvidenceTypeDTO>
+    evidenceTypeMapped?: Map<string, EvidenceTypeDTO>
 }
 
 export const Dropzone = (props: DropzoneProps) => {
-    const { setEvidenceTypeAdded, evidenceTypeAdded, evidenceTypeMap } = props
+    const { setEvidenceTypeAdded, evidenceTypeAdded, evidenceTypeMapped } = props
 
     const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined)
     const [lastAddedFile, setLastAddedFile] = useState<File | undefined>(undefined)
@@ -92,7 +92,7 @@ export const Dropzone = (props: DropzoneProps) => {
             >
                 <input id="evidenceBar-dropzoneInput" {...getInputProps()} />
             </Box>
-            <AddEvidencePopUp evidenceTypeMap={evidenceTypeMap} errorMessage={errorMessage} open={openPopup} onClose={onClosePopup} onValidate={onValidatePopup} />
+            <AddEvidencePopUp evidenceTypeMapped={evidenceTypeMapped} errorMessage={errorMessage} open={openPopup} onClose={onClosePopup} onValidate={onValidatePopup} />
         </>
     )
 }

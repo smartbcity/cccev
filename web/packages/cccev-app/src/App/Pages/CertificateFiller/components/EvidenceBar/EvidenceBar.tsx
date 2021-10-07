@@ -37,19 +37,19 @@ interface EvidenceBarProps {
     setEvidenceTypeAdded: (evidenceTypeId?: string | undefined) => void
     addEvidenceType: (evidenceTypeId?: string | undefined) => void
     evidenceTypeLists?: EvidenceTypeListDTO[][]
-    evidenceTypeMap?: Map<string, EvidenceTypeDTO>
+    evidenceTypeMapped?: Map<string, EvidenceTypeDTO>
     evidenceTypeListsFetchStatus?: AsyncStatus
 }
 
 export const EvidenceBar = (props: EvidenceBarProps) => {
-    const { currentEvidence, changeEvidence, addEvidenceType, setEvidenceTypeAdded, evidenceTypeAdded, evidenceTypeLists, evidenceTypeListsFetchStatus, evidenceTypeMap } = props
+    const { currentEvidence, changeEvidence, addEvidenceType, setEvidenceTypeAdded, evidenceTypeAdded, evidenceTypeLists, evidenceTypeListsFetchStatus, evidenceTypeMapped } = props
 
     const removeCurrentEvidence = useCallback(
         () => changeEvidence(),
         [changeEvidence],
     )
 
-    if (evidenceTypeListsFetchStatus === "PENDING" || evidenceTypeLists === undefined) {
+    if (evidenceTypeListsFetchStatus !== "SUCCESS" || evidenceTypeLists === undefined) {
         return (
             <EvidenceBarContainer>
                 <EvidenceListLoading />
@@ -60,7 +60,7 @@ export const EvidenceBar = (props: EvidenceBarProps) => {
         return (
             <EvidenceBarContainer>
                 <EvidenceList evidenceTypeLists={evidenceTypeLists} addEvidenceType={addEvidenceType} changeEvidence={changeEvidence} />
-                <Dropzone evidenceTypeMap={evidenceTypeMap} setEvidenceTypeAdded={setEvidenceTypeAdded} evidenceTypeAdded={evidenceTypeAdded} />
+                <Dropzone evidenceTypeMapped={evidenceTypeMapped} setEvidenceTypeAdded={setEvidenceTypeAdded} evidenceTypeAdded={evidenceTypeAdded} />
             </EvidenceBarContainer>
         )
     }

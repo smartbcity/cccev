@@ -40,8 +40,8 @@ export const EvidenceList = (props: EvidenceListProps) => {
     )
 
     
-    const evidenceTypeListsUi = useMemo(() => evidenceTypeLists?.map((el) => (
-        <EvidenceTypeListDisplayer onView={onViewEvidence} onUpload={onUploadEvidence} evidenceTypeLists={el} />
+    const evidenceTypeListsUi = useMemo(() => evidenceTypeLists?.map((el, index) => (
+        <EvidenceTypeListDisplayer key={`evidenceTypeLists-${index}`} onView={onViewEvidence} onUpload={onUploadEvidence} evidenceTypeLists={el} />
     )), [evidenceTypeLists, onUploadEvidence, onViewEvidence])
 
 

@@ -19,7 +19,7 @@ export const Title = () => {
             {t("evidenceList")}
             </Typography>
             <Tooltip helperText={t("certificateFillerPage.evidenceListInfo")}>
-                <Help sx={{ color: theme.colors.info, width: 25, height: 25 }} />
+                <Help sx={{ color: theme.colors.info, width: 25, height: 25, zIndex: 2 }} />
             </Tooltip>
         </Stack>
     )

@@ -10,14 +10,13 @@ interface addEvidencePopUpProps {
     errorMessage?: string
     onClose: () => void
     onValidate: (evidenceTypeId: string) => void
-    evidenceTypeMap?: Map<string, EvidenceTypeDTO>
+    evidenceTypeMapped?: Map<string, EvidenceTypeDTO>
 }
 
 export const AddEvidencePopUp = (props: addEvidencePopUpProps) => {
-    const { open, onClose, onValidate, errorMessage, evidenceTypeMap } = props
+    const { open, onClose, onValidate, errorMessage, evidenceTypeMapped } = props
     const theme = useTheme()
     const [evidenceTypeId, setEvidenceTypeId] = useState<string | undefined>(undefined)
-
     const onValidateMemoized = useCallback(
         () => evidenceTypeId && onValidate(evidenceTypeId),
         [onValidate, evidenceTypeId],
@@ -53,8 +52,8 @@ export const AddEvidencePopUp = (props: addEvidencePopUpProps) => {
 
     const selectOptions = useMemo(() => {
         const options: Option[] = []
-        if (!evidenceTypeMap) return []
-        evidenceTypeMap.forEach((evidenceType, evidenceTypeId) => {
+        if (!evidenceTypeMapped) return []
+        evidenceTypeMapped.forEach((evidenceType, evidenceTypeId) => {
             if (!evidenceType.evidence) {
                 options.push({
                     key: evidenceTypeId,
@@ -63,7 +62,7 @@ export const AddEvidencePopUp = (props: addEvidencePopUpProps) => {
             }
         })
         return options
-    }, [evidenceTypeMap])
+    }, [evidenceTypeMapped])
 
     return (
         <PopUp

@@ -15,11 +15,11 @@ import { MainLoading } from "./MainLoading"
 interface MainProps {
     filters: FiltersState
     changeFilters: (filters: FiltersState) => void
-    evidenceTypeMap?: Map<string, EvidenceTypeDTO>
+    evidenceTypeMapped?: Map<string, EvidenceTypeDTO>
 }
 
 export const Main = (props: MainProps) => {
-    const { filters, changeFilters, evidenceTypeMap } = props
+    const { filters, changeFilters, evidenceTypeMapped } = props
 
     const { t } = useTranslation()
 
@@ -52,7 +52,7 @@ export const Main = (props: MainProps) => {
     )
     return (
         <Box sx={{ padding: "10px 20px", paddingTop: "70px", maxWidth: "1500px", margin: "auto" }}>
-            <PageFilters evidenceTypeMap={evidenceTypeMap} filters={filters} changeFilters={changeFilters} />
+            <PageFilters evidenceTypeMapped={evidenceTypeMapped} filters={filters} changeFilters={changeFilters} />
             <CertificatFillerAccrodion globalFormState={globalFormState} categories={categories} />
             <LanguageSelector />
             <Box sx={{ display: "flex", justifyContent: "center", paddingBottom: "30px" }}>
@@ -63,7 +63,6 @@ export const Main = (props: MainProps) => {
 }
 
 const informationConceptsToCategories = (informationConcepts: InformationConceptDTO[]): Category[] => {
-    console.log(informationConcepts)
     const objCategories: { [key: string]: Category } = {}
     //@ts-ignore
     informationConcepts.forEach((el: (InformationConceptDTO & { category: { id: string, name: string } })) => {
