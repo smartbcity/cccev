@@ -38,8 +38,10 @@ class GetEvidenceTypeListsQueryFunctionImpl(
             ?: requestService.init().invoke(RequestInitCommand(id = query.id, frameworkId = query.requirement)).id.let {
                 requestRepository.findById(it).awaitSingle()
             }
-
-        GetEvidenceTypeListsQueryResult(requirement.evidenceTypeLists(request))
+        val evidences = requirement.evidenceTypeLists(request).distinctBy {
+            it.flatMap { it.specifiesEvidenceType }.joinToString { it.identifier }
+        }
+        GetEvidenceTypeListsQueryResult(evidences)
     }
 
     private fun Requirement.evidenceTypeLists(request: RequestEntity): List<List<EvidenceTypeListDTOBase>> {
