@@ -17,7 +17,7 @@ push-latest: push-latest-cccev-front push-latest-cccev-api
 
 
 package-cccev-api:
-	VERSION=${VERSION} ./gradlew build ${CCCEV_APP_PACKAGE}
+	VERSION=${VERSION} ./gradlew build ${CCCEV_APP_PACKAGE} -x test
 
 push-cccev-api:
 	@docker push ${CCCEV_APP_IMG}

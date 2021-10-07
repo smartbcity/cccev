@@ -34,7 +34,7 @@ export const Header = () => {
                 <Typography
                     variant="h4"
                 >
-                    Certificat pour des luminaires à module led
+                    Déclaration Carbon Copy
                 </Typography>
                 <Typography
                     variant="body1"
@@ -47,7 +47,7 @@ export const Header = () => {
             </Stack>
             <CertificateInformationsBox>
                 <Typography textAlign="end">
-                    {t("createdOn", {creationDate: "06/10/2021"})}
+                    {t("createdOn", {creationDate: "08/10/2021"})}
                 </Typography>
                 <Stack
                     justifyContent="space-around"
