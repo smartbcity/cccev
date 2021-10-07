@@ -8,8 +8,6 @@ import ccev.dsl.core.InformationConceptId
 import ccev.dsl.core.SupportedValue
 import ccev.dsl.core.SupportedValueDTO
 import f2.dsl.fnc.F2Function
-import kotlin.js.JsExport
-import kotlin.js.JsName
 
 /**
  * Add a Supported Value to a request.
@@ -23,8 +21,7 @@ typealias RequestSupportedValueAddCommandFunction = F2Function<RequestSupportedV
  * @D2 command
  * @parent [RequestSupportedValueAddCommandFunction]
  */
-@JsName("RequestSupportedValueAddCommandDTO")
-interface RequestSupportedValueAddCommandDTO: RequestCommand {
+expect interface RequestSupportedValueAddCommandDTO: RequestCommand {
 	/**
 	 * The unique id of the request.
 	 */
@@ -41,8 +38,7 @@ interface RequestSupportedValueAddCommandDTO: RequestCommand {
  * @D2 event
  * @parent [RequestSupportedValueAddCommandFunction]
  */
-@JsName("RequestSupportedValueAddedEventDto")
-interface RequestSupportedValueAddedEventDTO: RequestEvent {
+expect interface RequestSupportedValueAddedEventDTO: RequestEvent {
 	/**
 	 * The unique id of the request.
 	 */
@@ -60,15 +56,11 @@ interface RequestSupportedValueAddedEventDTO: RequestEvent {
 	val providesValueFor: InformationConceptId
 }
 
-@JsExport
-@JsName("RequestSupportedValueAddCommand")
 class RequestSupportedValueAddCommand(
 	override val id: RequestId,
 	override val supportedValue: SupportedValue,
 ): RequestSupportedValueAddCommandDTO
 
-@JsExport
-@JsName("RequestSupportedValueAddedEvent")
 class RequestSupportedValueAddedEvent(
 	override val id: RequestId,
 	override val type: RequestState.Created = RequestState.Created,

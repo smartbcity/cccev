@@ -5,8 +5,6 @@ import cccev.s2.request.domain.RequestEvent
 import cccev.s2.request.domain.RequestState
 import cccev.s2.request.domain.model.RequestId
 import f2.dsl.fnc.F2Function
-import kotlin.js.JsExport
-import kotlin.js.JsName
 
 /**
  * Send to a request.
@@ -20,8 +18,7 @@ typealias RequestSendCommandFunction = F2Function<RequestSendCommand, RequestSen
  * @D2 command
  * @parent [RequestSendCommandFunction]
  */
-@JsName("RequestSendCommandDTO")
-interface RequestSendCommandDTO: RequestCommand {
+expect interface RequestSendCommandDTO: RequestCommand {
 	/**
 	 * The unique id of the request.
 	 */
@@ -33,8 +30,7 @@ interface RequestSendCommandDTO: RequestCommand {
  * @D2 event
  * @parent [RequestSendCommandFunction]
  */
-@JsName("RequestSentEventDto")
-interface RequestSentEventDTO: RequestEvent {
+expect interface RequestSentEventDTO: RequestEvent {
 	/**
 	 * The unique id of the request.
 	 */
@@ -47,14 +43,10 @@ interface RequestSentEventDTO: RequestEvent {
 	override val type: RequestState.Sent
 }
 
-@JsExport
-@JsName("RequestSendCommand")
 class RequestSendCommand(
 	override val id: RequestId,
 ): RequestSendCommandDTO
 
-@JsExport
-@JsName("RequestSentEvent")
 class RequestSentEvent(
 	override val id: RequestId,
 	override val type: RequestState.Sent = RequestState.Sent,

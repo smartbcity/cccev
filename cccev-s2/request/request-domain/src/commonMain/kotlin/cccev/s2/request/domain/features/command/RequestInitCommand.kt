@@ -4,7 +4,6 @@ import cccev.s2.request.domain.model.RequestId
 import ccev.dsl.core.RequirementId
 import f2.dsl.fnc.F2Function
 import s2.dsl.automate.S2InitCommand
-import kotlin.js.JsName
 
 /**
  * Init a request.
@@ -18,8 +17,7 @@ typealias RequestInitCommandFunction = F2Function<RequestInitCommand, RequestIni
  * @D2 command
  * @parent [RequestInitCommandFunction]
  */
-@JsName("RequestInitCommandDTO")
-interface RequestInitCommandDTO: S2InitCommand {
+expect interface RequestInitCommandDTO: S2InitCommand {
 	/**
 	 * The unique id of the request.
 	 */
@@ -36,8 +34,7 @@ interface RequestInitCommandDTO: S2InitCommand {
  * @D2 event
  * @parent [RequestInitCommandFunction]
  */
-@JsName("RequestInitializedEventDTO")
-interface RequestInitializedEventDTO {
+expect interface RequestInitializedEventDTO {
 	/**
 	 * The unique id of the request.
 	 */

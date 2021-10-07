@@ -14,11 +14,7 @@ import s2.dsl.automate.S2Event
 import s2.dsl.automate.S2Role
 import s2.dsl.automate.S2State
 import s2.dsl.automate.builder.s2
-import kotlin.js.JsExport
-import kotlin.js.JsName
 
-@JsExport
-@JsName("s2Request")
 fun s2Request() = S2Request
 
 val S2Request = s2<RequestId, RequestState> {
@@ -72,24 +68,16 @@ val S2Request = s2<RequestId, RequestState> {
 	}
 }
 
-@JsExport
-open class RequestState(override var position: Int) : S2State {
+open class RequestState(override var position: Int): S2State {
 	object Created: RequestState(position = 0)
 	object Sent: RequestState(position = 10)
 	object Signed: RequestState(position = 20)
 	object Audited: RequestState(position = 30)
 }
 
+class EditorRole: S2Role
+class AuditorRole: S2Role
 
-@JsExport
-@JsName("EditorRole")
-class EditorRole : S2Role
+expect interface RequestEvent: S2Event<RequestState, RequestId>
 
-@JsExport
-@JsName("AuditorRole")
-class AuditorRole : S2Role
-
-
-interface RequestEvent : S2Event<RequestState, RequestId>
-
-interface RequestCommand : S2Command<RequestId>
+expect interface RequestCommand: S2Command<RequestId>

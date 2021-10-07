@@ -5,8 +5,6 @@ import cccev.s2.request.domain.RequestEvent
 import cccev.s2.request.domain.RequestState
 import cccev.s2.request.domain.model.RequestId
 import f2.dsl.fnc.F2Function
-import kotlin.js.JsExport
-import kotlin.js.JsName
 
 /**
  * Sign to a request.
@@ -20,8 +18,7 @@ typealias RequestSignCommandFunction = F2Function<RequestSignCommand, RequestSig
  * @D2 command
  * @parent [RequestSignCommandFunction]
  */
-@JsName("RequestSignCommandDTO")
-interface RequestSignCommandDTO: RequestCommand {
+expect interface RequestSignCommandDTO: RequestCommand {
 	/**
 	 * The unique id of the request.
 	 */
@@ -33,8 +30,7 @@ interface RequestSignCommandDTO: RequestCommand {
  * @D2 event
  * @parent [RequestSignCommandFunction]
  */
-@JsName("RequestSignedEventDto")
-interface RequestSignedEventDTO: RequestEvent {
+expect interface RequestSignedEventDTO: RequestEvent {
 	/**
 	 * The unique id of the request.
 	 */
@@ -47,14 +43,10 @@ interface RequestSignedEventDTO: RequestEvent {
 	override val type: RequestState.Signed
 }
 
-@JsExport
-@JsName("RequestSignCommand")
 class RequestSignCommand(
 	override val id: RequestId,
 ): RequestSignCommandDTO
 
-@JsExport
-@JsName("RequestSignedEvent")
 class RequestSignedEvent(
 	override val id: RequestId,
 	override val type: RequestState.Signed = RequestState.Signed,

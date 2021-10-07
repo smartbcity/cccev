@@ -8,8 +8,6 @@ import ccev.dsl.core.Evidence
 import ccev.dsl.core.EvidenceDTO
 import ccev.dsl.core.EvidenceId
 import f2.dsl.fnc.F2Function
-import kotlin.js.JsExport
-import kotlin.js.JsName
 
 /**
  * Add evidence to a request.
@@ -23,8 +21,7 @@ typealias RequestEvidenceAddCommandFunction = F2Function<RequestEvidenceAddComma
  * @D2 command
  * @parent [RequestEvidenceAddCommandFunction]
  */
-@JsName("RequestEvidenceAddCommandDTO")
-interface RequestEvidenceAddCommandDTO: RequestCommand {
+expect interface RequestEvidenceAddCommandDTO: RequestCommand {
 	/**
 	 * The unique id of the request.
 	 */
@@ -41,8 +38,7 @@ interface RequestEvidenceAddCommandDTO: RequestCommand {
  * @D2 event
  * @parent [RequestEvidenceAddCommandFunction]
  */
-@JsName("RequestEvidenceAddedEventDto")
-interface RequestEvidenceAddedEventDTO: RequestEvent {
+expect interface RequestEvidenceAddedEventDTO: RequestEvent {
 	/**
 	 * The unique id of the request.
 	 */
@@ -60,15 +56,11 @@ interface RequestEvidenceAddedEventDTO: RequestEvent {
 	val evidenceId: EvidenceId
 }
 
-@JsExport
-@JsName("RequestEvidenceAddCommand")
 class RequestEvidenceAddCommand(
 	override val id: RequestId,
 	override val evidence: Evidence,
 ): RequestEvidenceAddCommandDTO
 
-@JsExport
-@JsName("RequestEvidenceAddedEvent")
 class RequestEvidenceAddedEvent(
 	override val id: RequestId,
 	override val type: RequestState.Created = RequestState.Created,

@@ -6,8 +6,6 @@ import cccev.s2.request.domain.RequestState
 import cccev.s2.request.domain.model.RequestId
 import ccev.dsl.core.EvidenceId
 import f2.dsl.fnc.F2Function
-import kotlin.js.JsExport
-import kotlin.js.JsName
 
 /**
  * Remove evidence from a request.
@@ -21,8 +19,7 @@ typealias RequestEvidenceRemoveCommandFunction = F2Function<RequestEvidenceRemov
  * @D2 command
  * @parent [RequestEvidenceRemoveCommandFunction]
  */
-@JsName("RequestEvidenceRemoveCommandDTO")
-interface RequestEvidenceRemoveCommandDTO: RequestCommand {
+expect interface RequestEvidenceRemoveCommandDTO: RequestCommand {
 	/**
 	 * The unique id of the request.
 	 */
@@ -39,8 +36,7 @@ interface RequestEvidenceRemoveCommandDTO: RequestCommand {
  * @D2 event
  * @parent [RequestEvidenceRemoveCommandFunction]
  */
-@JsName("RequestEvidenceRemovedEventDto")
-interface RequestEvidenceRemovedEventDTO: RequestEvent {
+expect interface RequestEvidenceRemovedEventDTO: RequestEvent {
 	/**
 	 * The unique id of the request.
 	 */
@@ -58,15 +54,11 @@ interface RequestEvidenceRemovedEventDTO: RequestEvent {
 	val evidenceId: EvidenceId
 }
 
-@JsExport
-@JsName("RequestEvidenceRemoveCommand")
 class RequestEvidenceRemoveCommand(
 	override val id: RequestId,
 	override val evidenceId: EvidenceId,
 ): RequestEvidenceRemoveCommandDTO
 
-@JsExport
-@JsName("RequestEvidenceRemovedEvent")
 class RequestEvidenceRemovedEvent(
 	override val id: RequestId,
 	override val type: RequestState.Created = RequestState.Created,
