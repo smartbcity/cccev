@@ -6,6 +6,7 @@ import ccev.dsl.core.SupportedValue
 
 object Annexe1 {
     object Document: Evidence(
+        identifier = "annexe1Document",
         isConformantTo = listOf(
             Annexe1AvecDetailsEquipementDocument.identifier
         ),
@@ -65,6 +66,7 @@ object Annexe1 {
 
 object EtudePrealable {
     object Document: Evidence(
+        identifier = "etudePrealableDocument",
         isConformantTo = listOf(
             EtudeDimensionnementEclairagePrealableDocument.identifier
         ),
@@ -73,6 +75,7 @@ object EtudePrealable {
 
 object CertificatPro {
     object Document: Evidence(
+        identifier = "certificatProDocument",
         isConformantTo = listOf(
             CertificatCerfa.identifier
         ),

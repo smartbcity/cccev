@@ -1,9 +1,9 @@
 package cccev.s2.request.domain.features.command
 
-import cccev.s2.request.domain.model.RequestId
 import cccev.s2.request.domain.RequestCommand
 import cccev.s2.request.domain.RequestEvent
 import cccev.s2.request.domain.RequestState
+import cccev.s2.request.domain.model.RequestId
 import f2.dsl.fnc.F2Function
 import kotlin.js.JsExport
 import kotlin.js.JsName
@@ -13,15 +13,15 @@ import kotlin.js.JsName
  * @D2 function
  * @parent [cccev.s2.request.domain.RequestAggregate]
  */
-typealias RequestAuditCommandFunction = F2Function<RequestAuditCommandDTO, RequestAuditedEventDTO>
+typealias RequestAuditCommandFunction = F2Function<RequestAuditCommand, RequestAuditedEvent>
 
 /**
- * Command to add an supported Value to a request.
+ * Command to add a supported Value to a request.
  * @D2 command
  * @parent [RequestAuditCommandFunction]
  */
 @JsName("RequestAuditCommandDTO")
-interface RequestAuditCommandDTO : RequestCommand {
+interface RequestAuditCommandDTO: RequestCommand {
 	/**
 	 * The unique id of the request.
 	 */
@@ -29,12 +29,12 @@ interface RequestAuditCommandDTO : RequestCommand {
 }
 
 /**
- * Event sent when an supported Value has been add to a request.
+ * Event sent when a supported Value has been added to a request.
  * @D2 event
  * @parent [RequestAuditCommandFunction]
  */
 @JsName("RequestAuditedEventDto")
-interface RequestAuditedEventDTO : RequestEvent {
+interface RequestAuditedEventDTO: RequestEvent {
 	/**
 	 * The unique id of the request.
 	 */
@@ -42,20 +42,20 @@ interface RequestAuditedEventDTO : RequestEvent {
 
 	/**
 	 * The current state of the request.
-	 * @example "Sent"
+	 * @example "Audited"
 	 */
-	override val type: RequestState.Sent
+	override val type: RequestState.Audited
 }
 
 @JsExport
 @JsName("RequestAuditCommand")
 class RequestAuditCommand(
 	override val id: RequestId,
-) : RequestAuditCommandDTO
+): RequestAuditCommandDTO
 
 @JsExport
 @JsName("RequestAuditedEvent")
 class RequestAuditedEvent(
 	override val id: RequestId,
-	override val type: RequestState.Sent = RequestState.Sent,
-) : RequestAuditedEventDTO
+	override val type: RequestState.Audited = RequestState.Audited,
+): RequestAuditedEventDTO

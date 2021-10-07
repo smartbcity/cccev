@@ -1,16 +1,17 @@
 package cccev.s2.request.domain.features.command
 
 import cccev.s2.request.domain.model.RequestId
-import cccev.s2.request.domain.RequestInitCommand
+import ccev.dsl.core.RequirementId
 import f2.dsl.fnc.F2Function
-import kotlin.js.JsExport
+import s2.dsl.automate.S2InitCommand
 import kotlin.js.JsName
 
 /**
- * @D2 function Init a request
+ * Init a request.
+ * @D2 function
  * @parent [cccev.s2.request.domain.RequestAggregate]
  */
-typealias RequestInitCommandFunction = F2Function<RequestInitCommandDTO, RequestInitializedEventDTO>
+typealias RequestInitCommandFunction = F2Function<RequestInitCommand, RequestInitializedEvent>
 
 /**
  * Command to init a request.
@@ -18,24 +19,36 @@ typealias RequestInitCommandFunction = F2Function<RequestInitCommandDTO, Request
  * @parent [RequestInitCommandFunction]
  */
 @JsName("RequestInitCommandDTO")
-interface RequestInitCommandDTO : RequestInitCommand
+interface RequestInitCommandDTO: S2InitCommand {
+	/**
+	 * The unique id of the request.
+	 */
+	val id: RequestId
+
+	/**
+	 * Identifier of the framework used for the request
+	 */
+	val frameworkId: RequirementId
+}
 
 /**
- * Event sent when an organization has been created.
+ * Event sent when a request has been created.
  * @D2 event
  * @parent [RequestInitCommandFunction]
  */
 @JsName("RequestInitializedEventDTO")
-interface RequestInitializedEventDTO
-
-@JsExport
-@JsName("RequestInitCommand")
-class RequestInitCommand(
+interface RequestInitializedEventDTO {
+	/**
+	 * The unique id of the request.
+	 */
 	val id: RequestId
-) : RequestInitCommandDTO
+}
 
-@JsExport
-@JsName("RequestInitializedEvent")
+class RequestInitCommand(
+	override val id: RequestId,
+	override val frameworkId: RequirementId
+): RequestInitCommandDTO
+
 class RequestInitializedEvent(
-	val id: RequestId,
-) : RequestInitializedEventDTO
+	override val id: RequestId,
+): RequestInitializedEventDTO

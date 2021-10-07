@@ -1,9 +1,9 @@
 package cccev.s2.request.domain.features.command
 
-import cccev.s2.request.domain.model.RequestId
 import cccev.s2.request.domain.RequestCommand
 import cccev.s2.request.domain.RequestEvent
 import cccev.s2.request.domain.RequestState
+import cccev.s2.request.domain.model.RequestId
 import f2.dsl.fnc.F2Function
 import kotlin.js.JsExport
 import kotlin.js.JsName
@@ -13,15 +13,15 @@ import kotlin.js.JsName
  * @D2 function
  * @parent [cccev.s2.request.domain.RequestAggregate]
  */
-typealias RequestRefuseCommandFunction = F2Function<RequestRefuseCommandDTO, RequestRefusedEventDTO>
+typealias RequestRefuseCommandFunction = F2Function<RequestRefuseCommand, RequestRefusedEvent>
 
 /**
- * Command to add an supported Value to a request.
+ * Command to add a supported Value to a request.
  * @D2 command
  * @parent [RequestRefuseCommandFunction]
  */
 @JsName("RequestRefuseCommandDTO")
-interface RequestRefuseCommandDTO : RequestCommand {
+interface RequestRefuseCommandDTO: RequestCommand {
 	/**
 	 * The unique id of the request.
 	 */
@@ -34,7 +34,7 @@ interface RequestRefuseCommandDTO : RequestCommand {
  * @parent [RequestRefuseCommandFunction]
  */
 @JsName("RequestRefusedEventDto")
-interface RequestRefusedEventDTO : RequestEvent {
+interface RequestRefusedEventDTO: RequestEvent {
 	/**
 	 * The unique id of the request.
 	 */
@@ -42,20 +42,20 @@ interface RequestRefusedEventDTO : RequestEvent {
 
 	/**
 	 * The current state of the request.
-	 * @example "Sent"
+	 * @example "Created"
 	 */
-	override val type: RequestState.Sent
+	override val type: RequestState.Created
 }
 
 @JsExport
 @JsName("RequestRefuseCommand")
 class RequestRefuseCommand(
 	override val id: RequestId,
-) : RequestRefuseCommandDTO
+): RequestRefuseCommandDTO
 
 @JsExport
 @JsName("RequestRefusedEvent")
 class RequestRefusedEvent(
 	override val id: RequestId,
-	override val type: RequestState.Sent = RequestState.Sent,
-) : RequestRefusedEventDTO
+	override val type: RequestState.Created = RequestState.Created,
+): RequestRefusedEventDTO

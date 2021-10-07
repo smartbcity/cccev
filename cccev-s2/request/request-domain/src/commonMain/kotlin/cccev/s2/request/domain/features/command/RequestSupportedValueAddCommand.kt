@@ -1,19 +1,22 @@
 package cccev.s2.request.domain.features.command
 
-import cccev.s2.request.domain.model.RequestId
 import cccev.s2.request.domain.RequestCommand
 import cccev.s2.request.domain.RequestEvent
 import cccev.s2.request.domain.RequestState
+import cccev.s2.request.domain.model.RequestId
+import ccev.dsl.core.InformationConceptId
+import ccev.dsl.core.SupportedValue
+import ccev.dsl.core.SupportedValueDTO
 import f2.dsl.fnc.F2Function
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
 /**
- * Add supported Value to a request.
+ * Add a Supported Value to a request.
  * @D2 function
  * @parent [cccev.s2.request.domain.RequestAggregate]
  */
-typealias RequestSupportedValueAddCommandFunction = F2Function<RequestSupportedValueAddCommandDTO, RequestSupportedValueAddedEventDTO>
+typealias RequestSupportedValueAddCommandFunction = F2Function<RequestSupportedValueAddCommand, RequestSupportedValueAddedEvent>
 
 /**
  * Command to add an supported Value to a request.
@@ -21,11 +24,16 @@ typealias RequestSupportedValueAddCommandFunction = F2Function<RequestSupportedV
  * @parent [RequestSupportedValueAddCommandFunction]
  */
 @JsName("RequestSupportedValueAddCommandDTO")
-interface RequestSupportedValueAddCommandDTO : RequestCommand {
+interface RequestSupportedValueAddCommandDTO: RequestCommand {
 	/**
 	 * The unique id of the request.
 	 */
 	override val id: RequestId
+
+	/**
+	 * The supported value to add.
+	 */
+	val supportedValue: SupportedValueDTO
 }
 
 /**
@@ -34,7 +42,7 @@ interface RequestSupportedValueAddCommandDTO : RequestCommand {
  * @parent [RequestSupportedValueAddCommandFunction]
  */
 @JsName("RequestSupportedValueAddedEventDto")
-interface RequestSupportedValueAddedEventDTO : RequestEvent {
+interface RequestSupportedValueAddedEventDTO: RequestEvent {
 	/**
 	 * The unique id of the request.
 	 */
@@ -45,17 +53,24 @@ interface RequestSupportedValueAddedEventDTO : RequestEvent {
 	 * @example "Created"
 	 */
 	override val type: RequestState.Created
+
+	/**
+	 * Identifier of the information concept for which the newly added supported value provides a value.
+	 */
+	val providesValueFor: InformationConceptId
 }
 
 @JsExport
 @JsName("RequestSupportedValueAddCommand")
 class RequestSupportedValueAddCommand(
 	override val id: RequestId,
-) : RequestSupportedValueAddCommandDTO
+	override val supportedValue: SupportedValue,
+): RequestSupportedValueAddCommandDTO
 
 @JsExport
 @JsName("RequestSupportedValueAddedEvent")
 class RequestSupportedValueAddedEvent(
 	override val id: RequestId,
 	override val type: RequestState.Created = RequestState.Created,
-) : RequestSupportedValueAddedEventDTO
+	override val providesValueFor: InformationConceptId,
+): RequestSupportedValueAddedEventDTO

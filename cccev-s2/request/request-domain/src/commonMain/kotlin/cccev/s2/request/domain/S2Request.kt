@@ -2,18 +2,20 @@ package cccev.s2.request.domain
 
 import cccev.s2.request.domain.features.command.RequestAuditCommand
 import cccev.s2.request.domain.features.command.RequestEvidenceAddCommand
+import cccev.s2.request.domain.features.command.RequestEvidenceRemoveCommand
+import cccev.s2.request.domain.features.command.RequestInitCommand
+import cccev.s2.request.domain.features.command.RequestRefuseCommand
 import cccev.s2.request.domain.features.command.RequestSendCommand
 import cccev.s2.request.domain.features.command.RequestSignCommand
 import cccev.s2.request.domain.features.command.RequestSupportedValueAddCommand
 import cccev.s2.request.domain.model.RequestId
-import kotlin.js.JsExport
-import kotlin.js.JsName
 import s2.dsl.automate.S2Command
 import s2.dsl.automate.S2Event
-import s2.dsl.automate.S2InitCommand
 import s2.dsl.automate.S2Role
 import s2.dsl.automate.S2State
 import s2.dsl.automate.builder.s2
+import kotlin.js.JsExport
+import kotlin.js.JsName
 
 @JsExport
 @JsName("s2Request")
@@ -31,6 +33,12 @@ val S2Request = s2<RequestId, RequestState> {
 		to = RequestState.Created
 		role = EditorRole()
 		cmd = RequestEvidenceAddCommand::class
+	}
+	transaction<RequestEvidenceRemoveCommand> {
+		from = RequestState.Created
+		to = RequestState.Created
+		role = EditorRole()
+		cmd = RequestEvidenceRemoveCommand::class
 	}
 	transaction<RequestSupportedValueAddCommand> {
 		from = RequestState.Created
@@ -56,15 +64,20 @@ val S2Request = s2<RequestId, RequestState> {
 		role = EditorRole()
 		cmd = RequestAuditCommand::class
 	}
+	transaction<RequestRefuseCommand> {
+		from = RequestState.Signed
+		to = RequestState.Created
+		role = EditorRole()
+		cmd = RequestRefuseCommand::class
+	}
 }
 
-@Suppress("MagicNumber")
 @JsExport
 open class RequestState(override var position: Int) : S2State {
-	object Created : RequestState(0)
-	object Sent : RequestState(10)
-	object Signed : RequestState(20)
-	object Audited : RequestState(30)
+	object Created: RequestState(position = 0)
+	object Sent: RequestState(position = 10)
+	object Signed: RequestState(position = 20)
+	object Audited: RequestState(position = 30)
 }
 
 
@@ -78,7 +91,5 @@ class AuditorRole : S2Role
 
 
 interface RequestEvent : S2Event<RequestState, RequestId>
-
-interface RequestInitCommand : S2InitCommand
 
 interface RequestCommand : S2Command<RequestId>

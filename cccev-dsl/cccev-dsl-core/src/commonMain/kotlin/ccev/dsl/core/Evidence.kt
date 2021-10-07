@@ -2,9 +2,9 @@ package ccev.dsl.core
 
 typealias EvidenceId = String
 typealias SupportedValueId = String
-typealias InformationConceptId = String
 
 expect interface EvidenceDTO {
+    val identifier: EvidenceId
     val isConformantTo: List<EvidenceTypeId>
     val supportsValue: List<SupportedValueId>
     val supportsConcept: List<InformationConceptId>
@@ -14,13 +14,14 @@ expect interface EvidenceDTO {
 }
 
 open class Evidence(
-    val isConformantTo: List<EvidenceTypeId>,
-    val supportsValue: List<SupportedValueId> = emptyList(),
-    val supportsConcept: List<InformationConceptId> = emptyList(),
-    val supportsRequirement: List<RequirementId> = emptyList(),
-    val validityPeriod: PeriodOfTime? = null,
-    val file: String? = null
-)
+    override val identifier: EvidenceId,
+    override val isConformantTo: List<EvidenceTypeId>,
+    override val supportsValue: List<SupportedValueId> = emptyList(),
+    override val supportsConcept: List<InformationConceptId> = emptyList(),
+    override val supportsRequirement: List<RequirementId> = emptyList(),
+    override val validityPeriod: PeriodOfTime? = null,
+    override val file: String? = null
+): EvidenceDTO
 
 
 

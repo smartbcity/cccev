@@ -1,9 +1,9 @@
 package cccev.s2.request.domain.features.command
 
-import cccev.s2.request.domain.model.RequestId
 import cccev.s2.request.domain.RequestCommand
 import cccev.s2.request.domain.RequestEvent
 import cccev.s2.request.domain.RequestState
+import cccev.s2.request.domain.model.RequestId
 import f2.dsl.fnc.F2Function
 import kotlin.js.JsExport
 import kotlin.js.JsName
@@ -13,7 +13,7 @@ import kotlin.js.JsName
  * @D2 function
  * @parent [cccev.s2.request.domain.RequestAggregate]
  */
-typealias RequestSignCommandFunction = F2Function<RequestSignCommandDTO, RequestSignedEventDTO>
+typealias RequestSignCommandFunction = F2Function<RequestSignCommand, RequestSignedEvent>
 
 /**
  * Command to add an supported Value to a request.
@@ -21,7 +21,7 @@ typealias RequestSignCommandFunction = F2Function<RequestSignCommandDTO, Request
  * @parent [RequestSignCommandFunction]
  */
 @JsName("RequestSignCommandDTO")
-interface RequestSignCommandDTO : RequestCommand {
+interface RequestSignCommandDTO: RequestCommand {
 	/**
 	 * The unique id of the request.
 	 */
@@ -34,7 +34,7 @@ interface RequestSignCommandDTO : RequestCommand {
  * @parent [RequestSignCommandFunction]
  */
 @JsName("RequestSignedEventDto")
-interface RequestSignedEventDTO : RequestEvent {
+interface RequestSignedEventDTO: RequestEvent {
 	/**
 	 * The unique id of the request.
 	 */
@@ -42,7 +42,7 @@ interface RequestSignedEventDTO : RequestEvent {
 
 	/**
 	 * The current state of the request.
-	 * @example "Created"
+	 * @example "Signed"
 	 */
 	override val type: RequestState.Signed
 }
@@ -51,11 +51,11 @@ interface RequestSignedEventDTO : RequestEvent {
 @JsName("RequestSignCommand")
 class RequestSignCommand(
 	override val id: RequestId,
-) : RequestSignCommandDTO
+): RequestSignCommandDTO
 
 @JsExport
 @JsName("RequestSignedEvent")
 class RequestSignedEvent(
 	override val id: RequestId,
 	override val type: RequestState.Signed = RequestState.Signed,
-) : RequestSignedEventDTO
+): RequestSignedEventDTO

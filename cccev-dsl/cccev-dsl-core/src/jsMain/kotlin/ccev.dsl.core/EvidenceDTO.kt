@@ -3,6 +3,7 @@ package ccev.dsl.core
 @JsExport
 @JsName("EvidenceDTO")
 actual external interface EvidenceDTO {
+    actual val identifier: EvidenceId
     actual val isConformantTo: List<EvidenceTypeId>
     actual val supportsValue: List<SupportedValueId>
     actual val supportsConcept: List<InformationConceptId>

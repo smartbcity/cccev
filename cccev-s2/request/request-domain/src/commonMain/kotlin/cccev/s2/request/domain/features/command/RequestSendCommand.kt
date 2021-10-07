@@ -1,9 +1,9 @@
 package cccev.s2.request.domain.features.command
 
-import cccev.s2.request.domain.model.RequestId
 import cccev.s2.request.domain.RequestCommand
 import cccev.s2.request.domain.RequestEvent
 import cccev.s2.request.domain.RequestState
+import cccev.s2.request.domain.model.RequestId
 import f2.dsl.fnc.F2Function
 import kotlin.js.JsExport
 import kotlin.js.JsName
@@ -13,7 +13,7 @@ import kotlin.js.JsName
  * @D2 function
  * @parent [cccev.s2.request.domain.RequestAggregate]
  */
-typealias RequestSendCommandFunction = F2Function<RequestSendCommandDTO, RequestSendedEventDTO>
+typealias RequestSendCommandFunction = F2Function<RequestSendCommand, RequestSentEvent>
 
 /**
  * Command to add an supported Value to a request.
@@ -21,7 +21,7 @@ typealias RequestSendCommandFunction = F2Function<RequestSendCommandDTO, Request
  * @parent [RequestSendCommandFunction]
  */
 @JsName("RequestSendCommandDTO")
-interface RequestSendCommandDTO : RequestCommand {
+interface RequestSendCommandDTO: RequestCommand {
 	/**
 	 * The unique id of the request.
 	 */
@@ -33,8 +33,8 @@ interface RequestSendCommandDTO : RequestCommand {
  * @D2 event
  * @parent [RequestSendCommandFunction]
  */
-@JsName("RequestSendedEventDto")
-interface RequestSendedEventDTO : RequestEvent {
+@JsName("RequestSentEventDto")
+interface RequestSentEventDTO: RequestEvent {
 	/**
 	 * The unique id of the request.
 	 */
@@ -51,11 +51,11 @@ interface RequestSendedEventDTO : RequestEvent {
 @JsName("RequestSendCommand")
 class RequestSendCommand(
 	override val id: RequestId,
-) : RequestSendCommandDTO
+): RequestSendCommandDTO
 
 @JsExport
-@JsName("RequestSendedEvent")
-class RequestSendedEvent(
+@JsName("RequestSentEvent")
+class RequestSentEvent(
 	override val id: RequestId,
 	override val type: RequestState.Sent = RequestState.Sent,
-) : RequestSendedEventDTO
+): RequestSentEventDTO

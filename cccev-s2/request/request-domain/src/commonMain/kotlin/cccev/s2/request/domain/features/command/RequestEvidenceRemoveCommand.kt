@@ -4,45 +4,43 @@ import cccev.s2.request.domain.RequestCommand
 import cccev.s2.request.domain.RequestEvent
 import cccev.s2.request.domain.RequestState
 import cccev.s2.request.domain.model.RequestId
-import ccev.dsl.core.Evidence
-import ccev.dsl.core.EvidenceDTO
 import ccev.dsl.core.EvidenceId
 import f2.dsl.fnc.F2Function
 import kotlin.js.JsExport
 import kotlin.js.JsName
 
 /**
- * Add evidence to a request.
+ * Remove evidence from a request.
  * @D2 function
  * @parent [cccev.s2.request.domain.RequestAggregate]
  */
-typealias RequestEvidenceAddCommandFunction = F2Function<RequestEvidenceAddCommand, RequestEvidenceAddedEvent>
+typealias RequestEvidenceRemoveCommandFunction = F2Function<RequestEvidenceRemoveCommand, RequestEvidenceRemovedEvent>
 
 /**
- * Command to add an evidence to a request.
+ * Command to remove an evidence from a request.
  * @D2 command
- * @parent [RequestEvidenceAddCommandFunction]
+ * @parent [RequestEvidenceRemoveCommandFunction]
  */
-@JsName("RequestEvidenceAddCommandDTO")
-interface RequestEvidenceAddCommandDTO: RequestCommand {
+@JsName("RequestEvidenceRemoveCommandDTO")
+interface RequestEvidenceRemoveCommandDTO: RequestCommand {
 	/**
 	 * The unique id of the request.
 	 */
 	override val id: RequestId
 
 	/**
-	 * The evidence to add.
+	 * Identifier of the evidence to remove.
 	 */
-	val evidence: EvidenceDTO
+	val evidenceId: EvidenceId
 }
 
 /**
  * Event sent when an evidence has been added to a request.
  * @D2 event
- * @parent [RequestEvidenceAddCommandFunction]
+ * @parent [RequestEvidenceRemoveCommandFunction]
  */
-@JsName("RequestEvidenceAddedEventDto")
-interface RequestEvidenceAddedEventDTO: RequestEvent {
+@JsName("RequestEvidenceRemovedEventDto")
+interface RequestEvidenceRemovedEventDTO: RequestEvent {
 	/**
 	 * The unique id of the request.
 	 */
@@ -55,22 +53,22 @@ interface RequestEvidenceAddedEventDTO: RequestEvent {
 	override val type: RequestState.Created
 
 	/**
-	 * Identifier of the newly added evidence.
+	 * Identifier of the removed evidence.
 	 */
 	val evidenceId: EvidenceId
 }
 
 @JsExport
-@JsName("RequestEvidenceAddCommand")
-class RequestEvidenceAddCommand(
+@JsName("RequestEvidenceRemoveCommand")
+class RequestEvidenceRemoveCommand(
 	override val id: RequestId,
-	override val evidence: Evidence,
-): RequestEvidenceAddCommandDTO
+	override val evidenceId: EvidenceId,
+): RequestEvidenceRemoveCommandDTO
 
 @JsExport
-@JsName("RequestEvidenceAddedEvent")
-class RequestEvidenceAddedEvent(
+@JsName("RequestEvidenceRemovedEvent")
+class RequestEvidenceRemovedEvent(
 	override val id: RequestId,
 	override val type: RequestState.Created = RequestState.Created,
 	override val evidenceId: EvidenceId,
-): RequestEvidenceAddedEventDTO
+): RequestEvidenceRemovedEventDTO
