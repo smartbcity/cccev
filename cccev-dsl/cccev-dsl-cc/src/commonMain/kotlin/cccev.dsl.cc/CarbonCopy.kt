@@ -3,7 +3,7 @@ package cccev.dsl.cc
 import ccev.dsl.core.criterion
 
 val CarbonCopy = criterion {
-    identifier = "carbonCopy"
+    identifier = "carboncopy"
     name = "Carbon Copy"
     type = CC
     +ScopeInfo
