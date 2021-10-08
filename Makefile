@@ -11,7 +11,7 @@ CCCEV_APP_PACKAGE	   	:= :api-gateway:bootBuildImage
 
 package: package-cccev-front package-cccev-api
 
-push: push-cccev-api
+push: push-cccev-front push-cccev-api
 
 push-latest: push-latest-cccev-front push-latest-cccev-api
 

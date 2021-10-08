@@ -1,12 +1,15 @@
 package cccev.bubble.core
 
-sealed interface ObjType
+sealed interface ObjType {
+	@Suppress("VariableNaming")
+	var _id: EntryId?
+}
 
 typealias EntryId = String
 
 @Suppress("ConstructorParameterNaming")
 data class Entry(
-	val _id: EntryId?,
+	override var _id: EntryId? = null,
 	val suportedValues: String? = null,
 	val refDateTo: String? = null,
 	val refDateFrom: String? = null,
@@ -22,20 +25,20 @@ data class Entry(
 
 @Suppress("ConstructorParameterNaming")
 data class Request(
-//	val _id: String?,
+	override var _id: EntryId? = null,
 	val organizationRequesting: String? = null,
 	val requestedEmail: String? = null,
 	val status: String = "Request sent",
 	val registry: String?,
 	var entry: String?
-)
+): ObjType
 
 typealias SupportedValueId = String
 typealias RequirementId = String
 
 @Suppress("ConstructorParameterNaming")
 data class SupportedValue(
-	val _id: SupportedValueId?,
+	override var _id: SupportedValueId?,
 	/**
 	 * The unique id of the entry.
 	 * @example "1633526615552x703979258083541000"

@@ -68,10 +68,11 @@ class KtorRepository(
 		}
 	}
 
-	suspend inline fun <reified T: Any> updateObject(
+	suspend inline fun <reified T: ObjType> updateObject(
 		id: String,
 		obj: T,
 	): Any {
+		obj._id = null
 		return client(bearerToken).patch(baseUrl("${T::class.simpleName!!}/$id")) {
 			contentType(ContentType.Application.Json)
 			body = obj

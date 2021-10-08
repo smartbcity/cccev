@@ -13,17 +13,7 @@ internal class KtorRepositoryTest {
 
 	@Test
 	fun getList() = runBlocking{
-		val list = ktorRepository.getList<SupportedValue>()
-
-		list.response.results.forEach {
-			println(it)
-//			val getOne = ktorRepository.getOne<SupportedValue>(it._id!!)
-//			println(getOne)
-		}
-	}
-	@Test
-	fun getEntries() = runBlocking {
-		val list = ktorRepository.getList<Entry>()
+		val list = ktorRepository.getList<Request>()
 
 		list.response.results.forEach {
 			println(it)
@@ -51,7 +41,8 @@ internal class KtorRepositoryTest {
 
 	@Test
 	fun getRequest(): Unit = runBlocking {
-		val request = ktorRepository.getOne<Request>("1633610619203x148433928885895170", "Request").response
+		val request = ktorRepository.getOne<Request>("1633678038538x673914045626318800", "Request").response
+		ktorRepository.updateObject(request._id!!, request)
 		println(request)
 	}
 
