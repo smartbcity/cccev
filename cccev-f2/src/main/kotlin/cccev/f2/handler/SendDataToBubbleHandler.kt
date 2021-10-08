@@ -5,6 +5,7 @@ import cccev.bubble.core.KtorRepository
 import cccev.bubble.core.Request
 import cccev.dsl.cc.AllocatedEmissions
 import cccev.dsl.cc.CarbonCopy
+import cccev.dsl.cc.Equity
 import cccev.dsl.cc.ScopeTotal
 import cccev.dsl.dto.model.EvidenceTypeListDTOBase
 import cccev.dsl.dto.query.GetEvidenceTypeListsQuery
@@ -55,7 +56,7 @@ class SendDataToBubbleHandler(
 
 			val value = when (requestEntity.frameworkId) {
 				CarbonCopy.identifier -> informationConcepts.firstOrNull { it.identifier == ScopeTotal.identifier }
-				CarbonCopy.identifier -> informationConcepts.firstOrNull { it.identifier == AllocatedEmissions.identifier }
+				Equity.identifier -> informationConcepts.firstOrNull { it.identifier == AllocatedEmissions.identifier }
 				else -> null
 			}?.supportedValue?.value
 
