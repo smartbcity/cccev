@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import reportWebVitals from "reportWebVitals";
 import { AppProvider } from "@smartb/g2-providers";
-import { languages } from "i18n";
+import { Languages, languages } from "i18n";
 import { history, store } from "store";
 import { ThemeContextProvider } from "@smartb/g2-themes";
 import { LoadingComponent } from "components";
@@ -13,7 +13,7 @@ import { InitApp } from "./InitApp";
 ReactDOM.render(
   <React.StrictMode>
     <ThemeContextProvider theme={theme} customMuiTheme={muiTheme}>
-      <AppProvider
+      <AppProvider<Languages>
         languages={languages}
         reduxStore={store}
         history={history}

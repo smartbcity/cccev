@@ -18,7 +18,7 @@
   "peerDependencies": {
     "react": "^17.0.1",
     "react-i18next": "^11.8.7",
-    "@smartb/g2": "^1.0.0-alpha.6",
+    "@smartb/g2": "^1.0.0-alpha.7",
     "react-router-dom": "^5.2.0"
   },
   "dependencies": {

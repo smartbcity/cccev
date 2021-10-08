@@ -22,7 +22,7 @@
     "@material-ui/core": "^4.12.3",
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
-    "@smartb/g2": "^1.0.0-alpha.6",
+    "@smartb/g2": "^1.0.0-alpha.7",
     "utils": "^1.0.0",
     "components": "^1.0.0",
     "datahub": "^1.0.0",

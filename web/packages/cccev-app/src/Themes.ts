@@ -67,10 +67,6 @@ export const muiTheme: ThemeOptions = {
     button: {
       fontFamily: "roboto",
       fontWeight: 500,
-    },
-    allVariants: {
-      fontFamily: "roboto",
-      fontWeight: 500
     }
   }
 };

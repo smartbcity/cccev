@@ -1,7 +1,7 @@
 import { Box } from "@mui/material"
 import { PageFilters } from "./PageFilters"
 import { CertificatFillerAccrodion, Category, CcevFormField } from "components"
-import { useCallback, useEffect, useMemo } from "react"
+import { useCallback, useMemo } from "react"
 import { LanguageSelector } from "./LanguageSelector"
 import { FiltersState } from "store/filters/filters.reducer"
 import { objToArray } from "utils"
@@ -9,7 +9,7 @@ import { FormPartialField, useFormWithPartialFields } from "@smartb/g2-forms"
 import { Button } from "@smartb/g2-components"
 import { useTranslation } from "react-i18next"
 import { useAsyncResponse } from "utils"
-import { EvidenceTypeDTO, getInformationConcepts, InformationConceptDTO, requestSupportedValueAddCommand, SupportedValueDTO } from "datahub"
+import { EvidenceTypeDTO, getInformationConcepts, InformationConceptDTO, requestSupportedValueAddCommand, SupportedValueDTO, requestSendToBubbleCommand } from "datahub"
 import { MainLoading } from "./MainLoading"
 
 interface MainProps {
@@ -37,10 +37,8 @@ export const Main = (props: MainProps) => {
         :
         [], [informationConcepts.result])
 
-    console.log(partialFields)
-
     const onSubmit = useCallback(
-        (values: any) => {
+        async (values: any) => {
             if (informationConcepts.result) {
                 const supportedValues = informationConcepts.result.informationConcepts.map((info): SupportedValueDTO => ({
                     identifier: info.supportedValue.identifier,
@@ -48,7 +46,8 @@ export const Main = (props: MainProps) => {
                     value: info.unit.type === "date" ? values[info.identifier].getTime() : info.unit.type === "string" ? values[info.identifier] : values[info.identifier].toString(),
                     query: undefined
                 }))
-                requestSupportedValueAddCommand(supportedValues)
+                await requestSupportedValueAddCommand(supportedValues)
+                await requestSendToBubbleCommand()
             }
         },
         [informationConcepts.result],
@@ -56,19 +55,11 @@ export const Main = (props: MainProps) => {
 
     const globalFormState = useFormWithPartialFields({
         partialfFields: partialFields,
-        onSubmit: onSubmit
-    })
-
-    useEffect(() => {
-        if (informationConcepts.status === "SUCCESS" && informationConcepts.result !== undefined) {
-            informationConcepts.result.informationConcepts.forEach((info) => {
-                const value = getDefaultValue(info.unit.type, info.supportedValue.value)
-                if (value) {
-                    globalFormState.setFieldValue(info.identifier, value)
-                }
-            })
+        onSubmit: onSubmit,
+        formikConfig: {
+            enableReinitialize: true
         }
-    }, [globalFormState.setFieldValue, informationConcepts.status, informationConcepts.result])
+    })
 
     const categories = useMemo(() => informationConcepts.result && evidenceTypeMapped ? informationConceptsToCategories(informationConcepts.result.informationConcepts, evidenceTypeMapped) : [], [informationConcepts.result, evidenceTypeMapped])
 

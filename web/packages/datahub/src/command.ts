@@ -56,3 +56,16 @@ export const requestSupportedValueAddCommand = async (supportedValues: Supported
     })
 }
 
+interface RequestSendCommandDTO extends cccev.s2.request.domain.features.command.RequestSendCommandDTO { }
+interface RequestSentEventDTO extends cccev.s2.request.domain.features.command.RequestSentEventDto { }
+
+export const requestSendToBubbleCommand = async () => {
+    //@ts-ignore
+    const request = window._env_.request
+    return (await certificatRequest<RequestSentEventDTO[]>({
+        url: "/send",
+        body: JSON.stringify({
+            id: request,
+        } as RequestSendCommandDTO)
+    }))[0]
+}

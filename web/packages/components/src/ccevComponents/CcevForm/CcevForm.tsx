@@ -14,7 +14,7 @@ const FormStyled = styled(Form)({
     "& .AruiForm-field": {
         margin: 0
     },
-    "& .AruiTextfield-Textfield": {
+    "& .MuiFormControl-root": {
         width: "300px"
     },
     "& .MuiInputLabel-root": {
