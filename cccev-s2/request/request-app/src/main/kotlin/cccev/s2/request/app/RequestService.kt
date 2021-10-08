@@ -24,6 +24,7 @@ class RequestService(
 	@Bean
 	override fun init(): RequestInitCommandFunction = f2Function { cmd ->
 		aggregate.createWithEvent(cmd, { RequestInitializedEvent(id = id) }) {
+			println("Request [${cmd.id}]: init")
 			RequestEntity(
 				id = cmd.id,
 				status = RequestState.Created,
@@ -36,6 +37,7 @@ class RequestService(
 
 	@Bean
 	override fun addEvidence(): RequestEvidenceAddCommandFunction = f2Function { cmd ->
+		println("Request [${cmd.id}]: addEvidence")
 		aggregate.doTransition(cmd) {
 			this to addEvidence(cmd.evidence)
 		}
@@ -43,6 +45,7 @@ class RequestService(
 
 	@Bean
 	override fun removeEvidence(): RequestEvidenceRemoveCommandFunction = f2Function { cmd ->
+		println("Request [${cmd.id}]: removeEvidence")
 		aggregate.doTransition(cmd) {
 			this to removeEvidence(cmd.evidenceTypeId)
 		}
@@ -50,6 +53,7 @@ class RequestService(
 
 	@Bean
 	override fun addSupportedValue(): RequestSupportedValueAddCommandFunction = f2Function { cmd ->
+		println("Request [${cmd.id}]: addSupportedValue")
 		aggregate.doTransition(cmd) {
 			this to addSupportedValue(cmd.supportedValue)
 		}
@@ -57,6 +61,7 @@ class RequestService(
 
 	@Bean
 	override fun send(): RequestSendCommandFunction = f2Function { cmd ->
+		println("Request [${cmd.id}]: send")
 		aggregate.doTransition(cmd) {
 
 			this to send()
@@ -65,6 +70,7 @@ class RequestService(
 
 	@Bean
 	override fun sign(): RequestSignCommandFunction = f2Function { cmd ->
+		println("Request [${cmd.id}]: sign")
 		aggregate.doTransition(cmd) {
 			this to sign()
 		}
@@ -72,6 +78,7 @@ class RequestService(
 
 	@Bean
 	override fun audit(): RequestAuditCommandFunction = f2Function { cmd ->
+		println("Request [${cmd.id}]: audit")
 		aggregate.doTransition(cmd) {
 			this to audit()
 		}
@@ -79,6 +86,7 @@ class RequestService(
 
 	@Bean
 	override fun refuse(): RequestRefuseCommandFunction = f2Function { cmd ->
+		println("Request [${cmd.id}]: refuse")
 		aggregate.doTransition(cmd) {
 			this to refuse()
 		}

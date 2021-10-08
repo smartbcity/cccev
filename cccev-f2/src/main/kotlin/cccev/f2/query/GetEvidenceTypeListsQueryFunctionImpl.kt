@@ -18,9 +18,9 @@ import ccev.dsl.core.Requirement
 import f2.dsl.fnc.f2Function
 import f2.dsl.fnc.invoke
 import kotlinx.coroutines.reactor.awaitSingle
-import kotlinx.coroutines.reactor.awaitSingleOrNull
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.dao.DuplicateKeyException
 
 @Configuration
 class GetEvidenceTypeListsQueryFunctionImpl(
@@ -30,14 +30,20 @@ class GetEvidenceTypeListsQueryFunctionImpl(
 ) {
     @Bean
     fun getEvidenceTypeListsQueryFunction(): GetEvidenceTypeListsQueryFunction = f2Function { query ->
+        println("Request [${query.id}]: GetEvidenceTypeLists")
         val getRequirementQuery = GetRequirementQuery(query.requirement)
         val requirement = getRequirementQueryFunction.invoke(getRequirementQuery).requirement
             ?: throw NotFoundException("Requirement not found")
 
-        val request = requestRepository.findById(query.id).awaitSingleOrNull()
-            ?: requestService.init().invoke(RequestInitCommand(id = query.id, frameworkId = query.requirement)).id.let {
-                requestRepository.findById(it).awaitSingle()
-            }
+        try {
+            val requestId = requestService.init().invoke(RequestInitCommand(id = query.id, frameworkId = query.requirement)).id
+            println("Request [$requestId]")
+        } catch (e: DuplicateKeyException) {
+            println("Request exists")
+        }
+
+        val request = requestRepository.findById(query.id).awaitSingle()
+
         val evidences = requirement.evidenceTypeLists(request).distinctBy {
             it.flatMap { it.specifiesEvidenceType }.joinToString { it.identifier }
         }
