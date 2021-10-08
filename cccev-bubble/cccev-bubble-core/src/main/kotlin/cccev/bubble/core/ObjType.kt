@@ -17,7 +17,7 @@ data class Entry(
 	val value: String,
 	val status: String,
 	val owner: String? = null,
-	val registry: String
+	val registry: String?
 ): ObjType
 
 @Suppress("ConstructorParameterNaming")
@@ -26,7 +26,7 @@ data class Request(
 	val organizationRequesting: String? = null,
 	val requestedEmail: String? = null,
 	val status: String = "Request sent",
-	val registry: String,
+	val registry: String?,
 	var entry: String?
 )
 

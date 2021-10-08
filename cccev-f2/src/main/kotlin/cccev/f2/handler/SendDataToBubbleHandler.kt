@@ -37,11 +37,13 @@ class SendDataToBubbleHandler(
 	@EventListener
 	fun onRequestSent(event: RequestSentEvent) = GlobalScope.launch(Dispatchers.IO) {
 		val requestId = event.id
+		println("Send request [$requestId] to bubble")
 		val requestEntity = requestRepository.findById(requestId).awaitSingle()
 
 		val request = ktorRepository.getOne<Request>(requestId).response
 
 		val entryId = request.entry ?: let {
+			println("Creating entry")
 			val entry = Entry(
 				_id = null,
 				request = requestId,
@@ -52,10 +54,13 @@ class SendDataToBubbleHandler(
 				refDateTo = "2021-12-31T11:00:00.000Z",
 			)
 			val result = ktorRepository.saveObject(entry)
+			println("Created entry [${result.id}]")
 			request.entry = result.id
 			ktorRepository.updateObject(requestId, request)
+			println("Updated request [$requestId] with entry")
 			result.id
 		}
+		println("Entry is [$entryId]")
 
 		val informationConcepts = getInformationConceptsQueryFunction.invoke(
 			GetInformationConceptsQuery(requestId, requestEntity.frameworkId)
@@ -89,11 +94,13 @@ class SendDataToBubbleHandler(
 			)
 		}
 
-		bubbleValues.forEach { value ->
-			value._id
-				?.let { id -> ktorRepository.updateObject(id, value) }
-				?: ktorRepository.saveObject(value)
-		}
+		bubbleValues.onEach(::println)
+			.forEach { value ->
+				value._id
+					?.let { id -> ktorRepository.updateObject(id, value) }
+					?: ktorRepository.saveObject(value)
+			}
+		println("Data sent to bubble :)")
 	}
 
 	private fun buildUrl(requestId: String, frameworkId: String, evidenceTypeId: String): String {
