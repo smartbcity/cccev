@@ -5,7 +5,7 @@ import ccev.dsl.core.Ratio
 import ccev.dsl.core.XSDDate
 
 object Scope1: InformationConceptBase(
-    identifier = "1631745628421x226481125220847400",
+    identifier = "bubble_1631745628421x226481125220847400",
     name = "Scope 1",
     unit = TonsCo2E,
     type = CC.Scope,
@@ -14,7 +14,7 @@ object Scope1: InformationConceptBase(
 )
 
 object Scope2: InformationConceptBase(
-    identifier = "1631745725079x715449360344731600",
+    identifier = "bubble_1631745725079x715449360344731600",
     name = "Scope 2",
     unit = TonsCo2E,
     type = CC.Scope,
@@ -23,7 +23,7 @@ object Scope2: InformationConceptBase(
 )
 
 object Scope3: InformationConceptBase(
-    identifier = "1631745764693x799770971892103800",
+    identifier = "bubble_1631745764693x799770971892103800",
     name = "Scope 3",
     unit = TonsCo2E,
     type = CC.Scope,
@@ -59,7 +59,7 @@ object VintagePeriodEnd: InformationConceptBase(
 )
 
 object Participation: InformationConceptBase(
-    identifier = "1633282057103x338292671526627460",
+    identifier = "bubble_1633282057103x338292671526627460",
     name = "Fin période référence",
     unit = Ratio,
     type = CCE.Participation,

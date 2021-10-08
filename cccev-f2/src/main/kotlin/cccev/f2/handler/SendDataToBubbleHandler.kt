@@ -3,6 +3,9 @@ package cccev.f2.handler
 import cccev.bubble.core.Entry
 import cccev.bubble.core.KtorRepository
 import cccev.bubble.core.Request
+import cccev.dsl.cc.AllocatedEmissions
+import cccev.dsl.cc.CarbonCopy
+import cccev.dsl.cc.ScopeTotal
 import cccev.dsl.dto.model.EvidenceTypeListDTOBase
 import cccev.dsl.dto.query.GetEvidenceTypeListsQuery
 import cccev.dsl.dto.query.GetEvidenceTypeListsQueryFunction
@@ -43,12 +46,23 @@ class SendDataToBubbleHandler(
 
 		val request = ktorRepository.getOne<Request>(requestId).response
 
+		val informationConcepts = getInformationConceptsQueryFunction.invoke(
+			GetInformationConceptsQuery(requestId, requestEntity.frameworkId)
+		).informationConcepts
+
 		val entryId = request.entry ?: let {
 			println("Creating entry")
+
+			val value = when (requestEntity.frameworkId) {
+				CarbonCopy.identifier -> informationConcepts.firstOrNull { it.identifier == ScopeTotal.identifier }
+				CarbonCopy.identifier -> informationConcepts.firstOrNull { it.identifier == AllocatedEmissions.identifier }
+				else -> null
+			}?.supportedValue?.value
+
 			val entry = Entry(
 				_id = null,
 				request = requestId,
-				value = "100",
+				value = value ?: "",
 				status = "Pending",
 				registry = request.registry,
 				refDateFrom = "2021-01-01T11:00:00.000Z",
@@ -63,10 +77,6 @@ class SendDataToBubbleHandler(
 		}
 		println("Entry is [$entryId]")
 
-		val informationConcepts = getInformationConceptsQueryFunction.invoke(
-			GetInformationConceptsQuery(requestId, requestEntity.frameworkId)
-		).informationConcepts
-
 		val evidenceTypes = getEvidenceTypeListsQueryFunction.invoke(
 			GetEvidenceTypeListsQuery(requestId, requestEntity.frameworkId)
 		).evidenceTypeLists.flatMap { etl ->
@@ -74,6 +84,11 @@ class SendDataToBubbleHandler(
 		}.associateBy { it.identifier }
 
 		val bubbleValues = informationConcepts.mapNotNull { infoConcept ->
+			val prefix = "bubble_"
+			if (!infoConcept.identifier.startsWith(prefix)) return@mapNotNull null
+
+			val requirementId = infoConcept.identifier.removePrefix(prefix)
+
 			val supportedValue = requestEntity.supportedValues[infoConcept.identifier]
 				?: return@mapNotNull null
 
@@ -91,7 +106,7 @@ class SendDataToBubbleHandler(
 				_id = existingValueId,
 				entry = entryId,
 				label = infoConcept.name,
-				requirement = infoConcept.identifier,
+				requirement = requirementId,
 				value = supportedValue.value,
 				evidence = evidenceType?.let { buildUrl(requestId, requestEntity.frameworkId, it.identifier) }
 			)
