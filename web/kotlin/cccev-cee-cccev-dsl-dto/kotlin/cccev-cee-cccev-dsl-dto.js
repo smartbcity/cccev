@@ -6241,14 +6241,14 @@
   };
   function _no_name_provided__28() {
   }
-  _no_name_provided__28.prototype.invoke_r9u9lt_k$ = function ($this$transaction) {
+  _no_name_provided__28.prototype.invoke_r5tatw_k$ = function ($this$transaction) {
     $this$transaction._from_3 = Sent_getInstance();
-    $this$transaction._to_4 = Signed_getInstance();
+    $this$transaction._to_4 = Sent_getInstance();
     $this$transaction._role_2 = new EditorRole();
-    $this$transaction._cmd = getKClass_0(RequestSignCommand);
+    $this$transaction._cmd = getKClass_0(RequestEvidenceAddCommand);
   };
   _no_name_provided__28.prototype.invoke_20e8_k$ = function (p1) {
-    this.invoke_r9u9lt_k$(p1 instanceof S2TransitionBuilder_0 ? p1 : THROW_CCE());
+    this.invoke_r5tatw_k$(p1 instanceof S2TransitionBuilder_0 ? p1 : THROW_CCE());
     return Unit_getInstance();
   };
   _no_name_provided__28.$metadata$ = {
@@ -6257,14 +6257,14 @@
   };
   function _no_name_provided__29() {
   }
-  _no_name_provided__29.prototype.invoke_7qbg8t_k$ = function ($this$transaction) {
-    $this$transaction._from_3 = Signed_getInstance();
-    $this$transaction._to_4 = Audited_getInstance();
+  _no_name_provided__29.prototype.invoke_kl4zs3_k$ = function ($this$transaction) {
+    $this$transaction._from_3 = Sent_getInstance();
+    $this$transaction._to_4 = Sent_getInstance();
     $this$transaction._role_2 = new EditorRole();
-    $this$transaction._cmd = getKClass_0(RequestAuditCommand);
+    $this$transaction._cmd = getKClass_0(RequestEvidenceRemoveCommand);
   };
   _no_name_provided__29.prototype.invoke_20e8_k$ = function (p1) {
-    this.invoke_7qbg8t_k$(p1 instanceof S2TransitionBuilder_0 ? p1 : THROW_CCE());
+    this.invoke_kl4zs3_k$(p1 instanceof S2TransitionBuilder_0 ? p1 : THROW_CCE());
     return Unit_getInstance();
   };
   _no_name_provided__29.$metadata$ = {
@@ -6273,14 +6273,14 @@
   };
   function _no_name_provided__30() {
   }
-  _no_name_provided__30.prototype.invoke_tw2x6_k$ = function ($this$transaction) {
-    $this$transaction._from_3 = Signed_getInstance();
-    $this$transaction._to_4 = Created_getInstance();
+  _no_name_provided__30.prototype.invoke_2xoj34_k$ = function ($this$transaction) {
+    $this$transaction._from_3 = Sent_getInstance();
+    $this$transaction._to_4 = Sent_getInstance();
     $this$transaction._role_2 = new EditorRole();
-    $this$transaction._cmd = getKClass_0(RequestRefuseCommand);
+    $this$transaction._cmd = getKClass_0(RequestSupportedValueAddCommand);
   };
   _no_name_provided__30.prototype.invoke_20e8_k$ = function (p1) {
-    this.invoke_tw2x6_k$(p1 instanceof S2TransitionBuilder_0 ? p1 : THROW_CCE());
+    this.invoke_2xoj34_k$(p1 instanceof S2TransitionBuilder_0 ? p1 : THROW_CCE());
     return Unit_getInstance();
   };
   _no_name_provided__30.$metadata$ = {
@@ -6289,7 +6289,71 @@
   };
   function _no_name_provided__31() {
   }
-  _no_name_provided__31.prototype.invoke_c3m0t_k$ = function ($this$s2) {
+  _no_name_provided__31.prototype.invoke_rvxavq_k$ = function ($this$transaction) {
+    $this$transaction._from_3 = Sent_getInstance();
+    $this$transaction._to_4 = Sent_getInstance();
+    $this$transaction._role_2 = new EditorRole();
+    $this$transaction._cmd = getKClass_0(RequestSendCommand);
+  };
+  _no_name_provided__31.prototype.invoke_20e8_k$ = function (p1) {
+    this.invoke_rvxavq_k$(p1 instanceof S2TransitionBuilder_0 ? p1 : THROW_CCE());
+    return Unit_getInstance();
+  };
+  _no_name_provided__31.$metadata$ = {
+    kind: 'class',
+    interfaces: []
+  };
+  function _no_name_provided__32() {
+  }
+  _no_name_provided__32.prototype.invoke_r9u9lt_k$ = function ($this$transaction) {
+    $this$transaction._from_3 = Sent_getInstance();
+    $this$transaction._to_4 = Signed_getInstance();
+    $this$transaction._role_2 = new EditorRole();
+    $this$transaction._cmd = getKClass_0(RequestSignCommand);
+  };
+  _no_name_provided__32.prototype.invoke_20e8_k$ = function (p1) {
+    this.invoke_r9u9lt_k$(p1 instanceof S2TransitionBuilder_0 ? p1 : THROW_CCE());
+    return Unit_getInstance();
+  };
+  _no_name_provided__32.$metadata$ = {
+    kind: 'class',
+    interfaces: []
+  };
+  function _no_name_provided__33() {
+  }
+  _no_name_provided__33.prototype.invoke_7qbg8t_k$ = function ($this$transaction) {
+    $this$transaction._from_3 = Signed_getInstance();
+    $this$transaction._to_4 = Audited_getInstance();
+    $this$transaction._role_2 = new EditorRole();
+    $this$transaction._cmd = getKClass_0(RequestAuditCommand);
+  };
+  _no_name_provided__33.prototype.invoke_20e8_k$ = function (p1) {
+    this.invoke_7qbg8t_k$(p1 instanceof S2TransitionBuilder_0 ? p1 : THROW_CCE());
+    return Unit_getInstance();
+  };
+  _no_name_provided__33.$metadata$ = {
+    kind: 'class',
+    interfaces: []
+  };
+  function _no_name_provided__34() {
+  }
+  _no_name_provided__34.prototype.invoke_tw2x6_k$ = function ($this$transaction) {
+    $this$transaction._from_3 = Signed_getInstance();
+    $this$transaction._to_4 = Created_getInstance();
+    $this$transaction._role_2 = new EditorRole();
+    $this$transaction._cmd = getKClass_0(RequestRefuseCommand);
+  };
+  _no_name_provided__34.prototype.invoke_20e8_k$ = function (p1) {
+    this.invoke_tw2x6_k$(p1 instanceof S2TransitionBuilder_0 ? p1 : THROW_CCE());
+    return Unit_getInstance();
+  };
+  _no_name_provided__34.$metadata$ = {
+    kind: 'class',
+    interfaces: []
+  };
+  function _no_name_provided__35() {
+  }
+  _no_name_provided__35.prototype.invoke_c3m0t_k$ = function ($this$s2) {
     $this$s2._name_8 = 'RequestS2';
     $this$s2.init$default_kjd386_k$(null, _no_name_provided_$factory_23(), 1, null);
     $this$s2.transaction$default_2e0xsg_k$(null, null, _no_name_provided_$factory_24(), 3, null);
@@ -6299,17 +6363,21 @@
     $this$s2.transaction$default_2e0xsg_k$(null, null, _no_name_provided_$factory_28(), 3, null);
     $this$s2.transaction$default_2e0xsg_k$(null, null, _no_name_provided_$factory_29(), 3, null);
     $this$s2.transaction$default_2e0xsg_k$(null, null, _no_name_provided_$factory_30(), 3, null);
+    $this$s2.transaction$default_2e0xsg_k$(null, null, _no_name_provided_$factory_31(), 3, null);
+    $this$s2.transaction$default_2e0xsg_k$(null, null, _no_name_provided_$factory_32(), 3, null);
+    $this$s2.transaction$default_2e0xsg_k$(null, null, _no_name_provided_$factory_33(), 3, null);
+    $this$s2.transaction$default_2e0xsg_k$(null, null, _no_name_provided_$factory_34(), 3, null);
   };
-  _no_name_provided__31.prototype.invoke_20e8_k$ = function (p1) {
+  _no_name_provided__35.prototype.invoke_20e8_k$ = function (p1) {
     this.invoke_c3m0t_k$(p1 instanceof S2AutomateBuilder ? p1 : THROW_CCE());
     return Unit_getInstance();
   };
-  _no_name_provided__31.$metadata$ = {
+  _no_name_provided__35.$metadata$ = {
     kind: 'class',
     interfaces: []
   };
   function _no_name_provided_$factory_22() {
-    var i = new _no_name_provided__31();
+    var i = new _no_name_provided__35();
     return function (p1) {
       i.invoke_c3m0t_k$(p1);
       return Unit_getInstance();
@@ -6353,19 +6421,47 @@
   function _no_name_provided_$factory_28() {
     var i = new _no_name_provided__28();
     return function (p1) {
-      i.invoke_r9u9lt_k$(p1);
+      i.invoke_r5tatw_k$(p1);
       return Unit_getInstance();
     };
   }
   function _no_name_provided_$factory_29() {
     var i = new _no_name_provided__29();
     return function (p1) {
-      i.invoke_7qbg8t_k$(p1);
+      i.invoke_kl4zs3_k$(p1);
       return Unit_getInstance();
     };
   }
   function _no_name_provided_$factory_30() {
     var i = new _no_name_provided__30();
+    return function (p1) {
+      i.invoke_2xoj34_k$(p1);
+      return Unit_getInstance();
+    };
+  }
+  function _no_name_provided_$factory_31() {
+    var i = new _no_name_provided__31();
+    return function (p1) {
+      i.invoke_rvxavq_k$(p1);
+      return Unit_getInstance();
+    };
+  }
+  function _no_name_provided_$factory_32() {
+    var i = new _no_name_provided__32();
+    return function (p1) {
+      i.invoke_r9u9lt_k$(p1);
+      return Unit_getInstance();
+    };
+  }
+  function _no_name_provided_$factory_33() {
+    var i = new _no_name_provided__33();
+    return function (p1) {
+      i.invoke_7qbg8t_k$(p1);
+      return Unit_getInstance();
+    };
+  }
+  function _no_name_provided_$factory_34() {
+    var i = new _no_name_provided__34();
     return function (p1) {
       i.invoke_tw2x6_k$(p1);
       return Unit_getInstance();

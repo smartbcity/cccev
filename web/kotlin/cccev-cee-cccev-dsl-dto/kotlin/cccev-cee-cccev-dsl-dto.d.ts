@@ -357,7 +357,7 @@ export namespace cccev.dsl.dto.model {
 }
 export namespace cccev.dsl.dto.model {
     interface InformationConceptDTO extends ccev.dsl.core.InformationConcept {
-        readonly evidenceTypeLists: Array<string>;
+        readonly evidenceTypes: Array<Array<string>>;
         readonly supportedValue: ccev.dsl.core.SupportedValueDTO;
     }
 }

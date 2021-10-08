@@ -3155,7 +3155,7 @@
   function _no_name_provided__22() {
   }
   _no_name_provided__22.prototype.invoke_oywfzr_k$ = function ($this$criterion) {
-    $this$criterion._set_identifier__qlpr75_k$('carbonCopy');
+    $this$criterion._set_identifier__qlpr75_k$('carboncopy');
     $this$criterion._set_name__qlpr75_k$('Carbon Copy');
     $this$criterion._set_type__erbbi9_k$(CC_getInstance());
     $this$criterion.unaryPlus_9n4va8_k$(ScopeInfo_getInstance());
