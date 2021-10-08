@@ -48,6 +48,24 @@ val S2Request = s2<RequestId, RequestState> {
 		role = EditorRole()
 		cmd = RequestSendCommand::class
 	}
+	transaction<RequestEvidenceAddCommand> {
+		from = RequestState.Sent
+		to = RequestState.Sent
+		role = EditorRole()
+		cmd = RequestEvidenceAddCommand::class
+	}
+	transaction<RequestEvidenceRemoveCommand> {
+		from = RequestState.Sent
+		to = RequestState.Sent
+		role = EditorRole()
+		cmd = RequestEvidenceRemoveCommand::class
+	}
+	transaction<RequestSupportedValueAddCommand> {
+		from = RequestState.Sent
+		to = RequestState.Sent
+		role = EditorRole()
+		cmd = RequestSupportedValueAddCommand::class
+	}
 	transaction<RequestSignCommand> {
 		from = RequestState.Sent
 		to = RequestState.Signed
