@@ -60,7 +60,7 @@ object VintagePeriodEnd: InformationConceptBase(
 
 object Participation: InformationConceptBase(
     identifier = "bubble_1633282057103x338292671526627460",
-    name = "Fin période référence",
+    name = "Participation",
     unit = Ratio,
     type = CCE.Participation,
     description = "Pourcentage de participation",

@@ -47,7 +47,8 @@ export const Main = (props: MainProps) => {
                 }))
                 await requestSupportedValueAddCommand(supportedValues)
                 await requestSendToBubbleCommand()
-                window.open('https://impactmate.earth/', "_blank", 'noopener')
+                //@ts-ignore
+                window.open(`https://impactmate.earth/version-test/form_request/?request=${window._env_.request}`, "_blank", 'noopener')
             }
         },
         [informationConcepts.result],

@@ -43,7 +43,7 @@ data class SupportedValue(
 	 * The unique id of the entry.
 	 * @example "1633526615552x703979258083541000"
 	 */
-	val entry: EntryId,
+	val entry: EntryId?,
 	/**
 	 * The url to the evidence file.
 	 */

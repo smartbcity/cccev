@@ -43,6 +43,6 @@ object EquityInfo: InformationRequirement(
         AllocatedEmissions
     ),
     hasEvidenceTypeList = listOf(
-        BilanCarboneETL,
+        BilanParticipationETL,
     )
 )

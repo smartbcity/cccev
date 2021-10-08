@@ -35,7 +35,7 @@ class SendDataToBubbleHandler(
 	val ktorRepository = KtorRepository("95f4b5790e3d55cee1f6badeb192c9a1")
 
 	companion object {
-		const val BASE_URL = "https://app.impactmate.earth/"
+		const val BASE_URL = "https://app.impactmate.earth"
 	}
 
 	@Suppress("LongMethod")
@@ -84,6 +84,10 @@ class SendDataToBubbleHandler(
 			etl.flatMap(EvidenceTypeListDTOBase::specifiesEvidenceType)
 		}.associateBy { it.identifier }
 
+		val existingValues = ktorRepository.getList<BubbleSupportedValue>().response.results.filter {
+			it.entry == entryId
+		}
+
 		val bubbleValues = informationConcepts.mapNotNull { infoConcept ->
 			val prefix = "bubble_"
 			if (!infoConcept.identifier.startsWith(prefix)) return@mapNotNull null
@@ -98,7 +102,7 @@ class SendDataToBubbleHandler(
 				.firstOrNull { it.evidence != null }
 
 			val existingValueId = try {
-				ktorRepository.getOne<BubbleSupportedValue>(requestId).response._id
+				existingValues.firstOrNull { it.requirement == requirementId }?._id
 			} catch (e: Exception) {
 				null
 			}
@@ -123,6 +127,6 @@ class SendDataToBubbleHandler(
 	}
 
 	private fun buildUrl(requestId: String, frameworkId: String, evidenceTypeId: String): String {
-		return "$BASE_URL/?&request=$requestId&framework=$frameworkId&evidence=$evidenceTypeId"
+		return "$BASE_URL/?request=$requestId&framework=$frameworkId&evidence=$evidenceTypeId"
 	}
 }

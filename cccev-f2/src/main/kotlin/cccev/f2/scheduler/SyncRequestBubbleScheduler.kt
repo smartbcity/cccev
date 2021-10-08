@@ -54,8 +54,7 @@ class SyncRequestBubbleScheduler(
     private suspend fun syncRequestsWithState(requests: List<Request>, state: BubbleState) {
         val requestsWithState = requests.filter { it.status == state.id }
 
-        val requestIds = requestsWithState.map(Request::_id)
-        val requestEntities = requestRepository.findAllById(requestIds).collectList().awaitSingle()
+        val requestEntities = requestsWithState.map { request -> requestRepository.findById(request._id!!).awaitSingle() }
 
         requestEntities.filter { it.status != state.resultState }
             .forEach { it.updateStatus(state.resultState) }
