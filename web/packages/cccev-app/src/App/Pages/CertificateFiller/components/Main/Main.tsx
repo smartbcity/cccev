@@ -92,7 +92,7 @@ const informationConceptsToCategories = (informationConcepts: InformationConcept
             textFieldProps: {
                 textFieldType: el.unit.type === "number" ? "number" : "text",
             },
-            hasEvidence: el.evidenceTypeLists.some((evidenceTypeId) => !!evidenceTypeMapped.get(evidenceTypeId)?.evidence),
+            hasEvidence: hasEvidence(el.evidenceTypes, evidenceTypeMapped),
             fieldUnit: el.unit.notation
         }
         const fields = objCategories[el.category.id]?.fields ? [...objCategories[el.category.id].fields, newField] : [newField]
@@ -118,6 +118,17 @@ const enumTypeToEnumFields = (type: "string" | "date" | "number" | "boolean"): "
         default:
             return "textfield"
     }
+}
+
+const hasEvidence = (evidenceTypeIds: string[][], evidenceTypeMapped: Map<string, EvidenceTypeDTO>) => {
+    let hasEvidence = false
+    evidenceTypeIds.forEach((array) => {
+        if (array.length > 0) {
+            const every = array.every((evidenceTypeId) => !!evidenceTypeMapped.get(evidenceTypeId)?.evidence)
+            if (every) hasEvidence = true
+        }
+    })
+    return hasEvidence
 }
 
 const getDefaultValue = (type: "string" | "date" | "number" | "boolean", value?: any): Date | string | number | boolean | undefined => {
