@@ -15,6 +15,8 @@ const CertificateInformationsBox = styled(Box)({
 
 export const Header = () => {
     const {t} = useTranslation()
+    // @ts-ignore
+    const title = window._env_.framework == "carboncopy" ? "Déclaration Carbon Copy" : "Déclaration Carbon Equity"
     return (
         <Box
             sx={{
@@ -34,7 +36,7 @@ export const Header = () => {
                 <Typography
                     variant="h4"
                 >
-                    Déclaration Carbon Copy
+                    {title}
                 </Typography>
                 <Typography
                     variant="body1"
