@@ -34,6 +34,7 @@ class SendDataToBubbleHandler(
 		const val BASE_URL = "https://app.impactmate.earth/"
 	}
 
+	@Suppress("LongMethod")
 	@EventListener
 	fun onRequestSent(event: RequestSentEvent) = GlobalScope.launch(Dispatchers.IO) {
 		val requestId = event.id
@@ -66,16 +67,18 @@ class SendDataToBubbleHandler(
 			GetInformationConceptsQuery(requestId, requestEntity.frameworkId)
 		).informationConcepts
 
-		val evidenceTypeLists = getEvidenceTypeListsQueryFunction.invoke(
+		val evidenceTypes = getEvidenceTypeListsQueryFunction.invoke(
 			GetEvidenceTypeListsQuery(requestId, requestEntity.frameworkId)
-		).evidenceTypeLists.flatten().associateBy { it.identifier }
+		).evidenceTypeLists.flatMap { etl ->
+			etl.flatMap(EvidenceTypeListDTOBase::specifiesEvidenceType)
+		}.associateBy { it.identifier }
 
 		val bubbleValues = informationConcepts.mapNotNull { infoConcept ->
 			val supportedValue = requestEntity.supportedValues[infoConcept.identifier]
 				?: return@mapNotNull null
 
-			val evidenceType = infoConcept.evidenceTypeLists.mapNotNull(evidenceTypeLists::get)
-				.flatMap(EvidenceTypeListDTOBase::specifiesEvidenceType)
+			val evidenceType = infoConcept.evidenceTypes.flatten()
+				.mapNotNull(evidenceTypes::get)
 				.firstOrNull { it.evidence != null }
 
 			val existingValueId = try {

@@ -12,7 +12,7 @@ import cccev.s2.request.app.RequestService
 import cccev.s2.request.app.entity.RequestEntity
 import cccev.s2.request.app.entity.RequestRepository
 import cccev.s2.request.domain.features.command.RequestInitCommand
-import ccev.dsl.core.EvidenceTypeListBase
+import ccev.dsl.core.EvidenceTypeBase
 import ccev.dsl.core.InformationConceptBase
 import ccev.dsl.core.Requirement
 import f2.dsl.fnc.f2Function
@@ -54,7 +54,9 @@ class GetInformationConceptsQueryFunctionImpl(
     }
 
     private fun List<InformationConceptBase>.toDTOs(parent: Requirement, request: RequestEntity): List<InformationConceptDTOBase> {
-        val evidenceTypeLists = parent.hasEvidenceTypeList.orEmpty().map(EvidenceTypeListBase::identifier)
-        return map { ic -> ic.toDTO(evidenceTypeLists, request.supportedValues[ic.identifier]) }
+        val evidenceTypes = parent.hasEvidenceTypeList.orEmpty().map { etl ->
+            etl.specifiesEvidenceType.map(EvidenceTypeBase::identifier)
+        }
+        return map { ic -> ic.toDTO(evidenceTypes, request.supportedValues[ic.identifier]) }
     }
 }
