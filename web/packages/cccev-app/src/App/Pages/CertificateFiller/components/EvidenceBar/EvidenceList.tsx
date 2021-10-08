@@ -12,10 +12,11 @@ interface EvidenceListProps {
     addEvidenceType: (evidenceTypeId?: string | undefined) => void
     evidenceTypeLists?: EvidenceTypeListDTO[][]
     fetchEvidenceTypeLists: () => void
+    CanAddEvidence: boolean
 }
 
 export const EvidenceList = (props: EvidenceListProps) => {
-    const { changeEvidence, addEvidenceType, evidenceTypeLists, fetchEvidenceTypeLists } = props
+    const { changeEvidence, addEvidenceType, evidenceTypeLists, fetchEvidenceTypeLists, CanAddEvidence } = props
 
     const { t } = useTranslation()
 
@@ -64,9 +65,9 @@ export const EvidenceList = (props: EvidenceListProps) => {
                 <Title />
                 <Divider sx={{ borderColor: "#8294A3", borderBottomWidth: "2px" }} style={{ marginTop: "5px" }} flexItem />
                 {evidenceTypeListsUi}
-                <Button onClick={onAddEvidence} style={{ width: "180px", zIndex: 1 }}>{t("addAnEvidence")}</Button>
+                {CanAddEvidence && <Button onClick={onAddEvidence} style={{ width: "180px", zIndex: 1 }}>{t("addAnEvidence")}</Button>}
             </Stack>
-            <Stack
+            {CanAddEvidence && <Stack
                 direction="row"
                 spacing={3}
                 justifyContent="center"
@@ -81,7 +82,7 @@ export const EvidenceList = (props: EvidenceListProps) => {
                 <Typography variant="body2" color="#787878">
                     {t("canDropFile")}
                 </Typography>
-            </Stack>
+            </Stack>}
         </>
     )
 }

@@ -48,6 +48,7 @@ export const Main = (props: MainProps) => {
                 }))
                 await requestSupportedValueAddCommand(supportedValues)
                 await requestSendToBubbleCommand()
+                window.open('https://impactmate.earth/', "_blank", 'noopener')
             }
         },
         [informationConcepts.result],
@@ -91,7 +92,7 @@ const informationConceptsToCategories = (informationConcepts: InformationConcept
             textFieldProps: {
                 textFieldType: el.unit.type === "number" ? "number" : "text",
             },
-            hasEvidence: !!evidenceTypeMapped.get(el.identifier)?.evidence,
+            hasEvidence: el.evidenceTypeLists.some((evidenceTypeId) => !!evidenceTypeMapped.get(evidenceTypeId)?.evidence),
             fieldUnit: el.unit.notation
         }
         const fields = objCategories[el.category.id]?.fields ? [...objCategories[el.category.id].fields, newField] : [newField]

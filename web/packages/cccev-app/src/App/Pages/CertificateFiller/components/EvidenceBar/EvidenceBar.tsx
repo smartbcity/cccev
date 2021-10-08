@@ -50,7 +50,20 @@ export const EvidenceBar = (props: EvidenceBarProps) => {
         [changeEvidence],
     )
 
-    const currentFile = useMemo(() => currentEvidence ? evidenceTypeMapped?.get(currentEvidence)?.evidence?.file : undefined, [currentEvidence])
+    const CanAddEvidence = useMemo(() => {
+        if (evidenceTypeMapped === undefined) {
+            return false
+        }
+        let canAdd = false
+        evidenceTypeMapped.forEach((evidenceType) => {
+            if (!evidenceType.evidence) {
+                canAdd = true
+            }
+        })
+        return canAdd
+    }, [evidenceTypeMapped])
+
+    const currentFile = useMemo(() => currentEvidence ? evidenceTypeMapped?.get(currentEvidence)?.evidence?.file : undefined, [currentEvidence, evidenceTypeMapped])
 
     if (evidenceTypeListsFetchStatus !== "SUCCESS" || evidenceTypeLists === undefined) {
         return (
@@ -59,11 +72,11 @@ export const EvidenceBar = (props: EvidenceBarProps) => {
             </EvidenceBarContainer>
         )
     }
-    if (!currentFile) {
+    if (!currentEvidence) {
         return (
             <EvidenceBarContainer>
-                <EvidenceList fetchEvidenceTypeLists={fetchEvidenceTypeLists} evidenceTypeLists={evidenceTypeLists} addEvidenceType={addEvidenceType} changeEvidence={changeEvidence} />
-                <Dropzone fetchEvidenceTypeLists={fetchEvidenceTypeLists} evidenceTypeMapped={evidenceTypeMapped} setEvidenceTypeAdded={setEvidenceTypeAdded} evidenceTypeAdded={evidenceTypeAdded} />
+                <EvidenceList CanAddEvidence={CanAddEvidence} fetchEvidenceTypeLists={fetchEvidenceTypeLists} evidenceTypeLists={evidenceTypeLists} addEvidenceType={addEvidenceType} changeEvidence={changeEvidence} />
+                {CanAddEvidence && <Dropzone fetchEvidenceTypeLists={fetchEvidenceTypeLists} evidenceTypeMapped={evidenceTypeMapped} setEvidenceTypeAdded={setEvidenceTypeAdded} evidenceTypeAdded={evidenceTypeAdded} />}
             </EvidenceBarContainer>
         )
     }

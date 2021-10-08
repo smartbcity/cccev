@@ -15,7 +15,7 @@ const StyledInfiniteScroll = styled(InfiniteScroll)({
 })
 
 interface PdfDisplayerProps {
-    file: string
+    file?: string
 }
 
 export const PdfDisplayer = (props: PdfDisplayerProps) => {
@@ -34,6 +34,7 @@ export const PdfDisplayer = (props: PdfDisplayerProps) => {
                     key={`page_${1}`}
                     pageNumber={1}
                     className="pdfPage"
+                    loading={<LoadingPdf />}
                 />
             )
             if (numPages >= 2) {
@@ -43,6 +44,7 @@ export const PdfDisplayer = (props: PdfDisplayerProps) => {
                         key={`page_${2}`}
                         pageNumber={2}
                         className="pdfPage"
+                        loading={<LoadingPdf />}
                     />
                 )
             }
@@ -64,6 +66,7 @@ export const PdfDisplayer = (props: PdfDisplayerProps) => {
                             key={`page_${index + i + 1}`}
                             pageNumber={index + i + 1}
                             className="pdfPage"
+                            loading={<LoadingPdf />}
                         />
                     )
                 }
@@ -83,13 +86,16 @@ export const PdfDisplayer = (props: PdfDisplayerProps) => {
             scrollThreshold={"1300px"}
             className="PdfDisplayer-infiniteScroll"
         >
-            <Document
+            {file ? <Document
                 file={file}
                 onLoadSuccess={onDocumentLoadSuccess}
                 loading={<LoadingPdf />}
             >
                 {pages}
             </Document>
+                :
+                <LoadingPdf />
+            }
         </StyledInfiniteScroll>
     )
 }
