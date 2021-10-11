@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next"
 import { useAsyncResponse } from "utils"
 import { EvidenceTypeDTO, getInformationConcepts, InformationConceptDTO, requestSupportedValueAddCommand, SupportedValueDTO, requestSendToBubbleCommand } from "datahub"
 import { MainLoading } from "./MainLoading"
+import leven from 'leven'
 
 interface MainProps {
     filters: FiltersState
@@ -29,9 +30,7 @@ export const Main = (props: MainProps) => {
         informationConcepts.result.informationConcepts.map((info): FormPartialField => {
             return {
                 name: info.identifier,
-                defaultValue: getDefaultValue(info.unit.type, info.supportedValue.value) ?? (info.unit.type === "boolean" ? false : undefined),
-                //@ts-ignore
-                test: info
+                defaultValue: getDefaultValue(info.unit.type, info.supportedValue.value) ?? (info.unit.type === "boolean" ? false : undefined)
             }
         })
         :
@@ -62,7 +61,7 @@ export const Main = (props: MainProps) => {
         }
     })
 
-    const categories = useMemo(() => informationConcepts.result && evidenceTypeMapped ? informationConceptsToCategories(informationConcepts.result.informationConcepts, evidenceTypeMapped) : [], [informationConcepts.result, evidenceTypeMapped])
+    const categories = useMemo(() => informationConcepts.result && evidenceTypeMapped ? informationConceptsToCategories(informationConcepts.result.informationConcepts, evidenceTypeMapped, filters) : [], [informationConcepts.result, evidenceTypeMapped, filters])
 
     if (informationConcepts.status !== "SUCCESS" || informationConcepts.result === undefined) return (
         <MainLoading />
@@ -79,10 +78,11 @@ export const Main = (props: MainProps) => {
     )
 }
 
-const informationConceptsToCategories = (informationConcepts: InformationConceptDTO[], evidenceTypeMapped: Map<string, EvidenceTypeDTO>): Category[] => {
+const informationConceptsToCategories = (informationConcepts: InformationConceptDTO[], evidenceTypeMapped: Map<string, EvidenceTypeDTO>, filters: FiltersState): Category[] => {
+    const filteredInfoConcepts = filterInfoConcepts(informationConcepts, filters)
     const objCategories: { [key: string]: Category } = {}
     //@ts-ignore
-    informationConcepts.forEach((el: (InformationConceptDTO & { category: { id: string, name: string } })) => {
+    filteredInfoConcepts.forEach((el: (InformationConceptDTO & { category: { id: string, name: string } })) => {
         el.category = { id: "value-category", name: "Valeur à renseigner" }
         const newField: CcevFormField = {
             key: el.identifier,
@@ -103,6 +103,38 @@ const informationConceptsToCategories = (informationConcepts: InformationConcept
         }
     })
     return objToArray(objCategories)
+}
+
+const filterInfoConcepts = (informationConcepts: InformationConceptDTO[], filters: FiltersState) => {
+    return informationConcepts.filter((info) => {
+        if (filters.evidence) {
+            if (!info.evidenceTypes.some((evidenceTypeIds) => !!evidenceTypeIds.find((evidenceTypeId) => filters.evidence === evidenceTypeId))) {
+                return false
+            }
+        }
+        if (filters.search) {
+            const search = filters.search.trim()
+            if (search !== '') {
+                const startsWith = new RegExp(`^$|${search}`, 'i')
+                if (startsWith.test(info.name)) {
+                    return true
+                }
+                if (leven(search, info.name) <= 5) {
+                    return true
+                }
+                const searchSplited = search.split(' ')
+                if (searchSplited.length > 2) {
+                    const containsMultiple = new RegExp(`^$|${searchSplited.join('+|')}`, 'gi')
+                    const matched = info.name.match(containsMultiple)
+                    if (matched && matched.length > Math.floor(searchSplited.length/2)) {
+                        return true
+                    }
+                }
+                return false
+            }
+        }
+        return true
+    })
 }
 
 const enumTypeToEnumFields = (type: "string" | "date" | "number" | "boolean"): "textfield" | "select" | "datepicker" | "radioChoices" | "checkbox" => {

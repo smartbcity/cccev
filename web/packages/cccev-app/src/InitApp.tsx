@@ -10,7 +10,6 @@ export const InitApp = (props: InitAppProps) => {
     const {
         children
     } = props
-
     const canEnter = useMemo(() =>{
         const urlParams = parse(window.location.search, { ignoreQueryPrefix: true }) 
         if (typeof urlParams.request === "string" && typeof urlParams.framework === "string") {
