@@ -4,5 +4,4 @@ plugins {
 
 dependencies {
     api(project(":cccev-f2"))
-    api(project(":cccev-data"))
 }
