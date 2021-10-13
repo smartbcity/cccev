@@ -13,6 +13,7 @@ fun InformationConceptBase.toDTO(evidenceTypes: List<List<EvidenceTypeId>>, supp
     type = type,
     description = description,
     expressionOfExpectedValue = expressionOfExpectedValue,
+    dependsOn = dependsOn,
     evidenceTypes = evidenceTypes.map(List<EvidenceTypeId>::toTypedArray).toTypedArray(),
     supportedValue = supportedValue ?: SupportedValue(
         identifier = UUID.randomUUID().toString(),

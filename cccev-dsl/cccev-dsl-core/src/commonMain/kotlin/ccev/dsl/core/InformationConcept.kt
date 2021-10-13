@@ -9,6 +9,7 @@ expect interface InformationConcept {
 	val type: Code
 	val description: String
 	val expressionOfExpectedValue: String?
+	val dependsOn: List<InformationConceptId>
 }
 
 open class InformationConceptBase(
@@ -17,5 +18,6 @@ open class InformationConceptBase(
 	override val unit: CUnit,
 	override val type: Code,
 	override val description: String,
-	override val expressionOfExpectedValue: String?
+	override val expressionOfExpectedValue: String? = null,
+	override val dependsOn: List<InformationConceptId> = emptyList()
 ): InformationConcept

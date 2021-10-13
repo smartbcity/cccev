@@ -9,8 +9,7 @@ object Scope1: InformationConceptBase(
     name = "Scope 1",
     unit = TonsCo2E,
     type = CC.Scope,
-    description = "Scope 1",
-    expressionOfExpectedValue = null
+    description = "Scope 1"
 )
 
 object Scope2: InformationConceptBase(
@@ -18,8 +17,7 @@ object Scope2: InformationConceptBase(
     name = "Scope 2",
     unit = TonsCo2E,
     type = CC.Scope,
-    description = "Scope 2",
-    expressionOfExpectedValue = null
+    description = "Scope 2"
 )
 
 object Scope3: InformationConceptBase(
@@ -27,8 +25,7 @@ object Scope3: InformationConceptBase(
     name = "Scope 3",
     unit = TonsCo2E,
     type = CC.Scope,
-    description = "Scope 3",
-    expressionOfExpectedValue = null
+    description = "Scope 3"
 )
 
 object ScopeTotal: InformationConceptBase(
@@ -37,7 +34,8 @@ object ScopeTotal: InformationConceptBase(
     unit = TonsCo2E,
     type = CC.Scope,
     description = "Scope Total",
-    expressionOfExpectedValue = "${Scope1.identifier} + ${Scope2.identifier} + ${Scope3.identifier}"
+    expressionOfExpectedValue = "${Scope1.identifier} + ${Scope2.identifier} + ${Scope3.identifier}",
+    dependsOn = listOf(Scope1.identifier, Scope2.identifier, Scope3.identifier)
 )
 
 object VintagePeriodStart: InformationConceptBase(
@@ -45,8 +43,7 @@ object VintagePeriodStart: InformationConceptBase(
     name = "Début période référence",
     unit = XSDDate,
     type = CC.Vintage,
-    description = "Scope 3",
-    expressionOfExpectedValue = null
+    description = "Scope 3"
 )
 
 object VintagePeriodEnd: InformationConceptBase(
@@ -54,8 +51,7 @@ object VintagePeriodEnd: InformationConceptBase(
     name = "Fin période référence",
     unit = XSDDate,
     type = CC.Vintage,
-    description = "Scope 3",
-    expressionOfExpectedValue = null
+    description = "Scope 3"
 )
 
 object Participation: InformationConceptBase(
@@ -63,8 +59,7 @@ object Participation: InformationConceptBase(
     name = "Participation",
     unit = Ratio,
     type = CCE.Participation,
-    description = "Pourcentage de participation",
-    expressionOfExpectedValue = null
+    description = "Pourcentage de participation"
 )
 
 object AllocatedEmissions: InformationConceptBase(
@@ -73,6 +68,7 @@ object AllocatedEmissions: InformationConceptBase(
     unit = TonsCo2E,
     type = CCE.Participation,
     description = "Émissions allouées",
-    expressionOfExpectedValue = "${ScopeTotal.identifier} * ${Participation.identifier} / 100"
+    expressionOfExpectedValue = "${ScopeTotal.identifier} * ${Participation.identifier} / 100",
+    dependsOn = listOf(ScopeTotal.identifier, Participation.identifier)
 )
 

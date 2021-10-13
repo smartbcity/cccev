@@ -12,8 +12,7 @@ object ResistanceThermique: InformationConceptBase(
     name = "Résistance Thermique",
     unit = SquareMeterKelvinPerWatt,
     type = FicheCode.ConditionsDelivranceCertificats,
-    description = "Résistance Thermique",
-    expressionOfExpectedValue = null
+    description = "Résistance Thermique"
 )
 
 object DatePrecedentsTravauxMemeBatiment: InformationConceptBase(
@@ -21,8 +20,7 @@ object DatePrecedentsTravauxMemeBatiment: InformationConceptBase(
     name = "Résistance Thermique",
     unit = XSDDate,
     type = FicheCode.ConditionsDelivranceCertificats,
-    description = "Résistance Thermique",
-    expressionOfExpectedValue = null
+    description = "Résistance Thermique"
 )
 
 object SurfaceIsolant: InformationConceptBase(
@@ -30,8 +28,7 @@ object SurfaceIsolant: InformationConceptBase(
     name = "Surface Isolant",
     unit = SquareMeter,
     type = FicheCode.ConditionsDelivranceCertificats,
-    description = "Surface Isolant",
-    expressionOfExpectedValue = null
+    description = "Surface Isolant"
 )
 
 object CumacPerM2Isolant: InformationConceptBase(
@@ -40,7 +37,8 @@ object CumacPerM2Isolant: InformationConceptBase(
     unit = kWhCumacPerSquareMeter,
     type = FicheCode.ConditionsDelivranceCertificats,
     description = "Montant en kWh/m2 en fonction de la zone climatique",
-    expressionOfExpectedValue = "{H1: 25, H2: 30, H3: 34}.get(\${${NombreTypesDispositifGestionEclairage.identifier}})"
+    expressionOfExpectedValue = "{H1: 25, H2: 30, H3: 34}.get(${NombreTypesDispositifGestionEclairage.identifier})",
+    dependsOn = listOf(NombreTypesDispositifGestionEclairage.identifier)
 )
 
 object FacteurCorrectif: InformationConceptBase(
@@ -57,8 +55,9 @@ object FacteurCorrectif: InformationConceptBase(
             'Hôtellerie/Restauration': 0.7,
             Santé: 1.2,
             Autres: 0.6
-        }.get($${SecteurActivite.identifier})
-    """.trimIndent()
+        }.get(${SecteurActivite.identifier})
+    """.trimIndent(),
+    dependsOn = listOf(SecteurActivite.identifier)
 )
 
 object ZoneClimatique: InformationConceptBase(
@@ -66,8 +65,7 @@ object ZoneClimatique: InformationConceptBase(
     name = "Zone Climatique",
     unit = XSDString,
     type = FicheCode.ConditionsDelivranceCertificats,
-    description = "Zone Climatique",
-    expressionOfExpectedValue = "in ['H1', 'H2', 'H3']"
+    description = "Zone Climatique"
 )
 
 object SecteurActivite: InformationConceptBase(
@@ -75,6 +73,5 @@ object SecteurActivite: InformationConceptBase(
     name = "Secteur d'activité",
     unit = XSDString,
     type = FicheCode.ConditionsDelivranceCertificats,
-    description = "Secteur d'activité",
-    expressionOfExpectedValue = "in ['Bureaux', 'Hôtellerie/Restauration', 'Santé', 'Enseignement', 'Commerces', 'Autres']"
+    description = "Secteur d'activité"
 )

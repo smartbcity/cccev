@@ -8,8 +8,7 @@ object DateTravaux: InformationConceptBase(
     name = "Date Travaux",
     unit = XSDDate,
     type = FicheCode.ConditionsDelivranceCertificats,
-    description = "Date de travaux",
-    expressionOfExpectedValue = null
+    description = "Date de travaux"
 )
 
 object DatePrecedentsTravaux: InformationConceptBase(
@@ -17,8 +16,7 @@ object DatePrecedentsTravaux: InformationConceptBase(
     name = "Date Précédents Travaux",
     unit = XSDDate,
     type = FicheCode.ConditionsDelivranceCertificats,
-    description = "Date des précédents travaux",
-    expressionOfExpectedValue = null
+    description = "Date des précédents travaux"
 )
 
 object DateDevis: InformationConceptBase(
@@ -26,6 +24,5 @@ object DateDevis: InformationConceptBase(
     name = "Date Devis",
     unit = XSDDate,
     type = FicheCode.ConditionsDelivranceCertificats,
-    description = "Date de devis",
-    expressionOfExpectedValue = null
+    description = "Date de devis"
 )

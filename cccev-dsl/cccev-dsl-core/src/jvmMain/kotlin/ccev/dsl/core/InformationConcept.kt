@@ -7,4 +7,5 @@ actual interface InformationConcept {
     actual val type: Code
     actual val description: String
     actual val expressionOfExpectedValue: String?
+    actual val dependsOn: List<InformationConceptId>
 }
