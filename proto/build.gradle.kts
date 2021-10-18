@@ -4,6 +4,9 @@ plugins {
 
 dependencies {
     implementation(project(":cccev-dsl:cccev-dsl-cee"))
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.11.1")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.12.5")
+    implementation("com.fasterxml.jackson.core:jackson-databind:${Versions.jackson}")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:${Versions.jackson}")
+
+    testRuntimeOnly("org.jetbrains.kotlin:kotlin-main-kts:1.5.0")
+    testRuntimeOnly("org.jetbrains.kotlin:kotlin-scripting-jsr223:1.5.0")
 }

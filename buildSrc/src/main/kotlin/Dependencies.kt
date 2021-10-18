@@ -11,12 +11,14 @@ object Versions {
 	const val f2 = "next-SNAPSHOT"
 
 	const val ktor = "1.6.3"
+	const val coroutines = "1.5.2"
+	const val jackson = "2.13.0"
 
 	const val junit = "5.7.0"
 	const val junitPlateform = "1.8.1"
 	const val assertj = "3.15.0"
 
-	const val cucumber = "6.11.0"
+	const val cucumber = "7.0.0"
 }
 
 object Dependencies {
@@ -39,6 +41,13 @@ object Dependencies {
 			"org.junit.jupiter:junit-jupiter-api:${Versions.junit}",
 			"org.junit.platform:junit-platform-suite:${Versions.junitPlateform}",
 			"org.assertj:assertj-core:${Versions.assertj}"
+		)
+
+		val coroutines = arrayOf(
+			"org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}",
+			"org.jetbrains.kotlinx:kotlinx-coroutines-reactor:${Versions.coroutines}",
+			"org.jetbrains.kotlinx:kotlinx-coroutines-reactive:${Versions.coroutines}",
+			"org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:${Versions.coroutines}"
 		)
 	}
 }

@@ -63,7 +63,6 @@ class RequestService(
 	override fun send(): RequestSendCommandFunction = f2Function { cmd ->
 		println("Request [${cmd.id}]: send")
 		aggregate.doTransition(cmd) {
-
 			this to send()
 		}
 	}
