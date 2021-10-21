@@ -16,7 +16,9 @@ import org.springframework.context.annotation.Configuration
 class GetRequirementQueryFunctionImpl {
 
     companion object {
-        val AVAILABLE_REQUIREMENTS = listOf(CarbonCopy, Equity, BAT_EN_101, IND_BA_116).associateBy(Requirement::identifier)
+        val AVAILABLE_REQUIREMENTS = listOf<Requirement>(CarbonCopy, Equity, BAT_EN_101, IND_BA_116)
+            .associateBy(Requirement::identifier)
+            .toMutableMap() // for test purposes, will be removed when requirements are stored in db
     }
 
     @Bean
