@@ -1,10 +1,10 @@
-package features
+package features.cccev.s2.request.tasks.handler
 
 import cccev.dsl.dto.query.GetInformationConceptsQuery
 import cccev.dsl.dto.query.GetInformationConceptsQueryFunction
 import cccev.dsl.dto.query.GetRequirementQuery
 import cccev.dsl.dto.query.GetRequirementQueryFunction
-import cccev.s2.request.app.RequestService
+import cccev.s2.request.app.RequestAggregateService
 import cccev.s2.request.app.entity.RequestEntity
 import cccev.s2.request.domain.RequestState
 import cccev.s2.request.domain.features.command.RequestSupportedValueAddCommand
@@ -14,7 +14,6 @@ import ccev.dsl.core.SupportedValue
 import f2.dsl.fnc.invoke
 import io.cucumber.datatable.DataTable
 import io.cucumber.java8.En
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions
 import org.awaitility.Awaitility
@@ -22,7 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.mongodb.core.MongoTemplate
 import java.util.UUID
 
-@ExperimentalCoroutinesApi
 class ComputeExpectedValuesHandlerSteps: En {
 
     @Autowired
@@ -32,7 +30,7 @@ class ComputeExpectedValuesHandlerSteps: En {
     @Autowired
     private lateinit var getRequirementFunction: GetRequirementQueryFunction
     @Autowired
-    private lateinit var requestService: RequestService
+    private lateinit var requestAggregateService: RequestAggregateService
 
     private lateinit var frameworkId: RequirementId
     private lateinit var requestId: RequestId
@@ -85,7 +83,7 @@ class ComputeExpectedValuesHandlerSteps: En {
                         id = requestId,
                         supportedValue = value
                     )
-                    requestService.addSupportedValue().invoke(command)
+                    requestAggregateService.addSupportedValue().invoke(command)
                 }
             }
         }

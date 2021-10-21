@@ -3,7 +3,7 @@ package cccev.s2.request.tasks.handler
 import cccev.commons.EventHandler
 import cccev.dsl.dto.query.GetInformationConceptsQuery
 import cccev.dsl.dto.query.GetInformationConceptsQueryFunction
-import cccev.s2.request.app.RequestService
+import cccev.s2.request.app.RequestAggregateService
 import cccev.s2.request.app.entity.RequestEntity
 import cccev.s2.request.app.entity.RequestRepository
 import cccev.s2.request.domain.features.command.RequestSupportedValueAddCommand
@@ -21,7 +21,7 @@ import javax.script.ScriptEngineManager
 class ComputeExpectedValuesHandler(
     private val getInformationConceptsQueryFunction: GetInformationConceptsQueryFunction,
     private val requestRepository: RequestRepository,
-    private val requestService: RequestService
+    private val requestAggregateService: RequestAggregateService
 ): EventHandler() {
 
     @EventListener
@@ -56,7 +56,7 @@ class ComputeExpectedValuesHandler(
 //        }
 
         commands.forEach { command ->
-            requestService.addSupportedValue().invoke(command)
+            requestAggregateService.addSupportedValue().invoke(command)
         }
     }
 

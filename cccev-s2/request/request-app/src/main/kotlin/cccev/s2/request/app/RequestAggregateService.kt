@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.stereotype.Service
 
 @Service
-class RequestService(
+class RequestAggregateService(
 	private val aggregate: RequestS2Aggregate,
 ): RequestAggregate {
 	@Bean

@@ -2,7 +2,7 @@ package cccev.f2.scheduler
 
 import cccev.bubble.core.KtorRepository
 import cccev.bubble.core.Request
-import cccev.s2.request.app.RequestService
+import cccev.s2.request.app.RequestAggregateService
 import cccev.s2.request.app.entity.RequestEntity
 import cccev.s2.request.app.entity.RequestRepository
 import cccev.s2.request.domain.RequestState
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service
 @Service
 class SyncRequestBubbleScheduler(
     private val requestRepository: RequestRepository,
-    private val requestService: RequestService
+    private val requestAggregateService: RequestAggregateService
 ) {
     val ktorRepository = KtorRepository("95f4b5790e3d55cee1f6badeb192c9a1")
 
@@ -62,9 +62,9 @@ class SyncRequestBubbleScheduler(
 
     private suspend fun RequestEntity.updateStatus(status: RequestState) {
         when (status) {
-            RequestState.Signed -> requestService.sign().invoke(RequestSignCommand(id))
-            RequestState.Audited -> requestService.audit().invoke(RequestAuditCommand(id))
-            RequestState.Created -> requestService.refuse().invoke(RequestRefuseCommand(id))
+            RequestState.Signed -> requestAggregateService.sign().invoke(RequestSignCommand(id))
+            RequestState.Audited -> requestAggregateService.audit().invoke(RequestAuditCommand(id))
+            RequestState.Created -> requestAggregateService.refuse().invoke(RequestRefuseCommand(id))
         }
     }
 }

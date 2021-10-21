@@ -7,7 +7,7 @@ import cccev.dsl.dto.query.GetRequirementQuery
 import cccev.dsl.dto.query.GetRequirementQueryFunction
 import cccev.f2.exception.NotFoundException
 import cccev.f2.model.toDTO
-import cccev.s2.request.app.RequestService
+import cccev.s2.request.app.RequestAggregateService
 import cccev.s2.request.app.entity.RequestEntity
 import cccev.s2.request.app.entity.RequestRepository
 import cccev.s2.request.domain.features.command.RequestInitCommand
@@ -26,7 +26,7 @@ import org.springframework.dao.DuplicateKeyException
 class GetEvidenceTypeListsQueryFunctionImpl(
     private val getRequirementQueryFunction: GetRequirementQueryFunction,
     private val requestRepository: RequestRepository,
-    private val requestService: RequestService
+    private val requestAggregateService: RequestAggregateService
 ) {
     @Bean
     fun getEvidenceTypeListsQueryFunction(): GetEvidenceTypeListsQueryFunction = f2Function { query ->
@@ -36,7 +36,7 @@ class GetEvidenceTypeListsQueryFunctionImpl(
             ?: throw NotFoundException("Requirement not found")
 
         try {
-            val requestId = requestService.init().invoke(RequestInitCommand(id = query.id, frameworkId = query.requirement)).id
+            val requestId = requestAggregateService.init().invoke(RequestInitCommand(id = query.id, frameworkId = query.requirement)).id
             println("Request [$requestId]")
         } catch (e: DuplicateKeyException) {
             println("Request exists")
