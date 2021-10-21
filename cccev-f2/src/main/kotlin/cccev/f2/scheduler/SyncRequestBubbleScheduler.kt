@@ -16,13 +16,16 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.reactor.awaitSingle
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Service
+import s2.spring.utils.logger.Logger
 
 @Service
 class SyncRequestBubbleScheduler(
     private val requestRepository: RequestRepository,
     private val requestAggregateService: RequestAggregateService
 ) {
-    val ktorRepository = KtorRepository("95f4b5790e3d55cee1f6badeb192c9a1")
+    private val logger by Logger()
+
+    private val ktorRepository = KtorRepository("95f4b5790e3d55cee1f6badeb192c9a1")
 
     companion object {
         enum class BubbleState(val id: String, val resultState: RequestState) {
@@ -34,7 +37,7 @@ class SyncRequestBubbleScheduler(
 
     @Scheduled(cron = "0/30 0 0 ? * *", zone = "Europe/Paris")
     fun syncRequests() = GlobalScope.launch(Dispatchers.IO) {
-        println("SyncRequestBubbleScheduler: Start")
+        logger.info("SyncRequestBubbleScheduler: Start")
 
         try {
             val requests = ktorRepository.getList<Request>().response.results
@@ -42,13 +45,11 @@ class SyncRequestBubbleScheduler(
             BubbleState.values().forEach { state ->
                 syncRequestsWithState(requests, state)
             }
-
         } catch (e: Exception) {
-            println("SyncRequestBubbleScheduler: Error")
-            e.printStackTrace()
+            logger.error("SyncRequestBubbleScheduler: Error", e)
         }
 
-        println("SyncRequestBubbleScheduler: End")
+        logger.info("SyncRequestBubbleScheduler: End")
     }
 
     private suspend fun syncRequestsWithState(requests: List<Request>, state: BubbleState) {

@@ -40,7 +40,7 @@ class ComputeExpectedValuesHandler(
             supportedInfoConceptId in infoConcept.dependsOn
         }
 
-        val commands = infoConceptsDependingOnNewValue.filter { infoConcept ->
+        infoConceptsDependingOnNewValue.filter { infoConcept ->
             request.supportedValues.keys.containsAll(infoConcept.dependsOn)
         }.mapNotNull { infoConcept ->
             infoConcept.computeSupportedValue(request)
@@ -49,13 +49,7 @@ class ComputeExpectedValuesHandler(
                 id = requestId,
                 supportedValue = value
             )
-        }
-
-//        if (commands.isNotEmpty()) {
-//            requestService.addSupportedValue().invoke(commands.asFlow())
-//        }
-
-        commands.forEach { command ->
+        }.forEach { command ->
             requestAggregateService.addSupportedValue().invoke(command)
         }
     }

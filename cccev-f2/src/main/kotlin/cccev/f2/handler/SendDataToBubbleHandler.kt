@@ -3,6 +3,7 @@ package cccev.f2.handler
 import cccev.bubble.core.Entry
 import cccev.bubble.core.KtorRepository
 import cccev.bubble.core.Request
+import cccev.commons.EventHandler
 import cccev.dsl.cc.AllocatedEmissions
 import cccev.dsl.cc.CarbonCopy
 import cccev.dsl.cc.Equity
@@ -15,9 +16,6 @@ import cccev.dsl.dto.query.GetInformationConceptsQueryFunction
 import cccev.s2.request.app.entity.RequestRepository
 import cccev.s2.request.domain.features.command.RequestSentEvent
 import f2.dsl.fnc.invoke
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.reactor.awaitSingle
 import org.springframework.context.event.EventListener
 import org.springframework.stereotype.Component
@@ -28,7 +26,7 @@ class SendDataToBubbleHandler(
 	private val getInformationConceptsQueryFunction: GetInformationConceptsQueryFunction,
 	private val getEvidenceTypeListsQueryFunction: GetEvidenceTypeListsQueryFunction,
 	private val requestRepository: RequestRepository
-) {
+): EventHandler() {
 	/*
 	 * Use spring configuration for the bearer token
 	 */
@@ -40,9 +38,8 @@ class SendDataToBubbleHandler(
 
 	@Suppress("LongMethod")
 	@EventListener
-	fun onRequestSent(event: RequestSentEvent) = GlobalScope.launch(Dispatchers.IO) {
+	fun onRequestSent(event: RequestSentEvent) = handleEvent("SendDataToBubbleHandler - onRequestSent - Request [${event.id}]") {
 		val requestId = event.id
-		println("Send request [$requestId] to bubble")
 		val requestEntity = requestRepository.findById(requestId).awaitSingle()
 
 		val request = ktorRepository.getOne<Request>(requestId).response
@@ -52,7 +49,7 @@ class SendDataToBubbleHandler(
 		).informationConcepts
 
 		val entryId = request.entry ?: let {
-			println("Creating entry")
+			logger.info("Creating entry")
 
 			val value = when (requestEntity.frameworkId) {
 				CarbonCopy.identifier -> informationConcepts.firstOrNull { it.identifier == ScopeTotal.identifier }
@@ -70,13 +67,13 @@ class SendDataToBubbleHandler(
 				refDateTo = "2021-12-31T11:00:00.000Z",
 			)
 			val result = ktorRepository.saveObject(entry)
-			println("Created entry [${result.id}]")
+			logger.info("Created entry [${result.id}]")
 			request.entry = result.id
 			ktorRepository.updateObject(requestId, request)
-			println("Updated request [$requestId] with entry")
+			logger.info("Updated request [$requestId] with entry")
 			result.id
 		}
-		println("Entry is [$entryId]")
+		logger.info("Entry is [$entryId]")
 
 		val evidenceTypes = getEvidenceTypeListsQueryFunction.invoke(
 			GetEvidenceTypeListsQuery(requestId, requestEntity.frameworkId)
@@ -117,13 +114,13 @@ class SendDataToBubbleHandler(
 			)
 		}
 
-		bubbleValues.onEach(::println)
+		bubbleValues.onEach { logger.info(it.toString()) }
 			.forEach { value ->
 				value._id
 					?.let { id -> ktorRepository.updateObject(id, value) }
 					?: ktorRepository.saveObject(value)
 			}
-		println("Data sent to bubble :)")
+		logger.info("Data sent to bubble :)")
 	}
 
 	private fun buildUrl(requestId: String, frameworkId: String, evidenceTypeId: String): String {

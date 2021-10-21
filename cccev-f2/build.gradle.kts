@@ -4,6 +4,7 @@ plugins {
 }
 
 dependencies {
+    implementation(project(":api-commons"))
     api(project(":cccev-dsl:cccev-dsl-cee"))
     api(project(":cccev-dsl:cccev-dsl-cc"))
     api(project(":cccev-dsl:cccev-dsl-dto"))

@@ -21,6 +21,7 @@ import kotlinx.coroutines.reactor.awaitSingle
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.dao.DuplicateKeyException
+import s2.spring.utils.logger.Logger
 
 @Configuration
 class GetEvidenceTypeListsQueryFunctionImpl(
@@ -28,18 +29,20 @@ class GetEvidenceTypeListsQueryFunctionImpl(
     private val requestRepository: RequestRepository,
     private val requestAggregateService: RequestAggregateService
 ) {
+    private val logger by Logger()
+
     @Bean
     fun getEvidenceTypeListsQueryFunction(): GetEvidenceTypeListsQueryFunction = f2Function { query ->
-        println("Request [${query.id}]: GetEvidenceTypeLists")
+        logger.info("Request [${query.id}]: GetEvidenceTypeLists")
         val getRequirementQuery = GetRequirementQuery(query.requirement)
         val requirement = getRequirementQueryFunction.invoke(getRequirementQuery).requirement
             ?: throw NotFoundException("Requirement not found")
 
         try {
             val requestId = requestAggregateService.init().invoke(RequestInitCommand(id = query.id, frameworkId = query.requirement)).id
-            println("Request [$requestId]")
+            logger.info("Request [$requestId]")
         } catch (e: DuplicateKeyException) {
-            println("Request exists")
+            logger.info("Request exists")
         }
 
         val request = requestRepository.findById(query.id).awaitSingle()

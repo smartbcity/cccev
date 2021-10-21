@@ -16,15 +16,18 @@ import cccev.s2.request.domain.features.command.RequestSupportedValueAddCommandF
 import f2.dsl.fnc.f2Function
 import org.springframework.context.annotation.Bean
 import org.springframework.stereotype.Service
+import s2.spring.utils.logger.Logger
 
 @Service
 class RequestAggregateService(
 	private val aggregate: RequestS2Aggregate,
 ): RequestAggregate {
+	private val logger by Logger()
+
 	@Bean
 	override fun init(): RequestInitCommandFunction = f2Function { cmd ->
 		aggregate.createWithEvent(cmd, { RequestInitializedEvent(id = id) }) {
-			println("Request [${cmd.id}]: init")
+			logger.info("Request [${cmd.id}]: init")
 			RequestEntity(
 				id = cmd.id,
 				status = RequestState.Created,
@@ -37,7 +40,7 @@ class RequestAggregateService(
 
 	@Bean
 	override fun addEvidence(): RequestEvidenceAddCommandFunction = f2Function { cmd ->
-		println("Request [${cmd.id}]: addEvidence")
+		logger.info("Request [${cmd.id}]: addEvidence")
 		aggregate.doTransition(cmd) {
 			this to addEvidence(cmd.evidence)
 		}
@@ -45,7 +48,7 @@ class RequestAggregateService(
 
 	@Bean
 	override fun removeEvidence(): RequestEvidenceRemoveCommandFunction = f2Function { cmd ->
-		println("Request [${cmd.id}]: removeEvidence")
+		logger.info("Request [${cmd.id}]: removeEvidence")
 		aggregate.doTransition(cmd) {
 			this to removeEvidence(cmd.evidenceTypeId)
 		}
@@ -53,7 +56,7 @@ class RequestAggregateService(
 
 	@Bean
 	override fun addSupportedValue(): RequestSupportedValueAddCommandFunction = f2Function { cmd ->
-		println("Request [${cmd.id}]: addSupportedValue")
+		logger.info("Request [${cmd.id}]: addSupportedValue")
 		aggregate.doTransition(cmd) {
 			this to addSupportedValue(cmd.supportedValue)
 		}
@@ -61,7 +64,7 @@ class RequestAggregateService(
 
 	@Bean
 	override fun send(): RequestSendCommandFunction = f2Function { cmd ->
-		println("Request [${cmd.id}]: send")
+		logger.info("Request [${cmd.id}]: send")
 		aggregate.doTransition(cmd) {
 			this to send()
 		}
@@ -69,7 +72,7 @@ class RequestAggregateService(
 
 	@Bean
 	override fun sign(): RequestSignCommandFunction = f2Function { cmd ->
-		println("Request [${cmd.id}]: sign")
+		logger.info("Request [${cmd.id}]: sign")
 		aggregate.doTransition(cmd) {
 			this to sign()
 		}
@@ -77,7 +80,7 @@ class RequestAggregateService(
 
 	@Bean
 	override fun audit(): RequestAuditCommandFunction = f2Function { cmd ->
-		println("Request [${cmd.id}]: audit")
+		logger.info("Request [${cmd.id}]: audit")
 		aggregate.doTransition(cmd) {
 			this to audit()
 		}
@@ -85,7 +88,7 @@ class RequestAggregateService(
 
 	@Bean
 	override fun refuse(): RequestRefuseCommandFunction = f2Function { cmd ->
-		println("Request [${cmd.id}]: refuse")
+		logger.info("Request [${cmd.id}]: refuse")
 		aggregate.doTransition(cmd) {
 			this to refuse()
 		}

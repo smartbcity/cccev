@@ -4,11 +4,11 @@ import cccev.dsl.cc.Scope1
 import cccev.dsl.cc.Scope2
 import cccev.dsl.cc.Scope3
 import kotlinx.coroutines.runBlocking
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
+@Disabled
 internal class KtorRepositoryTest {
-
-
 	private val ktorRepository = KtorRepository("95f4b5790e3d55cee1f6badeb192c9a1")
 
 	@Test

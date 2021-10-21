@@ -4,8 +4,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.springframework.dao.OptimisticLockingFailureException
+import s2.spring.utils.logger.Logger
 
-abstract class EventHandler {
+open class EventHandler {
+
+    protected val logger by Logger()
 
     fun handleEvent(
         logMessage: String, retryOnOptimisticLockFailure: Int = 5,
@@ -22,14 +25,13 @@ abstract class EventHandler {
         prepareForExecution: suspend () -> T? = { null }, handleError: suspend (Exception) -> Unit = {}, exec: suspend (T) -> Unit
     ) = GlobalScope.launch(Dispatchers.IO) {
         val preparation = prepareForExecution() ?: return@launch
-        println("$logMessage: Start")
+        logger.info("$logMessage: Start")
 
         try {
             execWithRetryOnOptimisticFailure(retryOnOptimisticLockFailure, logMessage) { exec(preparation) }
-            println("$logMessage: End")
+            logger.info("$logMessage: End")
         } catch (e: Exception) {
-            println("$logMessage: Error")
-            e.printStackTrace()
+            logger.error("$logMessage: Error", e)
             handleError(e)
         }
     }
@@ -41,7 +43,7 @@ abstract class EventHandler {
             if (availableRetries == 0) {
                 throw e
             }
-            println("$logMessage: OptimisticLockingFailureException, retrying operation (retries left: $availableRetries)")
+            logger.info("$logMessage: OptimisticLockingFailureException, retrying operation (retries left: $availableRetries)")
             execWithRetryOnOptimisticFailure(availableRetries - 1, logMessage, exec)
         }
     }
