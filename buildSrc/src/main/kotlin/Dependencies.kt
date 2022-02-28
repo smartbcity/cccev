@@ -1,17 +1,17 @@
 import org.gradle.api.artifacts.Dependency
 
 object PluginVersions {
-	const val kotlin = "1.5.30"
+	const val kotlin = "1.6.20-M1"
 	const val fixers = "experimental-SNAPSHOT"
 	const val springBoot = "2.5.3"
 }
 
 object Versions {
-	const val s2 = "next-SNAPSHOT"
-	const val f2 = "next-SNAPSHOT"
+	const val s2 = "experimental-SNAPSHOT"
+	const val f2 = "experimental-SNAPSHOT"
 
 	const val ktor = "1.6.3"
-	const val coroutines = "1.5.2"
+	const val coroutines = "1.6.0"
 	const val jackson = "2.13.0"
 
 	const val junit = "5.7.0"
